@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+app-header, app-home {
+  width: 100%;
+}
+
+// Change this to router-outler 
+app-home {
+  min-height: 80vh;
+}

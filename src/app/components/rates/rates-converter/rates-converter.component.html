@@ -1,0 +1,33 @@
+<form class="converter" (change)="onConvert()" [formGroup]="_converterForm" novalidate>
+  <input
+    formControlName="fromAmount"
+    type="text" 
+    id="from-amount"
+    autocomplete="off">
+  <select
+    formControlName="fromBase"
+    name="from-base" 
+    id="from-base">
+    <option 
+      *ngFor="let currencyType of currencyTypes" 
+      [value]="currencyType.name">
+        {{currencyType.name}}
+    </option>
+  </select>
+  <input
+    formControlName="toAmount"
+    type="text" 
+    id="to-amount">
+  <select
+    formControlName="toBase"
+    name="to-base" 
+    id="to-base">
+    <option 
+      *ngFor="let currencyType of currencyTypes" 
+      [value]="currencyType.name">
+        {{currencyType.name}}
+    </option>
+  </select>
+  <input type="checkbox" name="combine-fee" id="combine-fee" formControlName="combineFee">
+</form>
+<app-rates-description [rates]="_ratesService.rates"></app-rates-description>

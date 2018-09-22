@@ -1,0 +1,33 @@
+@import 'src/vars';
+
+.container {
+  width: 100%;
+}
+
+#cover {
+  background-image: url("../../../assets/img/piggybank-temp.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 80vh;
+}
+
+
+.title {
+  margin: 20px;
+  text-align: center;
+  
+  h1 {
+    line-height: 50px;
+  }
+  
+  p {
+    line-height: 25px;
+    font-size: $font-large;
+    
+  }
+
+  #highlight {
+    color: $font-button-color;
+  }
+}

@@ -1,0 +1,74 @@
+<div [class]="isExpanded ? 'sidebar expanded' : 'sidebar'">
+  <!-- Toggler -->
+  <div (click)="onExpand()" id="toggler">
+    <fa-icon [icon]="faAngleDoubleRight" [flip]="isExpanded ? 'horizontal' : 'none'"></fa-icon>
+  </div>
+
+  <!-- Search -->
+  <div class="searchbar">
+    <input [hidden]="!isExpanded" #searchInput placeholder="Search..." type="text" id="search-input">
+    <fa-icon (click)="onSearch(searchInput)" id="search-icon" [icon]="faSearch"></fa-icon>
+  </div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="navbar-item" id="signup">
+      <div class="container">
+        <fa-icon [icon]="faPlusSquare"></fa-icon>
+        <p *ngIf="isExpanded">Sign Up</p>
+      </div>
+    </div>
+    <div class="navbar-item" id="login">
+      <div class="container">
+        <fa-icon [icon]="faUserCircle"></fa-icon>
+        <p *ngIf="isExpanded">Login</p>
+      </div>
+    </div>
+    <div class="navbar-item" id="about">
+      <div class="container">
+        <fa-icon [icon]="faUsers"></fa-icon>
+        <p *ngIf="isExpanded">About us</p>
+      </div>
+    </div>
+    <div class="navbar-item" id="service">
+      <div class="container">
+        <fa-icon [icon]="faGlobeAsia"></fa-icon>
+        <p *ngIf="isExpanded">Service</p>
+      </div>
+    </div>
+    <div class="navbar-item" id="blog">
+      <div class="container">
+        <fa-icon [icon]="faDesktop"></fa-icon>
+        <p *ngIf="isExpanded">Blog</p>
+      </div>
+    </div>
+    <div class="navbar-item" id="faq">
+      <div class="container">
+        <fa-icon [icon]="faInfoCircle"></fa-icon>
+        <p *ngIf="isExpanded">FAQ</p>
+      </div>
+    </div>
+    <div class="navbar-item" id="contact">
+      <div class="container">
+        <fa-icon [icon]="faPhone"></fa-icon>
+        <p *ngIf="isExpanded">Contact Us</p>
+      </div>
+    </div>
+    <div class="navbar-item" id="career">
+      <div class="container">
+        <fa-icon [icon]="faBriefcase"></fa-icon>
+        <p *ngIf="isExpanded">Career</p>
+      </div>
+    </div>
+
+    <div *ngIf="isExpanded" class="soc-med">
+      <p>Follow Us:</p>
+      <div class="soc-med-icon">
+        <a target="_blank" href="https://www.facebook.com/mfikriansyah"><fa-icon [icon]="faFacebook"></fa-icon></a>
+        <a target="_blank" href="https://www.facebook.com/mfikriansyah"><fa-icon [icon]="faInstagram"></fa-icon></a>
+        <a target="_blank" href="https://www.facebook.com/mfikriansyah"><fa-icon [icon]="faYoutube"></fa-icon></a>
+      </div>
+    </div>
+  </div>
+  <!-- End Navbar -->
+</div>
