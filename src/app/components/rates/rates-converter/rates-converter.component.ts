@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { RatesService } from '../../../services/rates.service';
 import Rates from '../../../model/rates.model';
 import Currency, { CurrencyType } from '../../../model/currency.model';
+import { DialogService } from '../../../services/dialog.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-rates-converter',
@@ -26,8 +28,9 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
   });
 
   currencyTypes = this._ratesService.currencyTypes;
+  isLoading = false;
 
-  constructor(private _ratesService: RatesService) {}
+  constructor(private _ratesService: RatesService, private _dialogService: DialogService, private _authService: AuthService) {}
 
   ngOnInit() {
     this.onConvert();
@@ -44,20 +47,23 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
   get combineFee() { return this._converterForm.get('combineFee'); }
 
   onConvert() {
+    this.isLoading = true;
     // If user enter string of non numerical characters
     this.checkForValidInput();
     // If user wants to switch between combine fee or not
     if (this._combineFeeBeforeValue !== this.combineFee.value) {
+      this.isLoading = false;
       return this.onCombineChange();
     }
-    this._subscription.add(this._ratesService.convertRates(
+    this._subscription = this._ratesService.convertRates(
       new Currency(this.fromBase.value, this.fromAmount.value),
       Currency.toCurrencyType(this.toBase.value),
       this.combineFee.value,
     )
     .subscribe((result: Rates) => {
       this.populateForm(result);
-    }));
+      this.isLoading = false;
+    });
   }
 
   checkForValidInput() {
@@ -70,6 +76,20 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
     this._ratesService.rates.combineWithFee = this.combineFee.value;
       this.populateForm(this._ratesService.rates);
       return;
+  }
+
+  /*
+    If user is logged in, send the created rates to the next step in transaction
+    Otherwise send user to logged in
+  */
+  onSend() {
+    // TODO check if user logged in
+    if (this._authService.isUserLoggedIn) {
+      alert('Create new transaction and then move to step 2 in transaction');
+    } else {
+      // Otherwise show login form
+      this._dialogService.viewSignin();
+    }
   }
 
   populateForm(result: Rates) {

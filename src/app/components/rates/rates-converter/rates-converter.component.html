@@ -1,33 +1,60 @@
-<form class="converter" (change)="onConvert()" [formGroup]="_converterForm" novalidate>
-  <input
-    formControlName="fromAmount"
-    type="text" 
-    id="from-amount"
-    autocomplete="off">
-  <select
-    formControlName="fromBase"
-    name="from-base" 
-    id="from-base">
-    <option 
-      *ngFor="let currencyType of currencyTypes" 
-      [value]="currencyType.name">
+<form (change)="onConvert()" [formGroup]="_converterForm" novalidate>
+  <div class="converter">
+    <mat-form-field class="converter-amount-input">
+      <input
+        matInput
+        placeholder="Send"
+        formControlName="fromAmount"
+        type="text" 
+        id="from-amount"
+        autocomplete="off">
+    </mat-form-field>
+    <mat-select
+      (selectionChange)="onConvert()"
+      formControlName="fromBase"
+      name="from-base" 
+      id="from-base"
+      class="currency-select"
+      placeholder="Base">
+      <mat-option 
+        value="IDR">
+        IDR
+    </mat-option>
+    </mat-select>
+  
+    <!-- Separator / Loading -->
+    <app-loading-bounce [isBouncing]="isLoading"></app-loading-bounce>
+  
+    <mat-form-field class="converter-amount-input">
+      <input
+        matInput
+        placeholder="Estimation"
+        formControlName="toAmount"
+        type="text" 
+        id="to-amount">
+    </mat-form-field>
+    <mat-select
+      (selectionChange)="onConvert()"
+      placeholder="Base"
+      formControlName="toBase"
+      name="to-base" 
+      id="to-base"
+      class="currency-select">
+      <mat-option 
+        *ngFor="let currencyType of currencyTypes" 
+        [value]="currencyType.name">
         {{currencyType.name}}
-    </option>
-  </select>
-  <input
-    formControlName="toAmount"
-    type="text" 
-    id="to-amount">
-  <select
-    formControlName="toBase"
-    name="to-base" 
-    id="to-base">
-    <option 
-      *ngFor="let currencyType of currencyTypes" 
-      [value]="currencyType.name">
-        {{currencyType.name}}
-    </option>
-  </select>
-  <input type="checkbox" name="combine-fee" id="combine-fee" formControlName="combineFee">
+      </mat-option>
+    </mat-select>
+  </div>
+
+  <mat-checkbox 
+    name="combine-fee" 
+    id="combine-fee" 
+    formControlName="combineFee"
+    (change)="onConvert()"
+    color="primary">Combine With Fee
+  </mat-checkbox>
 </form>
 <app-rates-description [rates]="_ratesService.rates"></app-rates-description>
+<button class="primary-button main" (click)="onSend()">Send</button>

@@ -1,0 +1,235 @@
+<div class="curtain">
+  <div class="container">
+    <!-- Close Icon here -->
+    <fa-icon (click)="onClose()" [icon]="faTimes" class="close"></fa-icon>
+  
+    <h2 class="title">Create New Account</h2>
+  
+    <form (submit)="onSubmit()" [formGroup]="signupForm" class="signup-form" novalidate>
+      <!-- First Name & Last Name -->
+      <div class="form-field">
+        <div class="input full-width">
+          <label for="first-name">First Name</label>
+          <mat-form-field>
+            <input matInput type="text" id="first-name" name="first-name" formControlName="firstNameControlForm">
+            <mat-error>
+              First Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="input full-width">
+          <label for="last-name">Last Name</label>
+          <mat-form-field>
+            <input matInput type="text" id="last-name" name="last-name" formControlName="lastNameControlForm">
+            <mat-error>
+              Last Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Date of Birth -->
+      <div class="form-field half">
+        <div class="input half-width">
+          <label for="date-of-birth">Date of Birth</label>
+          <mat-form-field>
+            <input matInput type="date" id="date-of-birth" name="date-of-birth" formControlName="dateOfBirthControlForm">
+            <mat-error *ngIf="dateOfBirthControlForm.hasError('required')">
+              Date of Birth is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="dateOfBirthControlForm.hasError('isOldEnough')">
+              You must be at least 18 years old
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Email & Password -->
+      <div class="form-field">
+        <div class="input full-width">
+          <!-- Email -->
+          <label for="email">Email</label>
+          <mat-form-field>
+            <input matInput type="email" id="email" name="email" formControlName="emailControlForm">
+            <mat-error *ngIf="emailControlForm.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="emailControlForm.hasError('email')">
+              Email is <strong>not a valid email</strong>
+            </mat-error>
+            <mat-error *ngIf="emailControlForm.hasError('isNotAvailable')">
+              Email is <strong>already taken</strong>
+            </mat-error>
+            <mat-hint *ngIf="emailControlForm.pending">
+              Checking
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="input full-width">
+          <!-- Password -->
+          <label for="password">Password</label>
+          <mat-form-field>
+            <input matInput type="password" id="password" #password name="password" formControlName="passwordControlForm">
+            <mat-error *ngIf="passwordControlForm.hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="passwordControlForm.hasError('minlength')">
+              Password must contain at least 8 characters
+            </mat-error>
+            <mat-error *ngIf="passwordControlForm.hasError('pattern')">
+              Password must contain at least 1 upper-, 1 lowercase letter and 1 number 
+            </mat-error>
+            <fa-icon matSuffix (click)="onShowPassword(password)" id="show-password-icon" [icon]="faEye"></fa-icon>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Country -->
+      <div class="form-field">
+        <div class="input full-width">
+          <label for="country">Country</label>
+          <mat-select
+            formControlName="countryControlForm"
+            name="country" 
+            id="country">
+            <mat-option 
+              *ngFor="let country of countryService.countries"
+              [value]="country.code">
+              {{country.name}}
+            </mat-option>
+          </mat-select>
+        </div>
+
+        <!-- Province -->
+        <div class="input full-width">
+          <!-- Province -->
+          <label for="province">Province</label>
+          <mat-select
+            formControlName="provinceControlForm"
+            name="province" 
+            id="province">
+              <mat-option 
+                *ngFor="let province of countryService.provinces"
+                [value]="province.name">
+                {{province.name}}
+              </mat-option>
+              <mat-option value="other">
+                Other
+              </mat-option>
+          </mat-select>
+        </div>
+
+        <div *ngIf="provinceControlForm.value === 'other'" class="input full-width">
+          <!-- Province -->
+          <mat-form-field>
+            <input 
+              matInput 
+              type="text"
+              formControlName="provinceOtherControlForm"
+              name="province-other" 
+              id="province-other">
+            <mat-error *ngIf="provinceControlForm.hasError('required')">
+              City is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      
+      <div class="form-field">
+        <div class="input two-third-width">
+          <!-- City -->
+          <label for="city">City</label>
+          <mat-form-field>
+            <input 
+              matInput 
+              type="text"
+              formControlName="cityControlForm"
+              name="city" 
+              id="city">
+            <mat-error *ngIf="emailControlForm.hasError('required')">
+              City is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="input one-third-width">
+          <!-- Postcode -->
+          <label for="postcode">Postcode</label>
+          <mat-form-field>
+            <input 
+              matInput 
+              type="text"
+              formControlName="postcodeControlForm"
+              name="postcode" 
+              id="postcode">
+            <mat-error *ngIf="postcodeControlForm.hasError('required')">
+              Postcode is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="!postcodeControlForm.hasError('required') && postcodeControlForm.hasError('isNotPostcode')">
+              Postcode is <strong>invalid</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="input three-fourth-width">
+          <!-- Street -->
+          <label for="street">Street</label>
+          <mat-form-field>
+            <input 
+              matInput 
+              type="text"
+              formControlName="streetControlForm"
+              name="street" 
+              id="street">
+            <mat-error *ngIf="streetControlForm.hasError('required')">
+              Street is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="input one-fourth-width">
+          <!-- House Number -->
+          <label for="house-number">House Nr.</label>
+          <mat-form-field>
+            <input 
+              matInput 
+              type="text"
+              formControlName="houseNumberControlForm"
+              name="house-number" 
+              id="house-number">
+            <mat-error *ngIf="houseNumberControlForm.hasError('required')">
+              House number is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <mat-checkbox
+          formControlName="agreementControlForm"
+          name="agreement" 
+          id="agreement"
+          color="primary">
+          I have read and agree to the terms of the <a href="#">Qintoen Customer Agreement</a>  
+          <span *ngIf="agreementControlForm.hasError('required')" class="important">*</span>
+        </mat-checkbox>
+      </div>
+
+      <div class="form-field center">
+        <button class="form-field" type="submit" class="submit-button" [disabled]="signupForm.status === 'INVALID'" [class.disabled]="signupForm.status === 'INVALID'">Sign Up</button>
+        <button class="form-field" type="button" class="cancel-button" (click)="onClose()">Cancel</button>
+      </div>
+    </form>
+
+    <div class="have-account">
+      <a (click)="onHaveAccount()">
+        Already have an account?
+      </a>
+    </div>
+  </div>
+</div>

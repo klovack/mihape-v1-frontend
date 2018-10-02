@@ -1,7 +1,12 @@
-<div class="container">
+<div class="main-container">
   <app-sidebar></app-sidebar>
   <div class="main-content">
     <app-header></app-header>
-    <app-home></app-home>
+    <router-outlet></router-outlet>
   </div>
+  <app-signin *ngIf="dialogService.showSignin"></app-signin>
+  <app-signup *ngIf="dialogService.showSignup"></app-signup>
+</div>
+<div *ngIf="dialogService.isLoading" class="loader">
+  <app-loading-circle></app-loading-circle>
 </div>

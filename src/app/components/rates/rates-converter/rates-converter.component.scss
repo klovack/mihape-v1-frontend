@@ -1,8 +1,35 @@
 .converter {
   margin-top: 50px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   margin-right: auto;
   margin-left: auto;
   max-width: 80%;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  >* {
+    margin: 10px;
+  }
+}
+
+.currency-select {
+  width: 70px;
+}
+
+#combine-fee {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.primary-button.main {
+  margin: 20px auto;
+  display: block;
+}
+
+.mat-form-field-label-wrapper {
+  top: -1.25em;
 }

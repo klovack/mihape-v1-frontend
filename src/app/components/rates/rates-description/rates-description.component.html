@@ -1,7 +1,7 @@
 <div class="rates-desc" *ngIf="rates">
   <!-- The last argument in the currency pipe will later be the value of the locale which user uses -->
   <p>
-    <span class="name">Send</span>
+    <span class="name">Converting</span>
     <span class="value">{{rates.fromCurrency.amount | currency:rates.fromCurrency.baseString:'symbol-narrow':'1.2-2':'id'}}</span>
   </p>
   <p>

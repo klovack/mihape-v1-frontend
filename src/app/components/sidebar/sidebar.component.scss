@@ -3,11 +3,13 @@
 .sidebar {
   background: $primary-color;
   color: $font-button-color;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   width: 50px;
   position: relative;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
   transition: width 350ms ease-in-out;
+  z-index: 99;
 
   &.expanded {
     width: 300px;
@@ -42,6 +44,7 @@ fa-icon {
   box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
   border-radius: 0px 10px 10px 0px;
   cursor: pointer;
+  z-index: 9999;
 }
 
 .searchbar {
@@ -60,6 +63,10 @@ fa-icon {
     padding: 12px 0;
     cursor: pointer;
   }
+}
+
+#search-input {
+  background: white;
 }
 
 .navbar {
@@ -84,6 +91,7 @@ fa-icon {
 .navbar-item {
   width: 100%;
   font-size: 16px;
+  transition: background-color 300ms ease-in-out;
   cursor: pointer;
 
   .container {
@@ -96,7 +104,7 @@ fa-icon {
     margin: 0 auto;
   }
 
-  &:hover, &:focus {
+  &:hover, &:focus, &.active {
     background: $primary-color;
     
     p, fa-icon {

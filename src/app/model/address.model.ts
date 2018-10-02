@@ -14,4 +14,15 @@ export default class Address {
   public get postcode() { return this._postcode; }
   public get province() { return this._province; }
   public get country() { return this._country; }
+
+  public toJSON() {
+    return {
+      street: this.street,
+      houseNumber: this.houseNumber,
+      city: this.city,
+      postcode: this.postcode,
+      province: this.province,
+      country: this.country
+    };
+  }
 }

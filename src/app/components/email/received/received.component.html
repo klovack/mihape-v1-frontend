@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="confirmation-received">
+    <span *ngIf="status === 'PENDING'">
+      <h1>Confirming Your Email...</h1>
+      <p>Please wait while we're confirming your email</p>
+    </span>
+    <span *ngIf="status === 'CONFIRMED'">
+      <h1>Your Email Has Been Confirmed</h1>
+      <p>You have successfully confirmed your email. Just <a routerLink="/" (click)="onSignin()">sign in</a> to continue</p>
+    </span>
+    <span *ngIf="status === 'NOT_FOUND'">
+      <h1>That Link Is Not Available</h1>
+      <p>Looks like the link you already confirmed your email so it is not available on our server.</p> 
+      <p>What you probably want to do is <a routerLink="/" (click)="onSignin()">sign in</a> or <a routerLink="/" (click)="onSignup()">sign up</a> if you don't have any account</p>
+    </span>
+    <span *ngIf="status === 'ERROR_CLIENT'">
+      <h1>Nothing To Do Here</h1>
+      <p>Instead of visiting this link randomly, click the link we sent you per email.</p>
+    </span>
+    <span *ngIf="status === 'ERROR_SERVER'">
+      <h1>Token Is Not Valid</h1>
+      <p>The given link is either false or it is expired. Please click <a routerLink="/email-confirm">here</a> to get the confirmation link.</p>
+    </span>
+  </div>
+</div>

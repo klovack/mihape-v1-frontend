@@ -1,0 +1,79 @@
+@import '../../../vars';
+
+$container-width: 500px;
+
+.curtain {
+  position: absolute;
+  min-width: 100vw;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(100,100,100,.8);
+  z-index: 9999;
+}
+
+.container {
+  position: absolute;
+  left: calc(50% - 250px);
+  top: 20%;
+  padding: 30px;
+  width: $container-width;
+  background: white;
+  z-index: 99;
+  border-radius: 5px;
+}
+
+.close {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-field {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  label {
+    width: 150px;
+  }
+}
+
+.full-width {
+  flex-grow: 1;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 20px;
+
+  a {
+    color: $light-secondary-text;
+  }
+}
+
+#show-password-icon {
+  cursor: pointer;
+}
+
+.no-account {
+  text-align: center;
+  margin: 30px 0 0 0;
+  padding: 20px 0 0 0;
+  border-top: 1px solid lightgray;
+}

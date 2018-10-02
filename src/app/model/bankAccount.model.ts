@@ -3,8 +3,8 @@ export default class BankAccount {
     private _name: string,
     private _accountNumber: string,
     private _country: string,
-    private _IBAN: string,
-    private _otherInformation: [
+    private _IBAN?: string,
+    private _otherInformation?: [
       {
       name: string,
       value: string,

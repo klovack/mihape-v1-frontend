@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="email-confirm">
+    <h1>Confirm Your Email</h1>
+    <p>To continue using our service, you have to confirm your email so we know that it's really you.</p>
+    <p>If you've already received our email, just click on the link and it will confirm your email.</p>
+    <p>Or if you've already confirmed just sign in, but if you don't have any account just sign up.</p>
+
+    <div class="signin-signup">
+      <button (click)="onSignUp()">Sign Up</button>
+      <button (click)="onSignIn()">Sign In</button>
+    </div>
+    
+    <form *ngIf="!emailSent" (ngSubmit)="onSendConfirmation()" #emailForm="ngForm" class="email-form">
+      <mat-form-field>
+        <input placeholder="Your email" type="email" matInput required #emailInput="ngModel" name="email" [(ngModel)]="email">
+        <mat-error>
+          Email is required
+        </mat-error>
+      </mat-form-field>
+      <button [disabled]="!emailForm.form.valid" type="submit">Send Confirmation</button>
+    </form>
+
+    <p class="notification" *ngIf="emailSent">Your email has been sent to your inbox. Please wait a few moment until it arrives</p>
+    <p class="notification error" *ngIf="error.isError" [ngSwitch]="error.status">
+      <!-- For better internationalization -->
+      <span *ngSwitchCase="400">You already have confirmed your email</span>
+      <span *ngSwitchCase="404">No user found with that email</span>
+      <span *ngSwitchCase="500">Internal server error</span>
+      <span *ngSwitchDefault>Ooops we don't know what happen, but we can't send you the email</span>
+    </p>
+
+    <a routerLink="/">Back to home</a>
+  </div>
+</div>

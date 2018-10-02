@@ -12,6 +12,8 @@ import {
   faAngleDoubleRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { faFacebookSquare, faInstagram, faYoutubeSquare } from '@fortawesome/free-brands-svg-icons';
+import { DialogService } from '../../services/dialog.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -36,7 +38,7 @@ export class SidebarComponent implements OnInit {
 
   isExpanded = false;
 
-  constructor() { }
+  constructor(private dialogService: DialogService, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -54,6 +56,14 @@ export class SidebarComponent implements OnInit {
         searchInput.focus();
       }, 10);
     }
+  }
+
+  onSignin() {
+    this.dialogService.viewSignin();
+  }
+
+  onSignup() {
+    this.dialogService.viewSignup();
   }
 
 }

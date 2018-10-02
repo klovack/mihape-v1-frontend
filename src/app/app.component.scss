@@ -1,4 +1,4 @@
-.container {
+.main-container {
   display: flex;
 }
 
@@ -7,13 +7,26 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  overflow: auto;
+
+  > * {
+    width: 100%;
+  }
 }
 
-app-header, app-home {
+.loader {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: #ffffff3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+app-header {
   width: 100%;
-}
-
-// Change this to router-outler 
-app-home {
-  min-height: 80vh;
 }

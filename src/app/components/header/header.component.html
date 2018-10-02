@@ -1,16 +1,31 @@
 <div id="header">
-  <div class="container">
+  <div class="header-container">
     <div class="left-section">
-      <div id="logo">
-        <img src="assets/logo/logo.svg" alt="Qintoen logo">
-      </div>
+      <a routerLink="/">
+        <div id="logo">
+          <img src="assets/logo/logo.svg" alt="Qintoen logo">
+        </div>
+      </a>
     </div>
     <div class="right-section">
       <div id="language">
-        <select name="language" id="language-select">
-          <option value="ID">ID</option>
-          <option value="EN">EN</option>
-        </select>
+        <mat-select
+          class="language-select"
+          name="language" 
+          id="language-select"
+          placeholder="Language"
+          value="ID">
+          <mat-option value="ID">
+            ID
+          </mat-option>
+          <mat-option value="EN">
+            EN
+          </mat-option>
+        </mat-select>
+      </div>
+
+      <div *ngIf="authService.isUserLoggedIn" (click)="onLogout()" id="user">
+        Logout
       </div>
     </div>
   </div>
