@@ -1,0 +1,56 @@
+<div class="trx-wrapper">
+  <div (click)="onShowDetail()" class="trx-desc">
+    <h3 class="title">{{transaction.name}}</h3>
+    <!-- If detail not shown -->
+    <div *ngIf="!showDetail" class="trx-desc-short">
+      <p>
+        {{transaction.statusToString}}.
+        <span *ngIf="transaction.status === 'IS_PROCESSED' || transaction.status === 'IS_COMPLETED'">{{transaction.createdAt | date:'H:mm, d LLL y'}}</span>
+        <span *ngIf="transaction.status === 'IS_CANCELED' || transaction.status === 'SENT_BACK'">{{transaction.canceledAt | date:'H:mm, d LLL y'}}</span>
+        <span *ngIf="transaction.status === 'IS_RECEIVED'">{{transaction.receivedAt | date}}</span>
+        <span *ngIf="transaction.status === 'IS_FAILED'">{{transaction.failedAt[transaction.failedAt.length - 1] | date:'H:mm, d LLL y'}}</span>
+      </p>
+    </div>
+
+    <!-- Detail shown -->
+    <table class="trx-desc-detail" *ngIf="showDetail">
+      <tr *ngIf="transaction.description">
+        <th>Description</th>
+        <td>{{transaction.description}}</td>
+      </tr>
+      <tr>
+        <th>Created</th>
+        <td>{{transaction.createdAt | date:'H:mm, d LLL y'}}</td>
+      </tr>
+      <tr *ngIf="transaction.receivedAt">
+        <th>Received</th>
+        <td>{{transaction.receivedAt | date:'H:mm, d LLL y'}}</td>
+      </tr>
+      <tr *ngIf="transaction.failedAt.length > 0">
+        <th>Failed</th>
+        <td>{{transaction.failedAt[transaction.failedAt.length - 1] | date:'H:mm, d LLL y'}}</td>
+      </tr>
+      <tr *ngIf="transaction.canceledAt">
+        <th>Canceled</th>
+        <td>{{transaction.canceledAt | date:'H:mm, d LLL y'}}</td>
+      </tr>
+      <tr *ngIf="!(transaction.receivedAt || transaction.canceledAt || transaction.failedAt[transaction.failedAt.length - 1])">
+        <th>Waiting until</th>
+        <td>{{transaction.deadlineAt | date:'H:mm, d LLL y'}}</td>
+      </tr>
+      <tr>
+        <th>Recipient</th>
+        <td>{{transaction.recipient.name}} in {{transaction.recipient.country}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="trx-right">
+    <!-- Temporary -->
+    <h4>{{transaction.rates.fromCurrency.amount | currency:transaction.rates.fromCurrency.baseString:'symbol-narrow':'1.0-0':'id'}}</h4>
+    <p>{{transaction.rates.toCurrency.amount | currency:transaction.rates.toCurrency.baseString:'symbol-narrow':'1.2-2':'id'}}</p>
+    
+  </div>
+  <a *ngIf="showDetail && transaction.status !== 'IS_CANCELED'" (click)="onDelete()" class="trx-edit">
+    <fa-icon [icon]="faTimes" class="trx-del"></fa-icon>
+  </a>
+</div>

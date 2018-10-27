@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import Rates from '../model/rates.model';
 import Currency, { CurrencyType } from '../model/currency.model';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,7 @@ export class RatesService {
     })
       .pipe(map((respond: RespondRates) => {
         this._rates = this.toRates(respond);
+        console.log(this._rates);
         return this._rates;
       }));
   }
@@ -41,6 +42,7 @@ export class RatesService {
   public get rates() { return this._rates; }
 
   private toRates(toBeConverted: RespondRates) {
+    console.log(toBeConverted);
     return new Rates(
       new Currency(toBeConverted.data.fromCurrency.base, toBeConverted.data.fromCurrency.originalAmount),
       new Currency(toBeConverted.data.fromCurrency.base, toBeConverted.data.fromCurrency.combineAmount),
@@ -64,6 +66,10 @@ class RespondRates {
       base: string,
       originalAmount: number,
       combineAmount: number,
+    };
+    toBeTransfered: {
+      base: string,
+      amount: number,
     };
     fee: number,
     combineWithFee: boolean

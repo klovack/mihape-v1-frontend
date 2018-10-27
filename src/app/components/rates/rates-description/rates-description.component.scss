@@ -12,15 +12,23 @@
     justify-content: space-between;
     width: 80%;
     margin: 0 auto;
-    line-height: 50px;
+    line-height: 60px;
     color: $font-primary-color;
 
     span {
-      width: 20%;
+      width: 40%;
     }
 
     span:last-child {
       width: auto;
+    }
+
+    &.small {
+      line-height: 0px;
+      margin-bottom: 20px;
+      font-size: $font-small;
+      font-weight: normal;
+      color: darken($color: $light-secondary-text, $amount: 20);
     }
   }
 }

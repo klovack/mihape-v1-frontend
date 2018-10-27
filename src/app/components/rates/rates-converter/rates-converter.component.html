@@ -1,14 +1,17 @@
+
 <form (change)="onConvert()" [formGroup]="_converterForm" novalidate>
   <div class="converter">
-    <mat-form-field class="converter-amount-input">
-      <input
-        matInput
-        placeholder="Send"
-        formControlName="fromAmount"
-        type="text" 
-        id="from-amount"
-        autocomplete="off">
-    </mat-form-field>
+    <div class="input">
+      <label for="from-amount">Send</label>
+      <mat-form-field class="converter-amount-input">
+        <input
+          matInput
+          formControlName="fromAmount"
+          type="text" 
+          id="from-amount"
+          autocomplete="off">
+      </mat-form-field>
+    </div>
     <mat-select
       (selectionChange)="onConvert()"
       formControlName="fromBase"
@@ -25,14 +28,16 @@
     <!-- Separator / Loading -->
     <app-loading-bounce [isBouncing]="isLoading"></app-loading-bounce>
   
-    <mat-form-field class="converter-amount-input">
-      <input
-        matInput
-        placeholder="Estimation"
-        formControlName="toAmount"
-        type="text" 
-        id="to-amount">
-    </mat-form-field>
+    <div class="input">
+      <label for="from-amount">Estimation</label>
+      <mat-form-field class="converter-amount-input">
+        <input
+          matInput
+          formControlName="toAmount"
+          type="text" 
+          id="to-amount">
+      </mat-form-field>
+    </div>
     <mat-select
       (selectionChange)="onConvert()"
       placeholder="Base"
@@ -48,6 +53,7 @@
     </mat-select>
   </div>
 
+  <p class="error center">{{errorMessage}}</p>
   <mat-checkbox 
     name="combine-fee" 
     id="combine-fee" 

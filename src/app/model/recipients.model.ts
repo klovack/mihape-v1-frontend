@@ -7,6 +7,7 @@ export default class Recipient {
     private _country: string,
     private _bankAccount: BankAccount,
     private _userId: string,
+    private _phoneNumber?: string,
   ) {}
 
   public get id() { return this._id; }
@@ -14,4 +15,5 @@ export default class Recipient {
   public get country() { return this._country; }
   public get bankAccount() { return this._bankAccount; }
   public get userId() { return this._userId; }
+  public get phoneNumber() { return this._phoneNumber; }
 }

@@ -2,14 +2,19 @@
   <!-- The last argument in the currency pipe will later be the value of the locale which user uses -->
   <p>
     <span class="name">Converting</span>
-    <span class="value">{{rates.fromCurrency.amount | currency:rates.fromCurrency.baseString:'symbol-narrow':'1.2-2':'id'}}</span>
+    <span class="value">{{rates.fromCurrency.amount | currency:rates.fromCurrency.baseString:'symbol-narrow':'1.0-0':'id'}}</span>
+  </p>
+  <p class="small">
+    <span>Estimation Rate</span>
+    <!-- <span></span> -->
+    <span>{{ exchangeRate.amount | currency:rates.total.baseString:'symbol-narrow':'1.2-2':'id'}} / {{ rates.toCurrency.baseString }}</span>
   </p>
   <p>
     <span class="name">Fee</span>
-    <span class="value">{{rates.fee.amount | currency:rates.fee.baseString:'symbol-narrow':'1.2-2':'id'}}</span>
+    <span class="value">{{rates.fee.amount | currency:rates.fee.baseString:'symbol-narrow':'1.0-0':'id'}}</span>
   </p>
   <p>
     <span class="name">Total</span>
-    <span class="value">{{rates.total.amount | currency:rates.total.baseString:'symbol-narrow':'1.2-2':'id'}}</span>
+    <span class="value">{{rates.total.amount | currency:rates.total.baseString:'symbol-narrow':'1.0-0':'id'}}</span>
   </p>
 </div>

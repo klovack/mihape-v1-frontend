@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Rates from '../../../model/rates.model';
+import Currency from '../../../model/currency.model';
 
 @Component({
   selector: 'app-rates-description',
@@ -13,5 +14,9 @@ export class RatesDescriptionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  get exchangeRate() {
+    return new Currency(this.rates.fromCurrency.base, this.rates.fromCurrency.amount / this.rates.toCurrency.amount);
   }
 }

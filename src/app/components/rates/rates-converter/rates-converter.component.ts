@@ -29,6 +29,7 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
 
   currencyTypes = this._ratesService.currencyTypes;
   isLoading = false;
+  errorMessage = '';
 
   constructor(private _ratesService: RatesService, private _dialogService: DialogService, private _authService: AuthService) {}
 
@@ -63,6 +64,10 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
     .subscribe((result: Rates) => {
       this.populateForm(result);
       this.isLoading = false;
+    },
+    err => {
+      this.isLoading = false;
+      this.showNoConnectionError();
     });
   }
 
@@ -93,9 +98,15 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
   }
 
   populateForm(result: Rates) {
-    this.fromAmount.setValue(Currency.toCurrencyString(result.fromCurrency));
-    this.toAmount.setValue(Currency.toCurrencyString(result.toCurrency));
-    this._combineFeeBeforeValue = result.combineWithFee;
-    this.combineFee.setValue(this._combineFeeBeforeValue);
+    if (result) {
+      this.fromAmount.setValue(Currency.toCurrencyString(result.fromCurrency));
+      this.toAmount.setValue(Currency.toCurrencyString(result.toCurrency));
+      this._combineFeeBeforeValue = result.combineWithFee;
+      this.combineFee.setValue(this._combineFeeBeforeValue);
+    }
+  }
+
+  showNoConnectionError() {
+    this.errorMessage = 'No connection to the server';
   }
 }

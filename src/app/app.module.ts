@@ -26,6 +26,11 @@ import { InternalErrorComponent } from './components/error/internal/internal-err
 import { NotFoundComponent } from './components/error/not-found/not-found.component';
 import { LoadingBounceComponent } from './components/util/loading-bounce/loading-bounce.component';
 import { LoadingCircleComponent } from './components/util/loading-circle/loading-circle.component';
+import { RecipientsNewComponent } from './components/recipients/recipients-new/recipients-new.component';
+import { RecipientsDetailComponent } from './components/recipients/recipients-detail/recipients-detail.component';
+import { TransactionsDetailComponent } from './components/transactions/transactions-detail/transactions-detail.component';
+import { DialogComponent } from './components/dialog/dialog/dialog.component';
+import { ConnectionErrorComponent } from './components/error/connection-error/connection-error.component';
 
 registerLocaleData(localeId);
 
@@ -47,7 +52,12 @@ registerLocaleData(localeId);
     InternalErrorComponent,
     NotFoundComponent,
     LoadingBounceComponent,
-    LoadingCircleComponent
+    LoadingCircleComponent,
+    RecipientsNewComponent,
+    RecipientsDetailComponent,
+    TransactionsDetailComponent,
+    DialogComponent,
+    ConnectionErrorComponent
   ],
   imports: [
     BrowserModule,

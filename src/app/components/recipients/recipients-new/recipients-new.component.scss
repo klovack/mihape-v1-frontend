@@ -1,0 +1,84 @@
+@import "../../../../vars";
+
+.container {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 80px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.rec-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-field {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  label {
+    width: 150px;
+  }
+}
+
+.full-width {
+  flex-grow: 1;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 20px;
+
+  a {
+    color: $light-secondary-text;
+  }
+}
+
+#show-password-icon {
+  cursor: pointer;
+}
+
+.no-account {
+  text-align: center;
+  margin: 30px 0 0 0;
+  padding: 20px 0 0 0;
+  border-top: 1px solid lightgray;
+}
+
+button {
+  width: 200px;
+  text-align: center;
+}
+
+#more-info {
+  text-align: right;
+}
+
+.submit-cancel {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cancel {
+  color: $dark-warn-text;
+}
+
+.more-info {
+  p {
+    color: $dark-primary-text;
+    text-align: center;
+  }
+
+  background: #fefee7;
+  border-radius: 2%;
+  padding: 20px;
+}

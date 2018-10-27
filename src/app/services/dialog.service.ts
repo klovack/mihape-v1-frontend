@@ -7,7 +7,9 @@ export class DialogService {
 
   showSignin = false;
   showSignup = false;
+  showCurtain = false;
   isLoading = false;
+  hasConnectionError = false;
 
   constructor() { }
 
@@ -31,10 +33,24 @@ export class DialogService {
 
   // Loading
   startLoading() {
+    this.showCurtain = true;
     this.isLoading = true;
   }
 
   stopLoading() {
+    this.showCurtain = false;
     this.isLoading = false;
+  }
+
+  // Connection error
+  viewConnectionError() {
+    this.hasConnectionError = true;
+    setTimeout(() => {
+      this.hasConnectionError = false;
+    }, 2000);
+  }
+
+  stopConnectionError() {
+    this.hasConnectionError = false;
   }
 }

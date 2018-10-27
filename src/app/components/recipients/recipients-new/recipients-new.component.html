@@ -1,0 +1,99 @@
+<div class="container">
+  <h2 class="title">Add Recipient</h2>
+
+  <form (submit)="onSubmit()" [formGroup]="newRecipientForm" class="rec-form" novalidate>
+    <div class="form-field">
+      <label for="name">Name*</label>
+      <mat-form-field class="full-width">
+        <input matInput type="text" id="name" name="name" formControlName="nameFormControl">
+        <mat-error>
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    
+    <div class="form-field">
+      <label for="country">Country*</label>
+      <mat-select
+        class="full-width"
+        formControlName="countryFormControl"
+        name="country" 
+        id="country">
+        <mat-option 
+          *ngFor="let country of countryService.supportedCountries"
+          [value]="country.name">
+          {{country.name}}
+        </mat-option>
+      </mat-select>
+    </div>
+
+    <div class="form-field">
+      <label for="phone-number">Phone Number*</label>
+      <mat-form-field class="full-width">
+        <span matPrefix>{{callPrefix}} &nbsp;</span>
+        <input matInput type="tel" id="phone-number" name="phone-number" formControlName="phoneNumberFormControl">
+        <mat-error>
+          Phone number is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-field">
+      <label for="bank-name">Bank Name*</label>
+      <mat-form-field class="full-width">
+        <input type="text" matInput id="bank-name" name="bank-name" formControlName="bankNameFormControl">
+        <mat-error>
+          Bank Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-field">
+      <label for="iban">IBAN*</label>
+      <mat-form-field class="full-width">
+        <input type="text" matInput id="iban" name="iban" formControlName="IBANFormControl">
+        <mat-error>
+          Bank Name is <strong>required and must be valid IBAN</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <p id="more-info" *ngIf="!moreInfoExpanded"><a (click)="onMoreInfo()"><fa-icon [icon]="faCaret"></fa-icon> Add more information</a></p>
+
+    <ng-container *ngIf="moreInfoExpanded">
+      <div formGroupName="moreInfoForm" class="more-info">
+        <p>Additional Information</p>
+        <div class="form-field">
+          <label for="account-number">Account Number</label>
+          <mat-form-field class="full-width">
+            <input type="text" matInput id="account-number" name="account-number" formControlName="accountNumberFormControl">
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <label for="bic">BIC</label>
+          <mat-form-field class="full-width">
+            <input type="text" matInput id="bic" name="bic" formControlName="bicFormControl">
+          </mat-form-field>
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <mat-form-field class="full-width">
+            <input type="email" matInput id="email" name="email" formControlName="emailFormControl">
+          </mat-form-field>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="submit-cancel">
+      <a class="cancel" routerLink="/recipients">Back</a>
+
+      <button
+        type="submit" 
+        class="submit-button" 
+        [disabled]="newRecipientForm.status === 'INVALID'" 
+        [class.disabled]="newRecipientForm.status === 'INVALID'">
+        Save Recipient
+      </button>
+    </div>
+  </form>
+</div>

@@ -11,6 +11,7 @@ export default class Rates {
     private _toCombineCurrency: Currency,
     private _fee: Currency,
     private _combineWithFee: boolean,
+    private _toBeTransfered?: Currency,
   ) {}
 
   get toCurrency(): Currency {
@@ -27,6 +28,10 @@ export default class Rates {
 
   get combineWithFee(): boolean {
     return this._combineWithFee;
+  }
+
+  get toBeTransfered(): Currency {
+    return this._toBeTransfered;
   }
 
   set combineWithFee(value: boolean) {

@@ -8,6 +8,7 @@ export class CountryService {
 
   private _countryList = [];
   private _provinceList = [];
+  private _europeanList = [];
   private _countriesUrl = 'http://localhost:3000/api/v1/countries';
 
   constructor(private http: HttpClient) { }
@@ -21,6 +22,18 @@ export class CountryService {
     }
 
     return this._countryList;
+  }
+
+  get supportedCountries() {
+    if (this._europeanList.length <= 0) {
+      this.countries.forEach(country => {
+        if (country.supported) {
+          this._europeanList.push(country);
+        }
+      });
+    }
+
+    return this._europeanList;
   }
 
   get provinces() {

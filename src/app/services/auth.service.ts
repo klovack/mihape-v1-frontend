@@ -19,13 +19,18 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  get authUser() {
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
   get isUserLoggedIn() {
     return localStorage.getItem('token') ? true : false;
   }
 
   logoutUser() {
     localStorage.removeItem('token');
-    console.log('Logout');
+    localStorage.removeItem('user');
+    this.router.navigate(['/']);
   }
 
   /** Make HTTP request to the server to
@@ -81,7 +86,7 @@ export class AuthService {
 
   private _storeUserData(data) {
     localStorage.setItem('token', 'JWT-transfer ' + data.token);
-    localStorage.setItem('user', JSON.stringify({ email: data.email, id: data.userId }));
+    localStorage.setItem('user', JSON.stringify({ email: data.email, id: data.userId, name: data.name }));
   }
 }
 
@@ -95,7 +100,8 @@ interface LoginRespond {
   data: {
     email: string,
     token: string,
-    userId: string
+    userId: string,
+    name: string,
   };
   message: string;
 }

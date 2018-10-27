@@ -2,7 +2,8 @@ import { AbstractControl, ValidatorFn, ValidationErrors, AsyncValidatorFn } from
 import { AuthService } from '../services/auth.service';
 import { Observable, of } from 'rxjs';
 import { catchError, map, debounceTime, take } from 'rxjs/operators';
-import { isPostalCode } from 'validator';
+import { isPostalCode, isMobilePhone } from 'validator';
+import { isValidIBAN } from 'ibantools';
 
 export class CustomValidator {
 
@@ -22,6 +23,20 @@ export class CustomValidator {
     return (control: AbstractControl): {[key: string]: any} | null => {
       const isPostcode = isPostalCode(control.value, 'any');
       return isPostcode ? null : { 'isNotPostcode': true };
+    };
+  }
+
+  public static isPhoneNum(): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const phoneNumber = isMobilePhone(control.value);
+      return phoneNumber ? null : { 'isNotPhoneNumber': true };
+    };
+  }
+
+  public static isIBAN(): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const iban = isValidIBAN(control.value);
+      return iban ? null : { 'isNotValidIBAN': true };
     };
   }
 }

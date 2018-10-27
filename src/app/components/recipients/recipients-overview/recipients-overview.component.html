@@ -1,3 +1,22 @@
-<p>
-  recipients-overview works!
-</p>
+<div class="container">
+  <h2 class="title">
+    <a [routerLink]="['/recipients']">
+      Recipients
+    </a>
+  </h2>
+  <app-recipients-detail 
+    *ngFor="let recipient of recipients" 
+    [recipient]="recipient"
+    (deleteRecipient)="deleteRecipient($event)"></app-recipients-detail>
+  <div *ngIf="recipients.length <= 0" class="no-recipients">You don't have any recipient</div>
+  <div class="see-more" *ngIf="showMore">
+    <a [routerLink]="['/recipients']">See More</a>
+  </div>
+  <div class="back" *ngIf="canBack">
+    <a [routerLink]="['/overview']">Back</a>
+  </div>
+
+  <div routerLink="/recipients/new" id="add-rec">
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </div>
+</div>

@@ -149,6 +149,12 @@ mat-select.mat-select {
   }
 }
 
+.mat-menu-panel {
+  position: relative;
+  top: 50px;
+  left: -80px;
+}
+
 .container {
   width: 100%;
 }

@@ -40,7 +40,7 @@ fa-icon {
   width: 40px;
   height: 40px;
   right: -40px;
-  top: 28px;
+  top: 20px;
   box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
   border-radius: 0px 10px 10px 0px;
   cursor: pointer;
@@ -126,5 +126,17 @@ fa-icon {
     color: $font-primary-color;
     font-size: 32px;
     margin: 10px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .sidebar {
+    position: absolute;
+    left: -50px;
+
+    &.expanded {
+      width: 300px;
+      left: 0;
+    }
   }
 }

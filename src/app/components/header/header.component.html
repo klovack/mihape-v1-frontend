@@ -8,6 +8,20 @@
       </a>
     </div>
     <div class="right-section">
+      <div *ngIf="authService.isUserLoggedIn" id="user">
+        <mat-menu id="user-menu" #navMenu="matMenu">
+          <ng-template matMenuContent>
+            <a routerLink="/overview" mat-menu-item class="menu-item">Overview</a>
+            <a routerLink="/transactions" mat-menu-item class="menu-item">Transactions</a>
+            <a routerLink="/recipients" mat-menu-item class="menu-item">Recipients</a>
+            <a mat-menu-item class="menu-item">Help</a>
+            <a mat-menu-item (click)="onLogout()" class="menu-item">Logout</a>
+          </ng-template>
+        </mat-menu>
+        <span id="name">{{ authService.authUser.name }}</span>
+        <fa-icon mat-icon-button [matMenuTriggerFor]="navMenu" [icon]="faUser" id="user-icon"></fa-icon>
+      </div> 
+
       <div id="language">
         <mat-select
           class="language-select"
@@ -22,10 +36,6 @@
             EN
           </mat-option>
         </mat-select>
-      </div>
-
-      <div *ngIf="authService.isUserLoggedIn" (click)="onLogout()" id="user">
-        Logout
       </div>
     </div>
   </div>

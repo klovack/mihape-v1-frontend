@@ -1,3 +1,22 @@
-<p>
-  transactions-overview works!
-</p>
+<div class="container">
+  <h2 class="title">
+    <a [routerLink]="['/transactions']">
+      Transactions
+    </a>
+  </h2>
+  <app-transactions-detail
+    *ngFor="let transaction of transactions"
+    [transaction]="transaction"
+    (deleteTrx)="deleteTrx($event)"></app-transactions-detail>
+  <div *ngIf="transactions.length <= 0" class="no-transactions">You don't have any transactions</div>
+  <div class="see-more" *ngIf="showMore">
+    <a [routerLink]="['/transactions']">See More</a>
+  </div>
+  <div class="back" *ngIf="canBack">
+    <a [routerLink]="['/overview']">Back</a>
+  </div>
+
+  <div routerLink="/transactions/new" id="add-trx">
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </div>
+</div>

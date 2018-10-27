@@ -1,0 +1,45 @@
+<div class="rec-wrapper">
+  <div (click)="onShowDetail()" class="rec-desc">
+    <h3 class="title">{{recipient.name}}</h3>
+    <!-- If detail not shown -->
+    <div *ngIf="!showDetail" class="rec-desc-short">
+      <p>{{recipient.bankAccount.name}}</p>
+    </div>
+
+    <!-- Detail shown -->
+    <table class="rec-desc-detail" *ngIf="showDetail">
+      <tr *ngIf="recipient.bankAccount.accountNumber">
+        <th>Account Number</th>
+        <td>{{recipient.bankAccount.accountNumber}}</td>
+      </tr>
+      <tr *ngIf="recipient.bankAccount.bic">
+        <th>Bank Code</th>
+        <td>{{recipient.bankAccount.bic}}</td>
+      </tr>
+      <tr>
+        <th>Phone Number</th>
+        <td>{{recipient.phoneNumber}}</td>
+      </tr>
+      <tr>
+        <th>IBAN</th>
+        <td>{{recipient.bankAccount.IBAN}}</td>
+      </tr>
+      <tr>
+        <th>Bank Name</th>
+        <td>{{recipient.bankAccount.name}}</td>
+      </tr>
+      <tr *ngFor="let otherInfo of recipient.bankAccount.otherInformation">
+        <th>{{otherInfo.name | titlecase}}</th>
+        <td>{{otherInfo.value}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="rec-right">
+    <!-- Temporary -->
+    <h4>{{recipient.bankAccount.country}}</h4>
+    
+  </div>
+  <a *ngIf="showDetail" (click)="onDelete()" class="rec-edit">
+    <fa-icon [icon]="faTrash" class="rec-del"></fa-icon>
+  </a>
+</div>
