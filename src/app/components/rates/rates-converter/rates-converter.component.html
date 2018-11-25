@@ -55,12 +55,20 @@
 
   <p class="error center">{{errorMessage}}</p>
   <mat-checkbox 
+    (mouseenter)="showCombineTooltip()"
+    (mouseleave)="hideCombineTooltip()"
     name="combine-fee" 
     id="combine-fee" 
     formControlName="combineFee"
     (change)="onConvert()"
     color="primary">Combine With Fee
+    <div *ngIf="combineTooltip" id="combine-tooltip">
+      <p>
+        Check this if you want the fee to be included.
+      </p>
+    </div>
   </mat-checkbox>
+
 </form>
 <app-rates-description [rates]="_ratesService.rates"></app-rates-description>
 <button class="primary-button main" (click)="onSend()">Send</button>

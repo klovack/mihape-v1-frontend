@@ -70,6 +70,14 @@ export class RecipientsNewComponent implements OnInit {
   get emailFormControl() { return this.moreInfoForm.get('emailFormControl'); }
   get moreInfoForm(): FormGroup { return this.newRecipientForm.controls.moreInfoForm as FormGroup; }
 
+  goBack() {
+    if (this.router.url === '/recipients/new') {
+      this.router.navigate(['/recipients']);
+    } else {
+      this.router.navigate(['/transactions/new']);
+    }
+  }
+
   onMoreInfo() {
     this.moreInfoExpanded = !this.moreInfoExpanded;
     this.faCaret = !this.moreInfoExpanded ? faCaretDown : faCaretUp;

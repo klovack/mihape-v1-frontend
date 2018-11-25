@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { faUserTie } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,13 +7,19 @@ import { faUserTie } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements DoCheck {
 
   faUser = faUserTie;
+  isUserLoggedIn = false;
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit() {
+  ngDoCheck() {
+    this.checkForUserLoggedIn();
+  }
+
+  checkForUserLoggedIn() {
+    this.isUserLoggedIn = this.authService.isUserLoggedIn;
   }
 
   onLogout() {

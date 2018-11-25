@@ -53,6 +53,10 @@ fa-icon {
   align-items: center;
   padding: 15px 0;
 
+  mat-form-field.mat-form-field {
+    animation: slideIn 400ms ease-in;
+  }
+
   input {
     width: 70%;
   }
@@ -104,6 +108,10 @@ fa-icon {
     margin: 0 auto;
   }
 
+  p {
+    animation: slideIn 400ms ease-in;
+  }
+
   &:hover, &:focus, &.active {
     background: $primary-color;
     
@@ -116,6 +124,8 @@ fa-icon {
 .soc-med {
   font-size: 16px;
   text-align: center;
+  min-width: 150px;
+  animation: slideIn 400ms ease-in;
 }
 
 .soc-med-icon {
@@ -138,5 +148,17 @@ fa-icon {
       width: 300px;
       left: 0;
     }
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-200%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

@@ -1,0 +1,120 @@
+@import '../../../../vars';
+
+$light-breadcrumb-color: lighten($color: $secondary-color, $amount: 30);
+
+.container {
+  margin: 20px auto;
+  margin-top: 80px;
+  margin-bottom: 150px;
+  width: 85%;
+  max-width: 1200px;
+  position: relative;
+}
+
+.title {
+  text-align: center;
+}
+
+$crumbs-back:#F3F5FA;
+$text-color:#8093A7;
+
+
+body {
+    margin: 100px auto;
+    font-family: Helvetica;
+    background: #FFF;
+}
+
+#crumbs {
+  text-align: center;
+  margin: 40px;
+
+  ul {
+    list-style: none;
+    display: inline-table;
+
+    li {
+      display: inline;
+      
+      a {
+        display: block;
+        float: left;
+        height: 20px;
+        background: $light-breadcrumb-color;
+
+        text-align: center;
+        padding: 10px 50px 10px 60px;
+        position: relative;
+        margin: 0 10px 0 0; 
+        
+        font-size: $font-medium;
+        line-height: 20px;
+        text-decoration: none;
+        color: $text-color;
+        
+        &:after {
+          content: "";  
+          border-top: 20px solid transparent;
+          border-bottom: 20px solid transparent;
+          border-left: 20px solid $light-breadcrumb-color;
+          position: absolute; 
+          right: -20px;
+          top: 0;
+          z-index: 1;
+        }
+        &:before {
+          content: "";  
+          border-top: 20px solid transparent;
+          border-bottom: 20px solid transparent;
+          border-left: 20px solid #fff;
+          position: absolute; 
+          left: 0; 
+          top: 0;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+        
+    
+#crumbs ul li:first-child a {
+  border-top-left-radius: 10px; 
+  border-bottom-left-radius: 10px;
+}
+#crumbs ul li:first-child a:before {
+  display: none; 
+}
+
+#crumbs ul li:last-child a {
+  padding-right: 40px;
+  border-top-right-radius: 10px; 
+  border-bottom-right-radius: 10px;
+}
+#crumbs ul li:last-child a:after {
+  display: none; 
+}
+
+#crumbs ul li a:hover {
+  background: $primary-color;
+  color:#fff;
+}
+#crumbs ul li a:hover:after {
+  border-left-color: $primary-color;
+  color:#fff;
+}
+
+#crumbs ul li a {
+  &.active {
+    background: $primary-color;
+    color:#fff;
+  }
+
+  &.active::after {
+    border-left-color: $primary-color;
+    color:#fff;
+  }
+}

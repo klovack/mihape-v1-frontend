@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterContentInit, DoCheck } from '@angular/core';
 import {
   faSearch,
   faPlusSquare,
@@ -20,7 +20,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements DoCheck {
 
   faSearch = faSearch;
   faPlusSquare = faPlusSquare;
@@ -37,24 +37,27 @@ export class SidebarComponent implements OnInit {
   faYoutube = faYoutubeSquare;
 
   isExpanded = false;
+  isUserLoggedIn = false;
 
   constructor(private dialogService: DialogService, private authService: AuthService) { }
 
-  ngOnInit() {
+  ngDoCheck() {
+    this.checkForUserLoggedIn();
+  }
+
+  checkForUserLoggedIn() {
+    this.isUserLoggedIn = this.authService.isUserLoggedIn;
   }
 
   onExpand() {
     this.isExpanded = !this.isExpanded;
   }
 
-  onSearch(searchInput: HTMLInputElement) {
+  onSearch(searchInput?: HTMLInputElement) {
     if (this.isExpanded) {
       console.log('GO SEARCH');
     } else {
       this.isExpanded = true;
-      setTimeout(() => {
-        searchInput.focus();
-      }, 10);
     }
   }
 

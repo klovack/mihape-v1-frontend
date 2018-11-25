@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
 import Transaction from '../model/transaction.model';
 import Rates from '../model/rates.model';
 import Currency from '../model/currency.model';
 import { RecipientsService } from './recipients.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class TransactionsService {
       }),
     })
     .pipe(
+      catchError(err => {
+        this.authService.logoutUser();
+        return new Observable();
+      }),
       map(async (data: TransactionRespond) => {
         return await this._populateTransactions(data);
       })
@@ -46,7 +51,12 @@ export class TransactionsService {
       headers: new HttpHeaders({
         'Authorization': this.authService.authToken,
       }),
-    });
+    }).pipe(
+      catchError(err => {
+        this.authService.logoutUser();
+        return new Observable();
+      })
+    );
   }
 
   private async _populateTransactions(data: TransactionRespond): Promise<Transaction[]> {

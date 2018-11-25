@@ -31,11 +31,13 @@ export class RatesService {
     return this.http.get(this._ratesUrl, {
       params: params
     })
-      .pipe(map((respond: RespondRates) => {
-        this._rates = this.toRates(respond);
-        console.log(this._rates);
-        return this._rates;
-      }));
+      .pipe(
+        map((respond: RespondRates) => {
+          this._rates = this.toRates(respond);
+          console.log(this._rates);
+          return this._rates;
+        })
+      );
   }
 
   public get currencyTypes() { return this._currencyTypes; }

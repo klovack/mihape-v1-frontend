@@ -31,6 +31,11 @@ import { RecipientsDetailComponent } from './components/recipients/recipients-de
 import { TransactionsDetailComponent } from './components/transactions/transactions-detail/transactions-detail.component';
 import { DialogComponent } from './components/dialog/dialog/dialog.component';
 import { ConnectionErrorComponent } from './components/error/connection-error/connection-error.component';
+import { TransactionsNewComponent } from './components/transactions/transactions-new/transactions-new.component';
+import {
+  TransactionsAddRecipientsComponent
+} from './components/transactions/transactions-add-recipients/transactions-add-recipients.component';
+import { JwtModule } from '@auth0/angular-jwt';
 
 registerLocaleData(localeId);
 
@@ -57,7 +62,9 @@ registerLocaleData(localeId);
     RecipientsDetailComponent,
     TransactionsDetailComponent,
     DialogComponent,
-    ConnectionErrorComponent
+    ConnectionErrorComponent,
+    TransactionsNewComponent,
+    TransactionsAddRecipientsComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +74,7 @@ registerLocaleData(localeId);
     HttpClientModule,
     FontAwesomeModule,
     MaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'id' },

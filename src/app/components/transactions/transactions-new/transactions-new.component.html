@@ -1,0 +1,19 @@
+<div class="container">
+  <h2 class="title">
+      New Transactions
+  </h2>
+  <div id="crumbs">
+    <ul>
+      <li><a [routerLink]="['/transactions', 'new', 'rates']" routerLinkActive="active">Rates</a></li>
+      <li><a [routerLink]="['/transactions', 'new', 'recipient']" routerLinkActive="active">Recipient</a></li>
+      <li><a [routerLink]="['/transactions', 'new', 'data']" routerLinkActive="active">Data</a></li>
+      <li><a [routerLink]="['/transactions', 'new', 'overview']" routerLinkActive="active">Overview</a></li>
+    </ul>
+  </div>
+
+  <router-outlet></router-outlet>
+
+  <div class="container">
+    <a [routerLink]="['/transactions']">Cancel</a>
+  </div>
+</div>

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 import User from '../model/user.model';
 import { Router } from '@angular/router';
 
@@ -8,10 +10,13 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private _emailCheckUrl = 'http://localhost:3000/api/v1/user/is-available';
-  private _registerUrl = 'http://localhost:3000/api/v1/user/register';
-  private _loginUrl = 'http://localhost:3000/api/v1/user/login';
-  private _confirmUrl = 'http://localhost:3000/api/v1/user/confirm';
+  private _authUrl = 'http://localhost:3000/api/v1/user';
+  private _jwtHelper = new JwtHelperService();
+
+
+  private _authHeaders = new HttpHeaders({
+    'Authorization': this.authToken,
+  });
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -24,13 +29,34 @@ export class AuthService {
   }
 
   get isUserLoggedIn() {
-    return localStorage.getItem('token') ? true : false;
+    const token = localStorage.getItem('token');
+
+    if (token == null) {
+      return false;
+    }
+
+    return !this._jwtHelper.isTokenExpired(token);
   }
 
   logoutUser() {
+    this.http.get(`${this._authUrl}/logout`, {
+      headers: this._authHeaders
+    }).toPromise()
+    .then(() => {
+      this.removeTokenFromStorage();
+      this.router.navigate(['/']);
+    })
+    .catch((err) => {
+      console.error('Can\'t connect to the server');
+      // console.log(err);
+      this.removeTokenFromStorage();
+      this.router.navigate(['/']);
+    });
+  }
+
+  removeTokenFromStorage() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.router.navigate(['/']);
   }
 
   /** Make HTTP request to the server to
@@ -39,7 +65,7 @@ export class AuthService {
    * @return Observable which contain the data from the server
    */
   isEmailAvailable(email: string) {
-    return this.http.get(this._emailCheckUrl, {
+    return this.http.get(`${this._authUrl}/is-available`, {
       params: new HttpParams().set('email', email),
     });
   }
@@ -48,12 +74,12 @@ export class AuthService {
    *  @returns Promise which can be used to detect when the request is over
    */
   registerUser(user: User) {
-    return this.http.post(this._registerUrl, {
+    return this.http.post(`${this._authUrl}/register`, {
       user: user.toJSON(),
     }).toPromise().then((data: RegisterRespond) => {
       this.router.navigate(['/email-confirm', { email: data.savedUser.email }]);
     }).catch(err => {
-      console.log(err);
+      // console.log(err);
       this.router.navigate(['/error', { errorMessage: err.error.message }]);
     });
   }
@@ -64,7 +90,7 @@ export class AuthService {
    * @param password must at least 8 characters long
    */
   signInUser(email: string, password: string) {
-    return this.http.post(this._loginUrl, {
+    return this.http.post(`${this._authUrl}/login`, {
       email,
       password,
     }).toPromise()
@@ -74,14 +100,33 @@ export class AuthService {
     });
   }
 
+  checkForValidToken() {
+    return this.http.get(`${this._authUrl}/login`, {
+      headers: this._authHeaders,
+    }).toPromise()
+    .then(() => {
+      // successfully logged in
+      console.log('Successfully logged in');
+      this.router.navigate(['/']);
+      return true;
+    })
+    .catch((err) => {
+      console.log('No user found');
+      console.error(err);
+      this.removeTokenFromStorage();
+      this.router.navigate(['/']);
+      return false;
+    });
+  }
+
   sendConfirmationEmail(email: string) {
-    return this.http.post(this._confirmUrl, {
+    return this.http.post(`${this._authUrl}/confirm`, {
       email: email,
     });
   }
 
   verifyEmailToken(emailToken: string) {
-    return this.http.get(`${this._confirmUrl}/${emailToken}`);
+    return this.http.get(`${this._authUrl}/confirm/${emailToken}`);
   }
 
   private _storeUserData(data) {

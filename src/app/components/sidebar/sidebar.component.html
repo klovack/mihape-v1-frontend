@@ -10,18 +10,18 @@
       <input matInput #searchInput placeholder="Search..." type="text" id="search-input">
       <fa-icon matSuffix (click)="onSearch(searchInput)" id="search-icon" [icon]="faSearch"></fa-icon>
     </mat-form-field>
-    <fa-icon [hidden]="isExpanded" (click)="onSearch(searchInput)" id="search-icon" [icon]="faSearch"></fa-icon>
+    <fa-icon [hidden]="isExpanded" (click)="onSearch()" id="search-icon" [icon]="faSearch"></fa-icon>
   </div>
 
   <!-- Navbar -->
   <div class="navbar">
-    <div *ngIf="!authService.isUserLoggedIn" (click)="onSignup()" [class.active]="dialogService.showSignup" class="navbar-item" id="signup">
+    <div *ngIf="!isUserLoggedIn" (click)="onSignup()" [class.active]="dialogService.showSignup" class="navbar-item" id="signup">
       <div class="container">
         <fa-icon [icon]="faPlusSquare"></fa-icon>
         <p *ngIf="isExpanded">Sign Up</p>
       </div>
     </div>
-    <div *ngIf="!authService.isUserLoggedIn" (click)="onSignin()" [class.active]="dialogService.showSignin" class="navbar-item" id="login">
+    <div *ngIf="!isUserLoggedIn" (click)="onSignin()" [class.active]="dialogService.showSignin" class="navbar-item" id="login">
       <div class="container">
         <fa-icon [icon]="faUserCircle"></fa-icon>
         <p *ngIf="isExpanded">Login</p>

@@ -30,6 +30,7 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
   currencyTypes = this._ratesService.currencyTypes;
   isLoading = false;
   errorMessage = '';
+  combineTooltip = false;
 
   constructor(private _ratesService: RatesService, private _dialogService: DialogService, private _authService: AuthService) {}
 
@@ -108,5 +109,13 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
 
   showNoConnectionError() {
     this.errorMessage = 'No connection to the server';
+  }
+
+  showCombineTooltip() {
+    this.combineTooltip = true;
+  }
+
+  hideCombineTooltip() {
+    this.combineTooltip = false;
   }
 }

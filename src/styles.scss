@@ -159,8 +159,18 @@ mat-select.mat-select {
   width: 100%;
 }
 
+.card {
+  padding: 35px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(125,125,125,0.1);
+}
+
 // Delete this
 body {
-  // background: #fec752;
+  background-image: url("./assets/img/smoke-BG.png");
+  background-size: 80%;
+  background-position-x: right;
+  background-position-y: 600%;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
