@@ -36,6 +36,7 @@ import {
   TransactionsAddRecipientsComponent
 } from './components/transactions/transactions-add-recipients/transactions-add-recipients.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { RecipientSelectComponent } from './components/recipients/recipient-select/recipient-select.component';
 
 registerLocaleData(localeId);
 
@@ -64,7 +65,8 @@ registerLocaleData(localeId);
     DialogComponent,
     ConnectionErrorComponent,
     TransactionsNewComponent,
-    TransactionsAddRecipientsComponent
+    TransactionsAddRecipientsComponent,
+    RecipientSelectComponent
   ],
   imports: [
     BrowserModule,

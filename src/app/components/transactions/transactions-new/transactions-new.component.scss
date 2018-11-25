@@ -117,4 +117,14 @@ body {
     border-left-color: $primary-color;
     color:#fff;
   }
+
+  &.disabled {
+    background: $dark-secondary-text;
+    color: white;
+    pointer-events: none;
+  }
+
+  &.disabled::after {
+    border-left-color: $dark-secondary-text;
+  }
 }

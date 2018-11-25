@@ -7,6 +7,7 @@ import Rates from '../../../model/rates.model';
 import Currency, { CurrencyType } from '../../../model/currency.model';
 import { DialogService } from '../../../services/dialog.service';
 import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rates-converter',
@@ -32,7 +33,12 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
   errorMessage = '';
   combineTooltip = false;
 
-  constructor(private _ratesService: RatesService, private _dialogService: DialogService, private _authService: AuthService) {}
+  constructor(
+    private _ratesService: RatesService,
+    private _dialogService: DialogService,
+    private _authService: AuthService,
+    private _router: Router
+    ) {}
 
   ngOnInit() {
     this.onConvert();
@@ -89,9 +95,9 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
     Otherwise send user to logged in
   */
   onSend() {
-    // TODO check if user logged in
+    // If user is logged in, redirect it to new transaction.
     if (this._authService.isUserLoggedIn) {
-      alert('Create new transaction and then move to step 2 in transaction');
+      this._router.navigate(['/transactions/new/recipient']);
     } else {
       // Otherwise show login form
       this._dialogService.viewSignin();

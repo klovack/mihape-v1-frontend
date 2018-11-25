@@ -5,9 +5,9 @@
   <div id="crumbs">
     <ul>
       <li><a [routerLink]="['/transactions', 'new', 'rates']" routerLinkActive="active">Rates</a></li>
-      <li><a [routerLink]="['/transactions', 'new', 'recipient']" routerLinkActive="active">Recipient</a></li>
-      <li><a [routerLink]="['/transactions', 'new', 'data']" routerLinkActive="active">Data</a></li>
-      <li><a [routerLink]="['/transactions', 'new', 'overview']" routerLinkActive="active">Overview</a></li>
+      <li><a [routerLink]="['/transactions', 'new', 'recipient']" routerLinkActive="active" [class.disabled]="!conditions.hasRates">Recipient</a></li>
+      <li><a [routerLink]="['/transactions', 'new', 'data']" routerLinkActive="active" [class.disabled]="!conditions.hasRecipients">Data</a></li>
+      <li><a [routerLink]="['/transactions', 'new', 'overview']" routerLinkActive="active" [class.disabled]="!conditions.hasData">Overview</a></li>
     </ul>
   </div>
 
@@ -15,5 +15,6 @@
 
   <div class="container">
     <a [routerLink]="['/transactions']">Cancel</a>
+    <a *ngIf="!!backUrl" [routerLink]="['/transactions/new', backUrl]">Back</a>
   </div>
 </div>

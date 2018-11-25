@@ -11,7 +11,14 @@ export class NonUserOnlyGuard implements CanActivate, CanLoad {
 
   canActivate(): boolean {
     if (this.authService.isUserLoggedIn) {
-      this.router.navigate(['/overview']);
+      console.log(this.router.url);
+      if (this.router.url.includes('/transactions/new')) {
+        console.log('navigate to transactions/new');
+        this.router.navigate(['/transactions/new/rates']);
+      } else {
+        console.log('navigate to transactions/new');
+        this.router.navigate(['/overview']);
+      }
       return false;
     }
     return true;

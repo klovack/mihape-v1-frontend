@@ -43,6 +43,10 @@ export class RatesService {
   public get currencyTypes() { return this._currencyTypes; }
   public get rates() { return this._rates; }
 
+  public clearRates() {
+    this._rates = null;
+  }
+
   private toRates(toBeConverted: RespondRates) {
     console.log(toBeConverted);
     return new Rates(

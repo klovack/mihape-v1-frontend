@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CountryService } from 'src/app/services/country.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidator } from 'src/app/validation/custom.validators';
@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./recipients-new.component.scss']
 })
 export class RecipientsNewComponent implements OnInit {
+
+  @Output('addNewRecipient') addNewRecipient = new EventEmitter<Recipient>();
 
   faCaret = faCaretDown;
   moreInfoExpanded = false;
@@ -47,6 +49,10 @@ export class RecipientsNewComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    if (this._isOnTransactionRoute()) {
+      document.getElementById('new-recipient').classList.add('in-transaction');
+    }
+
     this.countryFormControl.valueChanges.subscribe(
       (value) => {
         this.countryService.supportedCountries.forEach(country => {
@@ -69,6 +75,8 @@ export class RecipientsNewComponent implements OnInit {
   get bicFormControl() { return this.moreInfoForm.get('bicFormControl'); }
   get emailFormControl() { return this.moreInfoForm.get('emailFormControl'); }
   get moreInfoForm(): FormGroup { return this.newRecipientForm.controls.moreInfoForm as FormGroup; }
+
+  get showBackButton() { return !this.router.url.includes('/transactions/new'); }
 
   goBack() {
     if (this.router.url === '/recipients/new') {
@@ -104,9 +112,14 @@ export class RecipientsNewComponent implements OnInit {
     );
     this.recipientsService.createNewRecipient(newRecipient)
       .toPromise()
-      .then(() => {
-        this.dialogService.stopLoading();
-        this.router.navigate(['/recipients']);
+      .then((newlyCreatedRecipient) => {
+        if (this._isOnTransactionRoute()) {
+          this.dialogService.stopLoading();
+          this.addNewRecipient.emit(newlyCreatedRecipient);
+        } else {
+          this.dialogService.stopLoading();
+          this.router.navigate(['/recipients']);
+        }
       })
       .catch((err) => {
         this.dialogService.stopLoading();
@@ -114,4 +127,7 @@ export class RecipientsNewComponent implements OnInit {
       });
   }
 
+  private _isOnTransactionRoute() {
+    return this.router.url === '/transactions/new/recipient';
+  }
 }
