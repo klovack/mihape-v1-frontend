@@ -17,6 +17,7 @@ export class RatesService {
     { name: 'USD', type: CurrencyType.USD },
   ];
   private _rates: Rates;
+  private _maxTransaction = 10000000; // In Rupiah
 
   constructor(private http: HttpClient) {}
 
@@ -34,7 +35,6 @@ export class RatesService {
       .pipe(
         map((respond: RespondRates) => {
           this._rates = this.toRates(respond);
-          console.log(this._rates);
           return this._rates;
         })
       );
@@ -42,13 +42,17 @@ export class RatesService {
 
   public get currencyTypes() { return this._currencyTypes; }
   public get rates() { return this._rates; }
+  public get maxTransaction() { return this._maxTransaction; }
 
   public clearRates() {
     this._rates = null;
   }
 
+  public isBelowMaxTransaction(toBeChecked: Number) {
+    return this._maxTransaction >= toBeChecked;
+  }
+
   private toRates(toBeConverted: RespondRates) {
-    console.log(toBeConverted);
     return new Rates(
       new Currency(toBeConverted.data.fromCurrency.base, toBeConverted.data.fromCurrency.originalAmount),
       new Currency(toBeConverted.data.fromCurrency.base, toBeConverted.data.fromCurrency.combineAmount),
@@ -56,6 +60,7 @@ export class RatesService {
       new Currency(toBeConverted.data.toCurrency.base, toBeConverted.data.toCurrency.combineAmount),
       new Currency(toBeConverted.data.fromCurrency.base, toBeConverted.data.fee),
       toBeConverted.data.combineWithFee,
+      new Currency(toBeConverted.data.fromCurrency.base, toBeConverted.data.total)
     );
   }
 }
@@ -78,6 +83,7 @@ class RespondRates {
       amount: number,
     };
     fee: number,
-    combineWithFee: boolean
+    combineWithFee: boolean,
+    total: number
   };
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Input, OnChanges } from '@angular/core';
 import { RecipientsService } from '../../../services/recipients.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class RecipientsOverviewComponent implements OnInit, OnDestroy {
   @Input('limit') limit: Number;
   recipients = [];
   faPlus = faPlus;
+  faLeft = faArrowLeft;
   private _subscription: Subscription;
 
   constructor(
@@ -51,11 +52,13 @@ export class RecipientsOverviewComponent implements OnInit, OnDestroy {
         this._updateRecipients();
       })
       .catch((err) => {
-        if (err === 404) {
+        if (err.status === 404) {
           this._dialogService.viewConnectionError();
         }
-        if (err === 400) {
+        if (err.status === 400) {
           // Show error that recipient still in use
+          console.log('should display error');
+          this._dialogService.viewUndeletableRecipientError();
         }
         this._updateRecipients();
       });

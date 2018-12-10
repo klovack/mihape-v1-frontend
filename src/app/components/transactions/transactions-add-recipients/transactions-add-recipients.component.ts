@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class TransactionsAddRecipientsComponent implements OnInit {
 
   canAddNewRecipient = false;
+  chosenRecipient: Recipient;
 
   constructor(private _recipientsService: RecipientsService, private _router: Router) { }
 
@@ -19,11 +20,23 @@ export class TransactionsAddRecipientsComponent implements OnInit {
 
   onAbleToAddRecipient(addRecipient: HTMLInputElement) {
     this.canAddNewRecipient = addRecipient.checked;
+    console.log('able to add recipient');
   }
 
   onSelectRecipient(recipient: Recipient) {
     this._recipientsService.chooseRecipient(recipient);
-    this._router.navigate(['/transactions/new/data']);
+    this.chosenRecipient = this._recipientsService.chosenRecipient;
   }
 
+  onAddNewRecipient(recipient: Recipient, addRecipient: HTMLInputElement) {
+    addRecipient.checked = false;
+    this.onAbleToAddRecipient(addRecipient);
+
+    this._recipientsService.chooseRecipient(recipient);
+    this.chosenRecipient = this._recipientsService.chosenRecipient;
+  }
+
+  onNextPage() {
+    this._router.navigate(['/transactions/new/data']);
+  }
 }

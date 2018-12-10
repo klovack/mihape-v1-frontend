@@ -10,6 +10,13 @@ export class DialogService {
   showCurtain = false;
   isLoading = false;
   hasConnectionError = false;
+  nextNavigation = '';
+
+  dialogMessage = {
+    show: false,
+    showUndeletableRecipient: false,
+    showMaxLimit: false,
+  };
 
   constructor() { }
 
@@ -18,8 +25,9 @@ export class DialogService {
     this.showSignin = false;
   }
 
-  viewSignin() {
+  viewSignin(nextNavigation?: string) {
     this.showSignin = true;
+    this.nextNavigation = nextNavigation;
   }
 
   // Signup
@@ -45,12 +53,41 @@ export class DialogService {
   // Connection error
   viewConnectionError() {
     this.hasConnectionError = true;
-    setTimeout(() => {
-      this.hasConnectionError = false;
-    }, 2000);
+    this.prepareForClosing(this.stopConnectionError);
   }
 
   stopConnectionError() {
     this.hasConnectionError = false;
+  }
+
+  // Show Dialog Error
+  viewUndeletableRecipientError() {
+    this.dialogMessage.show = true;
+    this.dialogMessage.showUndeletableRecipient = true;
+    this.prepareForClosing(this.stopUndeletableRecipientError);
+  }
+
+  stopUndeletableRecipientError() {
+    this.dialogMessage.showUndeletableRecipient = false;
+    this.dialogMessage.show = false;
+  }
+
+  // Show Dialog Max Limit Error
+  viewMaxLimit() {
+    this.dialogMessage.show = true;
+    this.dialogMessage.showMaxLimit = true;
+    this.prepareForClosing(this.stopUndeletableRecipientError);
+  }
+
+  stopMaxLimit() {
+    this.dialogMessage.showMaxLimit = false;
+    this.dialogMessage.show = false;
+  }
+
+  // Delay before the dialog close
+  private prepareForClosing(closingFunction: Function) {
+    setTimeout(() => {
+      closingFunction.bind(this)();
+    }, 2000);
   }
 }

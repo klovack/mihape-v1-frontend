@@ -90,35 +90,39 @@
       <div class="form-field">
         <div class="input full-width">
           <label for="country">Country</label>
-          <mat-select
-            formControlName="countryControlForm"
-            name="country" 
-            id="country">
-            <mat-option 
-              *ngFor="let country of countryService.countries"
-              [value]="country.code">
-              {{country.name}}
-            </mat-option>
-          </mat-select>
+          <mat-form-field>
+            <mat-select
+              formControlName="countryControlForm"
+              name="country" 
+              id="country">
+              <mat-option 
+                *ngFor="let country of countryService.countries"
+                [value]="country.code">
+                {{country.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
 
         <!-- Province -->
         <div class="input full-width">
           <!-- Province -->
           <label for="province">Province</label>
-          <mat-select
-            formControlName="provinceControlForm"
-            name="province" 
-            id="province">
-              <mat-option 
-                *ngFor="let province of countryService.provinces"
-                [value]="province.name">
-                {{province.name}}
-              </mat-option>
-              <mat-option value="other">
-                Other
-              </mat-option>
-          </mat-select>
+          <mat-form-field>
+            <mat-select
+              formControlName="provinceControlForm"
+              name="province" 
+              id="province">
+                <mat-option 
+                  *ngFor="let province of countryService.provinces"
+                  [value]="province.name">
+                  {{province.name}}
+                </mat-option>
+                <mat-option value="other">
+                  Other
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
 
         <div *ngIf="provinceControlForm.value === 'other'" class="input full-width">

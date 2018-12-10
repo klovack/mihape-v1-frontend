@@ -33,9 +33,10 @@ export class RecipientsNewComponent implements OnInit {
       Validators.required,
       CustomValidator.isIBAN()
     ]),
+    bicFormControl: new FormControl('', Validators.required),
     moreInfoForm: new FormGroup({
       accountNumberFormControl: new FormControl(''),
-      bicFormControl: new FormControl(''),
+      bankCodeFormControl: new FormControl(''),
       emailFormControl: new FormControl(''),
     })
   });
@@ -72,9 +73,10 @@ export class RecipientsNewComponent implements OnInit {
   get bankNameFormControl() { return this.newRecipientForm.get('bankNameFormControl'); }
   get IBANFormControl() { return this.newRecipientForm.get('IBANFormControl'); }
   get accountNumberFormControl() { return this.moreInfoForm.get('accountNumberFormControl'); }
-  get bicFormControl() { return this.moreInfoForm.get('bicFormControl'); }
+  get bicFormControl() { return this.newRecipientForm.get('bicFormControl'); }
   get emailFormControl() { return this.moreInfoForm.get('emailFormControl'); }
   get moreInfoForm(): FormGroup { return this.newRecipientForm.controls.moreInfoForm as FormGroup; }
+  get bankCodeFormControl() { return this.moreInfoForm.get('bankCodeFormControl'); }
 
   get showBackButton() { return !this.router.url.includes('/transactions/new'); }
 
@@ -104,12 +106,14 @@ export class RecipientsNewComponent implements OnInit {
         this.accountNumberFormControl.value,
         this.bicFormControl.value,
         [
-          { name: 'email', value: this.emailFormControl.value }
+          { name: 'email', value: this.emailFormControl.value },
+          { name: 'bankCode', value: this.bankNameFormControl.value }
         ]
       ),
       '',
       this.callPrefix + this.phoneNumberFormControl.value
     );
+    console.log(newRecipient);
     this.recipientsService.createNewRecipient(newRecipient)
       .toPromise()
       .then((newlyCreatedRecipient) => {

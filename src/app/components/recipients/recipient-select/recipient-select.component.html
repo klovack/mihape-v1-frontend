@@ -1,13 +1,16 @@
-<mat-select
-  placeholder="Select Recipient"
-  #selectRecipient
-  (selectionChange)="onRecipientSelect(selectRecipient)"
-  name="recipient-select" 
-  id="recipient-select"
-  class="recipient-select">
-  <mat-option 
-    *ngFor="let recipient of recipients" 
-    [value]="recipient.id">
-    {{recipient.name}}
-  </mat-option>
-</mat-select>
+<mat-form-field class="recipient-select">
+  <mat-select
+    placeholder="Select Recipient"
+    #selectRecipient
+    (selectionChange)="onRecipientSelect(selectRecipient)"
+    name="recipient-select" 
+    id="recipient-select"
+    [disabled]="disabled"
+    [(value)]="chosenRecipientId">
+    <mat-option 
+      *ngFor="let recipient of recipients" 
+      [value]="recipient.id">
+      {{recipient.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

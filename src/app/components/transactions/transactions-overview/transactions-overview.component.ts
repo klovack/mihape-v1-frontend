@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { Subscription } from 'rxjs';
@@ -14,6 +14,7 @@ export class TransactionsOverviewComponent implements OnInit, OnDestroy {
 
   transactions = [];
   faPlus = faPlus;
+  faLeft = faArrowLeft;
   private _subscription: Subscription;
 
   constructor(

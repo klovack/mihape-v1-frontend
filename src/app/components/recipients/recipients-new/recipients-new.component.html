@@ -14,17 +14,21 @@
     
     <div class="form-field">
       <label for="country">Country*</label>
-      <mat-select
-        class="full-width"
-        formControlName="countryFormControl"
-        name="country" 
-        id="country">
-        <mat-option 
-          *ngFor="let country of countryService.supportedCountries"
-          [value]="country.name">
-          {{country.name}}
-        </mat-option>
-      </mat-select>
+      <mat-form-field class="full-width">
+        <mat-select
+          formControlName="countryFormControl"
+          name="country" 
+          id="country">
+          <mat-option 
+            *ngFor="let country of countryService.supportedCountries"
+            [value]="country.name">
+            {{country.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          Country is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
     </div>
 
     <div class="form-field">
@@ -58,6 +62,16 @@
       </mat-form-field>
     </div>
 
+    <div class="form-field">
+      <label for="bic">BIC*</label>
+      <mat-form-field class="full-width">
+        <input type="text" matInput id="bic" name="bic" formControlName="bicFormControl">
+        <mat-error>
+          Bank International Code (BIC) is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
     <p id="more-info" *ngIf="!moreInfoExpanded"><a (click)="onMoreInfo()"><fa-icon [icon]="faCaret"></fa-icon> Add more information</a></p>
 
     <ng-container *ngIf="moreInfoExpanded">
@@ -70,9 +84,9 @@
           </mat-form-field>
         </div>
         <div class="form-field">
-          <label for="bic">BIC</label>
+          <label for="bankCode">Bank Code</label>
           <mat-form-field class="full-width">
-            <input type="text" matInput id="bic" name="bic" formControlName="bicFormControl">
+            <input type="text" matInput id="bankCode" name="bankCode" formControlName="bankCodeFormControl">
           </mat-form-field>
         </div>
         <div class="form-field">

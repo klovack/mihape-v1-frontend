@@ -11,3 +11,4 @@
   <app-loading-circle *ngIf="dialogService.isLoading"></app-loading-circle>
 </div>
 <app-connection-error *ngIf="dialogService.hasConnectionError"></app-connection-error>
+<app-dialog *ngIf="dialogService.dialogMessage.show"></app-dialog>

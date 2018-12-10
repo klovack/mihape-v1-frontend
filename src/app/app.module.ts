@@ -37,6 +37,13 @@ import {
 } from './components/transactions/transactions-add-recipients/transactions-add-recipients.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RecipientSelectComponent } from './components/recipients/recipient-select/recipient-select.component';
+import {
+  TransactionsNewDataComponent
+} from './components/transactions/transactions-new/transactions-new-data/transactions-new-data.component';
+import {
+  TransactionsNewOverviewComponent
+} from './components/transactions/transactions-new/transactions-new-overview/transactions-new-overview.component';
+import { RatesDetailComponent } from './components/rates/rates-detail/rates-detail.component';
 
 registerLocaleData(localeId);
 
@@ -66,7 +73,10 @@ registerLocaleData(localeId);
     ConnectionErrorComponent,
     TransactionsNewComponent,
     TransactionsAddRecipientsComponent,
-    RecipientSelectComponent
+    RecipientSelectComponent,
+    TransactionsNewDataComponent,
+    TransactionsNewOverviewComponent,
+    RatesDetailComponent
   ],
   imports: [
     BrowserModule,

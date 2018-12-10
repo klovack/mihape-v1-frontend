@@ -12,18 +12,18 @@
           autocomplete="off">
       </mat-form-field>
     </div>
-    <mat-select
-      (selectionChange)="onConvert()"
-      formControlName="fromBase"
-      name="from-base" 
-      id="from-base"
-      class="currency-select"
-      placeholder="Base">
-      <mat-option 
-        value="IDR">
-        IDR
-    </mat-option>
-    </mat-select>
+    <mat-form-field class="currency-select">
+      <mat-select
+        (selectionChange)="onConvert()"
+        formControlName="fromBase"
+        name="from-base" 
+        id="from-base">
+        <mat-option 
+          value="IDR">
+          IDR
+      </mat-option>
+      </mat-select>
+    </mat-form-field>
   
     <!-- Separator / Loading -->
     <app-loading-bounce [isBouncing]="isLoading"></app-loading-bounce>
@@ -38,19 +38,20 @@
           id="to-amount">
       </mat-form-field>
     </div>
-    <mat-select
-      (selectionChange)="onConvert()"
-      placeholder="Base"
-      formControlName="toBase"
-      name="to-base" 
-      id="to-base"
-      class="currency-select">
-      <mat-option 
-        *ngFor="let currencyType of currencyTypes" 
-        [value]="currencyType.name">
-        {{currencyType.name}}
-      </mat-option>
-    </mat-select>
+    <mat-form-field class="currency-select">
+      <mat-select
+        (selectionChange)="onConvert()"
+        formControlName="toBase"
+        name="to-base" 
+        id="to-base"
+        class="currency-select">
+        <mat-option 
+          *ngFor="let currencyType of currencyTypes" 
+          [value]="currencyType.name">
+          {{currencyType.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <p class="error center">{{errorMessage}}</p>

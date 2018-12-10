@@ -1,4 +1,12 @@
 <div class="container">
-  <h2>{{title}}</h2>
-  <p>{{message}}</p>
+  <div
+    *ngIf="_dialogService.dialogMessage.showUndeletableRecipient"
+    class="message">
+    Recipient cannot be deleted because it is still being used.
+  </div>
+  <div
+    *ngIf="_dialogService.dialogMessage.showMaxLimit"
+    class="message">
+    Your input exceeds maximum limit of transaction
+  </div>
 </div>

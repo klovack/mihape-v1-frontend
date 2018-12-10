@@ -96,7 +96,10 @@ export class RecipientsService {
         'Authorization': this.authService.authToken,
       })
     }).pipe(
-      map((data: RecipientRespond) => this._newRecipientObject(data.data)),
+      map((data: RecipientRespond) => {
+        console.log(data);
+        return this._newRecipientObject(data.data);
+      }),
     );
   }
 
@@ -150,7 +153,11 @@ class RecipientRespond {
         name: string,
         accountNumber: string,
         bic: string,
-        otherInformation: [any]
+        otherInformation: {
+          _id: string,
+          name: string,
+          value: string
+        }[]
       },
       country: string
       name: string,

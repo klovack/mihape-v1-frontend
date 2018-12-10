@@ -1,4 +1,4 @@
-<div class="rec-wrapper">
+<div class="rec-wrapper" [class.no-pointer]="alwaysShowAll">
   <div (click)="onShowDetail()" class="rec-desc">
     <h3 class="title">{{recipient.name}}</h3>
     <!-- If detail not shown -->
@@ -8,29 +8,33 @@
 
     <!-- Detail shown -->
     <table class="rec-desc-detail" *ngIf="showDetail">
+      <tr>
+        <th>Bank Name</th>
+        <td>{{recipient.bankAccount.name}}</td>
+      </tr>
       <tr *ngIf="recipient.bankAccount.accountNumber">
         <th>Account Number</th>
         <td>{{recipient.bankAccount.accountNumber}}</td>
       </tr>
-      <tr *ngIf="recipient.bankAccount.bic">
+      <tr *ngIf="recipient.bankAccount.bankCode">
         <th>Bank Code</th>
         <td>{{recipient.bankAccount.bic}}</td>
-      </tr>
-      <tr>
-        <th>Phone Number</th>
-        <td>{{recipient.phoneNumber}}</td>
       </tr>
       <tr>
         <th>IBAN</th>
         <td>{{recipient.bankAccount.IBAN}}</td>
       </tr>
       <tr>
-        <th>Bank Name</th>
-        <td>{{recipient.bankAccount.name}}</td>
+        <th>BIC</th>
+        <td>{{recipient.bankAccount.bic}}</td>
       </tr>
-      <tr *ngFor="let otherInfo of recipient.bankAccount.otherInformation">
-        <th>{{otherInfo.name | titlecase}}</th>
-        <td>{{otherInfo.value}}</td>
+      <tr>
+        <th>Phone Number</th>
+        <td>{{recipient.phoneNumber}}</td>
+      </tr>
+      <tr *ngIf="recipient.bankAccount.email">
+        <th>Email</th>
+        <td>{{recipient.bankAccount.email}}</td>
       </tr>
     </table>
   </div>
@@ -39,7 +43,7 @@
     <h4>{{recipient.bankAccount.country}}</h4>
     
   </div>
-  <a *ngIf="showDetail" (click)="onDelete()" class="rec-edit">
+  <a *ngIf="showDetail && deletable" (click)="onDelete()" class="rec-edit">
     <fa-icon [icon]="faTrash" class="rec-del"></fa-icon>
   </a>
 </div>

@@ -10,10 +10,13 @@
     (deleteRecipient)="deleteRecipient($event)"></app-recipients-detail>
   <div *ngIf="recipients.length <= 0" class="no-recipients">You don't have any recipient</div>
   <div class="see-more" *ngIf="showMore">
-    <a [routerLink]="['/recipients']">See More</a>
+    <a [routerLink]="['/recipients']" class="route-nav more">See More</a>
   </div>
   <div class="back" *ngIf="canBack">
-    <a [routerLink]="['/overview']">Back</a>
+    <a [routerLink]="['/overview']" class="route-nav back">
+      <fa-icon [icon]="faLeft"></fa-icon>
+      Back
+    </a>
   </div>
 
   <div routerLink="/recipients/new" id="add-rec">

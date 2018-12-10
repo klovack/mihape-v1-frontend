@@ -17,6 +17,12 @@ import {
 } from '../components/transactions/transactions-add-recipients/transactions-add-recipients.component';
 import { UserOnlyGuard } from '../services/auth-guard/user-area-only.service';
 import { NonUserOnlyGuard } from '../services/auth-guard/non-user-only.service';
+import {
+  TransactionsNewDataComponent
+} from '../components/transactions/transactions-new/transactions-new-data/transactions-new-data.component';
+import {
+  TransactionsNewOverviewComponent
+} from '../components/transactions/transactions-new/transactions-new-overview/transactions-new-overview.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
@@ -25,9 +31,9 @@ const routes: Routes = [
   { path: 'transactions/new', component: TransactionsNewComponent, canLoad: [UserOnlyGuard], children: [
     { path: '', redirectTo: 'rates', pathMatch: 'full', canActivate: [UserOnlyGuard]},
     { path: 'rates', component: RatesConverterComponent, canActivate: [UserOnlyGuard] },
-    { path: 'data', component: NotFoundComponent, canActivate: [UserOnlyGuard] },
+    { path: 'data', component: TransactionsNewDataComponent, canActivate: [UserOnlyGuard] },
     { path: 'recipient', component: TransactionsAddRecipientsComponent, canActivate: [UserOnlyGuard] },
-    { path: 'overview', component: NotFoundComponent, canActivate: [UserOnlyGuard] },
+    { path: 'overview', component: TransactionsNewOverviewComponent, canActivate: [UserOnlyGuard] },
   ]},
   { path: 'recipients', component: RecipientsOverviewComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
   { path: 'recipients/new', component: RecipientsNewComponent },

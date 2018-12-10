@@ -12,6 +12,9 @@ import { RecipientsService } from 'src/app/services/recipients.service';
 export class RecipientsDetailComponent implements OnInit {
 
   @Input('recipient') recipient: Recipient;
+  @Input('deletable') deletable = true;
+  @Input('alwaysShowAll') alwaysShowAll = false;
+  @Input('expanded') expanded = false;
   @Output('deleteRecipient') deleteRecipient = new EventEmitter<Recipient>();
   faTrash = faTrash;
 
@@ -20,11 +23,17 @@ export class RecipientsDetailComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.showDetail = false;
+    if (this.alwaysShowAll || this.expanded) {
+      this.showDetail = true;
+    } else {
+      this.showDetail = false;
+    }
   }
 
   onShowDetail() {
-    this.showDetail = !this.showDetail;
+    if (!this.alwaysShowAll) {
+      this.showDetail = !this.showDetail;
+    }
   }
 
   get lastDigitNumber() {

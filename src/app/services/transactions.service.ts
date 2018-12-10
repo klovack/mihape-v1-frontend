@@ -8,6 +8,7 @@ import Rates from '../model/rates.model';
 import Currency from '../model/currency.model';
 import { RecipientsService } from './recipients.service';
 import { Observable } from 'rxjs';
+import { RatesService } from './rates.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,16 @@ export class TransactionsService {
 
   private _transactionsUrl = 'http://localhost:3000/api/v1/transactions';
 
-  constructor(private http: HttpClient, private authService: AuthService, private recipientsService: RecipientsService) { }
+  private _newlyCreatedTransaction: Transaction;
+
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private recipientsService: RecipientsService,
+    private ratesService: RatesService,
+  ) { }
+
+  public get newlyCreatedTransaction() { return this._newlyCreatedTransaction; }
 
   getAllTransactions(limit?: Number) {
     let params;
@@ -37,13 +47,38 @@ export class TransactionsService {
     })
     .pipe(
       catchError(err => {
-        this.authService.logoutUser();
+        // this.authService.logoutUser();
         return new Observable();
       }),
       map(async (data: TransactionRespond) => {
         return await this._populateTransactions(data);
       })
     );
+  }
+
+  clearPreparedTransaction() {
+    this._newlyCreatedTransaction = null;
+  }
+
+  prepareTransaction(purpose: string, paymentDetails?: string) {
+    // Get Recipient from recipientsService
+    const newRecipient = this.recipientsService.chosenRecipient;
+    // Get User from authService
+    const user = this.authService.authUser;
+    // Get Rates from ratesService
+    const rates = this.ratesService.rates;
+
+    const newPurpose = purpose || (this.newlyCreatedTransaction ? this.newlyCreatedTransaction.name : '');
+    const newPaymentDetails = paymentDetails || (this._newlyCreatedTransaction ? this.newlyCreatedTransaction.description : '');
+
+    // Create new transaction
+    this._newlyCreatedTransaction = new Transaction(
+      null, newPurpose, newPaymentDetails, new Date(), new Date(new Date().setDate(new Date().getDate() + 1)),
+      null, null, null, '', rates, user.id, newRecipient
+    );
+
+    // Return newlyCreatedTransaction
+    return this._newlyCreatedTransaction;
   }
 
   deleteTransaction(transaction: Transaction) {

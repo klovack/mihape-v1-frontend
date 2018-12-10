@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="overview-data">
+    <!-- Recipient -->
+    <h2 class="overview-title">Recipient Details</h2>
+    <app-recipients-detail [recipient]="createdTransaction.recipient" [deletable]="false" [alwaysShowAll]="true"></app-recipients-detail>
+
+    <!-- Rates -->
+    <h2 class="overview-title">Exchange Rates</h2>
+    <app-rates-detail [rates]="createdTransaction.rates"></app-rates-detail>
+
+    <!-- Transaction -->
+    <h2 class="overview-title">Transaction Details</h2>
+    
+  </div>
+  <div class="overview-footer">
+    <button id="submit">
+      Create Transaction
+    </button>
+  </div>
+</div>

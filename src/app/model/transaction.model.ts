@@ -41,3 +41,13 @@ export default class Transaction {
   public get userId() { return this._userId; }
   public get recipient() { return this._recipient; }
 }
+
+export const TransactionPurposes = [
+  { name: 'Biaya Pendidikan' },
+  { name: 'Kebutuhan Sehari-hari' },
+  { name: 'Online Shopping' },
+  { name: 'Donasi' },
+  { name: 'Mengirim untuk Anggota Keluarga' },
+  { name: 'Membayar Pinjaman' },
+  { name: 'Lainnya' }
+];

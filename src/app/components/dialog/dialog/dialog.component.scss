@@ -1,0 +1,27 @@
+.container {
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  background: rgb(255, 255, 59);
+  padding: 10px;
+  border: 1px solid red;
+  border-top: none;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  width: 40%;
+}
+
+@media screen and (max-width: 1800px) {
+  .container {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .container {
+    width: 100%;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { DialogService } from 'src/app/services/dialog.service';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
-export class DialogComponent implements OnInit {f;
+export class DialogComponent implements OnInit {
 
   message: string;
   title: string;

@@ -74,7 +74,12 @@ button, .button {
 mat-form-field.mat-form-field {
   font-size: $font-large;
   padding: 5px 10px 5px 10px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+  
+  &.mat-form-field-disabled {
+    border: 1px solid #eee;
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
+  }
 
   .mat-form-field-infix {
     border-top: none;
@@ -101,15 +106,21 @@ mat-form-field.mat-form-field {
   }
 }
 
-mat-select.mat-select {
-  display: inline-block;
-  width: 100px;
-  background: white;
-  outline: 0;
-  padding: 10px 10px 11px 10px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
-  border-radius: $border-radius-size;
-  font-size: $font-large;
+mat-select {
+  &.mat-select {
+    // display: inline-block;
+    // width: 100px;
+    // background: white;
+    // outline: 0;
+    // padding: 10px 10px 11px 10px;
+    // box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    // border-radius: $border-radius-size;
+    font-size: $font-large;
+  }
+
+  &.mat-select-disabled {
+    color: #aaa;
+  }
 }
 
 .primary-button {
@@ -165,12 +176,47 @@ mat-select.mat-select {
   border: 1px solid rgba(125,125,125,0.1);
 }
 
+.route-nav {
+  text-decoration: none;
+  color: $primary-color;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  &:hover {
+    color: lighten($color: $primary-color, $amount: 20);
+  }
+
+  &.cancel {
+    color: $dark-warn-text;
+  
+    &:hover {
+      color: lighten($color: $dark-warn-text, $amount: 20);
+    }
+  }
+
+  &.success {
+    color: $dark-primary-text;
+
+    &:hover {
+      color: lighten($color: $dark-primary-text, $amount: 20);
+    }
+  }
+
+  &.back {
+    color: $light-warn-text;
+
+    &:hover {
+      color: darken($color: $light-warn-text, $amount: 20);
+    }
+  }
+}
+
 // Delete this
 body {
   background-image: url("./assets/img/smoke-BG.png");
-  background-size: 80%;
+  background-size: 95%;
   background-position-x: right;
-  background-position-y: 600%;
+  background-position-y: 100%;
   background-repeat: no-repeat;
   overflow: hidden;
 }

@@ -9,14 +9,14 @@ export class NonUserOnlyGuard implements CanActivate, CanLoad {
 
   constructor(private authService: AuthService, private router: Router) { }
 
+  /**
+   * Protect the logged in user from the home page
+   */
   canActivate(): boolean {
     if (this.authService.isUserLoggedIn) {
-      console.log(this.router.url);
       if (this.router.url.includes('/transactions/new')) {
-        console.log('navigate to transactions/new');
         this.router.navigate(['/transactions/new/rates']);
       } else {
-        console.log('navigate to transactions/new');
         this.router.navigate(['/overview']);
       }
       return false;

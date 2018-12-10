@@ -41,6 +41,9 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
     ) {}
 
   ngOnInit() {
+    if (this._ratesService.rates) {
+      this.populateForm(this._ratesService.rates);
+    }
     this.onConvert();
   }
 
@@ -58,6 +61,9 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     // If user enter string of non numerical characters
     this.checkForValidInput();
+    // If user entered more than max transaction
+    this.checkForMaxTransaction();
+
     // If user wants to switch between combine fee or not
     if (this._combineFeeBeforeValue !== this.combineFee.value) {
       this.isLoading = false;
@@ -78,9 +84,23 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
     });
   }
 
-  checkForValidInput() {
+  private checkForValidInput() {
     if (typeof this.fromAmount.value === 'string' && isNaN(Number(Currency.parseCurrency(this.fromAmount.value)))) {
-      this.fromAmount.setValue('1,00');
+      this.fromAmount.setValue('1000000');
+    }
+  }
+
+  /**
+   * Temporary function to limit the transaction
+   * Later should implement more robust max transaction
+   * with the limit that can be injected
+   */
+  private checkForMaxTransaction() {
+    if (!this._ratesService.isBelowMaxTransaction(Number(Currency.parseCurrency(this.fromAmount.value.toString())))) {
+      if (this._router.url.includes('transactions/new')) {
+        this._dialogService.viewMaxLimit();
+        this.fromAmount.setValue(this._ratesService.maxTransaction);
+      }
     }
   }
 
@@ -100,7 +120,7 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
       this._router.navigate(['/transactions/new/recipient']);
     } else {
       // Otherwise show login form
-      this._dialogService.viewSignin();
+      this._dialogService.viewSignin('/transactions/new');
     }
   }
 

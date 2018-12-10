@@ -10,6 +10,7 @@
     margin-bottom: -50px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 
     > * {
       width: 100%;
@@ -20,4 +21,8 @@
 
 #add-new-recipient {
   text-align: right;
+}
+
+#recipient-detail {
+  padding-left: 1%;
 }

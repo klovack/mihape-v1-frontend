@@ -1,5 +1,5 @@
 <div class="container add-recipient">
-  <app-recipient-select *ngIf="!canAddNewRecipient" (recipientSelect)="onSelectRecipient($event)"></app-recipient-select>
+  <app-recipient-select [disabled]="canAddNewRecipient" (recipientSelect)="onSelectRecipient($event)"></app-recipient-select>
 
   <mat-checkbox
     name="add-new-recipient" 
@@ -8,5 +8,10 @@
     (change)="onAbleToAddRecipient(addRecipient)">
     Add Recipient
   </mat-checkbox>
+  <div id="recipient-detail">
+    <app-recipients-detail *ngIf="!!chosenRecipient && !canAddNewRecipient" [recipient]="chosenRecipient" [deletable]="false" [expanded]="true"></app-recipients-detail>
+  </div>
 </div>
-<app-recipients-new *ngIf="canAddNewRecipient" (addNewRecipient)="onSelectRecipient($event)"></app-recipients-new>
+<app-recipients-new *ngIf="canAddNewRecipient" (addNewRecipient)="onAddNewRecipient($event, addRecipient)"></app-recipients-new>
+<div class="container">
+</div>

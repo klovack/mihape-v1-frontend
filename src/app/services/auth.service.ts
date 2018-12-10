@@ -4,6 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 import User from '../model/user.model';
 import { Router } from '@angular/router';
+import { DialogService } from './dialog.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AuthService {
     'Authorization': this.authToken,
   });
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private dialogService: DialogService) { }
 
   get authToken() {
     return localStorage.getItem('token');
@@ -47,7 +48,7 @@ export class AuthService {
       this.router.navigate(['/']);
     })
     .catch((err) => {
-      console.error('Can\'t connect to the server');
+      // console.error('Can\'t connect to the server');
       // console.log(err);
       this.removeTokenFromStorage();
       this.router.navigate(['/']);
@@ -96,7 +97,11 @@ export class AuthService {
     }).toPromise()
     .then((user: LoginRespond) => {
       this._storeUserData(user.data);
-      this.router.navigate(['/overview']);
+      if (this.dialogService.nextNavigation) {
+        this.router.navigate([this.dialogService.nextNavigation]);
+      } else {
+        this.router.navigate(['/overview']);
+      }
     });
   }
 
@@ -106,15 +111,15 @@ export class AuthService {
     }).toPromise()
     .then(() => {
       // successfully logged in
-      console.log('Successfully logged in');
+      // console.log('Successfully logged in');
       this.router.navigate(['/']);
       return true;
     })
     .catch((err) => {
-      console.log('No user found');
-      console.error(err);
+      // console.log('No user found');
+      // console.error(err);
       this.removeTokenFromStorage();
-      this.router.navigate(['/']);
+      // this.router.navigate(['/']);
       return false;
     });
   }

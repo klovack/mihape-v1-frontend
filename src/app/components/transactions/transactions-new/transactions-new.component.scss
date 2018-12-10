@@ -128,3 +128,11 @@ body {
     border-left-color: $dark-secondary-text;
   }
 }
+
+#trx-next {
+  float: right;
+
+  &::after {
+    clear: both;
+  }
+}
