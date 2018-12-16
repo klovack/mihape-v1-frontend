@@ -4,6 +4,12 @@
     <fa-icon [icon]="faAngleDoubleRight" [flip]="isExpanded ? 'horizontal' : 'none'"></fa-icon>
   </div>
 
+  <a *ngIf="isExpanded" routerLink="/overview">
+    <div id="logo">
+      <img src="assets/logo/logo.svg" alt="Qintoen logo">
+    </div>
+  </a>
+
   <!-- Search -->
   <div class="searchbar">
     <mat-form-field *ngIf="isExpanded" floatLabel="never">

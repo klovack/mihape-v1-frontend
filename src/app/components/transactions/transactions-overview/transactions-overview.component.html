@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [class.no-top-margin]="!onOwnRoute">
   <h2 class="title">
     <a [routerLink]="['/transactions']">
       Transactions
@@ -7,7 +7,9 @@
   <app-transactions-detail
     *ngFor="let transaction of transactions"
     [transaction]="transaction"
-    (deleteTrx)="deleteTrx($event)"></app-transactions-detail>
+    (deleteTrx)="deleteTrx($event)"
+    (holdToDeleteEvent)="showHoldToDeleteWarning()"
+    [showMore]="true"></app-transactions-detail>
   <div *ngIf="transactions.length <= 0" class="no-transactions">You don't have any transactions</div>
   <div class="see-more" *ngIf="showMore">
     <a [routerLink]="['/transactions']" class="route-nav more">See More</a>

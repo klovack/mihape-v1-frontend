@@ -13,6 +13,10 @@
   border: 1px solid rgba(125,125,125,0.1);
   position: relative;
 
+  &.no-pointer {
+    cursor: default;
+  }
+
   p {
     line-height: 1.3em;
   }
@@ -49,13 +53,41 @@
 
 .trx-desc-detail {
   text-align: left;
-  line-height: 20px;
-  max-width: 70%;
+  line-height: 45px;
+  width: 109%;
+  margin-top: 20px;
+
+  &.full-width {
+    width: 100%;
+  }
+
+  th {
+    padding-left: 5px;
+  }
 
   td {
-    padding-left: 20px;
+    padding-left: 15%;
+  }
+  
+  tr:nth-child(odd) {
+    background: #f5f5ff;
   }
 }
+
+.trx-more {
+  margin-top: 20px;
+  display: block;
+  color: $dark-primary-text;
+}
+
+#delete-icon{
+  transition: font-size 1000ms linear;
+
+  &.deleting {
+    font-size: $font-largest;
+  }
+}
+
 
 @media screen and (max-width: 800px) {
   .trx-desc-detail {

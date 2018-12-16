@@ -2,7 +2,7 @@
 
 .rec-wrapper {
   cursor: pointer;
-  display: flex;
+  // display: flex;
   justify-content: space-between;
   align-items: baseline;
   // max-width: 800px;
@@ -43,7 +43,7 @@
 .rec-desc-detail {
   text-align: left;
   line-height: 45px;
-  width: 109%;
+  width: 100%;
   margin-top: 20px;
 
   th {
@@ -61,6 +61,23 @@
 
 .no-pointer {
   cursor: default;
+}
+
+#delete-icon{
+  transition: font-size 1000ms linear;
+
+  &.deleting {
+    font-size: $font-largest;
+  }
+}
+
+.rec-right {
+  float: right;
+  padding-top: 20px;
+
+  &::after {
+    clear: both;
+  } 
 }
 
 @media screen and (max-width: 800px) {

@@ -16,6 +16,7 @@ export class DialogService {
     show: false,
     showUndeletableRecipient: false,
     showMaxLimit: false,
+    showHoldToDelete: false,
   };
 
   constructor() { }
@@ -53,7 +54,7 @@ export class DialogService {
   // Connection error
   viewConnectionError() {
     this.hasConnectionError = true;
-    this.prepareForClosing(this.stopConnectionError);
+    this.prepareForClosing(this.stopConnectionError, 5000);
   }
 
   stopConnectionError() {
@@ -84,10 +85,22 @@ export class DialogService {
     this.dialogMessage.show = false;
   }
 
+  // Show Dialog Hold To Delete
+  viewHoldToDelete() {
+    this.dialogMessage.showHoldToDelete = true;
+    this.dialogMessage.show = true;
+    this.prepareForClosing(this.stopHoldToDelete);
+  }
+
+  stopHoldToDelete() {
+    this.dialogMessage.showHoldToDelete = false;
+    this.dialogMessage.show = false;
+  }
+
   // Delay before the dialog close
-  private prepareForClosing(closingFunction: Function) {
+  private prepareForClosing(closingFunction: Function, timeLimit = 2000) {
     setTimeout(() => {
       closingFunction.bind(this)();
-    }, 2000);
+    }, timeLimit);
   }
 }

@@ -40,3 +40,25 @@
 .value {
   text-align: left;
 }
+
+@media screen and (max-width: 1000px) {
+  .rates-desc {
+    max-width: 60%;
+  }
+}
+
+@media screen and (max-width:700px) {
+  .rates-desc {
+    max-width: 95%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .small {
+    text-align: right;
+
+    .hide-small {
+      display: none;
+    }
+  }
+}

@@ -48,11 +48,12 @@
 
   #combine-tooltip {
     position: absolute;
-    background: white;
+    background: #0a203f99;
+    border-radius: 8px;
     max-width: 500px;
     max-height: 200px;
     p {
-      position: relative;
+      color: white;
       word-wrap: break-word;
       text-align: start;
     }
@@ -80,5 +81,29 @@
     top: -21px;
     padding-left: 5px;
     text-align: left;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .converter {
+    flex-wrap: wrap;
+    max-width: 100%;
+
+    app-loading-bounce {
+      display: none;
+    }
+  }
+
+  #combine-tooltip {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 523px) {
+  .converter {
+    >* {
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
   }
 }

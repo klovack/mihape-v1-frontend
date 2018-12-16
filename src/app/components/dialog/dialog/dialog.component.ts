@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
@@ -6,14 +6,21 @@ import { DialogService } from 'src/app/services/dialog.service';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent implements OnInit, DoCheck {
 
-  message: string;
-  title: string;
+  showMaxLimit = false;
+  showUndeletableRecipient = false;
+  showHoldToDelete = false;
 
   constructor(private _dialogService: DialogService) { }
 
   ngOnInit() {
+  }
+
+  ngDoCheck() {
+    this.showMaxLimit = this._dialogService.dialogMessage.showMaxLimit;
+    this.showUndeletableRecipient = this._dialogService.dialogMessage.showUndeletableRecipient;
+    this.showHoldToDelete = this._dialogService.dialogMessage.showHoldToDelete;
   }
 
 }

@@ -77,3 +77,15 @@ $container-width: 500px;
   padding: 20px 0 0 0;
   border-top: 1px solid lightgray;
 }
+
+@media screen and (max-width: 1000px) {
+  .container {
+    left: auto;
+    width: 80%;
+  }
+
+  .form-field {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

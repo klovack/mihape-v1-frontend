@@ -139,6 +139,10 @@ fa-icon {
   }
 }
 
+#logo {
+  display: none;
+}
+
 @media screen and (max-width: 1000px) {
   .sidebar {
     position: absolute;
@@ -147,6 +151,17 @@ fa-icon {
     &.expanded {
       width: 300px;
       left: 0;
+    }
+  }
+
+  #logo {
+    display: block;
+    margin: 0 auto;
+
+    img {
+      margin: 0 auto;
+      display: block;
+      padding-top: 10px;
     }
   }
 }

@@ -1,4 +1,9 @@
 <div class="rec-wrapper" [class.no-pointer]="alwaysShowAll">
+  <div class="rec-right">
+    <!-- Temporary -->
+    <h4>{{recipient.bankAccount.country}}</h4>
+    
+  </div>
   <div (click)="onShowDetail()" class="rec-desc">
     <h3 class="title">{{recipient.name}}</h3>
     <!-- If detail not shown -->
@@ -38,12 +43,7 @@
       </tr>
     </table>
   </div>
-  <div class="rec-right">
-    <!-- Temporary -->
-    <h4>{{recipient.bankAccount.country}}</h4>
-    
-  </div>
-  <a *ngIf="showDetail && deletable" (click)="onDelete()" class="rec-edit">
-    <fa-icon [icon]="faTrash" class="rec-del"></fa-icon>
+  <a *ngIf="showDetail && deletable" (mousedown)="prepareToDelete()" (mouseup)="cancelDelete()" (mouseleave)="cancelDelete()" class="rec-edit">
+    <fa-icon [icon]="faTrash" id="delete-icon" class="rec-del"></fa-icon>
   </a>
 </div>

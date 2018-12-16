@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="overview-data">
+<div class="container" [class.shrinked]="!isNewTransaction">
+  <div class="overview-data" *ngIf="createdTransaction">
     <!-- Recipient -->
     <h2 class="overview-title">Recipient Details</h2>
     <app-recipients-detail [recipient]="createdTransaction.recipient" [deletable]="false" [alwaysShowAll]="true"></app-recipients-detail>
@@ -10,10 +10,17 @@
 
     <!-- Transaction -->
     <h2 class="overview-title">Transaction Details</h2>
-    
+    <app-transactions-detail
+      [transaction]="createdTransaction" 
+      [deletable]="false" 
+      [alwaysShowAll]="true" 
+      [showRecipient]="false"
+      [showCreated]="false"
+      [showDeadline]="true"
+      [showAmount]="false"></app-transactions-detail>
   </div>
   <div class="overview-footer">
-    <button id="submit">
+    <button *ngIf="isNewTransaction" id="submit" (click)="onCreateTransaction()">
       Create Transaction
     </button>
   </div>

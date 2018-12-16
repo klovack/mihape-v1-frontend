@@ -134,7 +134,7 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
   }
 
   showNoConnectionError() {
-    this.errorMessage = 'No connection to the server';
+    this._dialogService.viewConnectionError();
   }
 
   showCombineTooltip() {

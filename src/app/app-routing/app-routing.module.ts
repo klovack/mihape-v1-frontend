@@ -35,6 +35,7 @@ const routes: Routes = [
     { path: 'recipient', component: TransactionsAddRecipientsComponent, canActivate: [UserOnlyGuard] },
     { path: 'overview', component: TransactionsNewOverviewComponent, canActivate: [UserOnlyGuard] },
   ]},
+  { path: 'transactions/:id', component: TransactionsNewOverviewComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
   { path: 'recipients', component: RecipientsOverviewComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
   { path: 'recipients/new', component: RecipientsNewComponent },
   { path: 'email-confirm', component: ConfirmationComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },

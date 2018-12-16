@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [class.no-top-margin]="!onOwnRoute">
   <h2 class="title">
     <a [routerLink]="['/recipients']">
       Recipients
@@ -7,7 +7,8 @@
   <app-recipients-detail 
     *ngFor="let recipient of recipients" 
     [recipient]="recipient"
-    (deleteRecipient)="deleteRecipient($event)"></app-recipients-detail>
+    (deleteRecipient)="deleteRecipient($event)"
+    (holdToDeleteEvent)="onCancelDelete()"></app-recipients-detail>
   <div *ngIf="recipients.length <= 0" class="no-recipients">You don't have any recipient</div>
   <div class="see-more" *ngIf="showMore">
     <a [routerLink]="['/recipients']" class="route-nav more">See More</a>

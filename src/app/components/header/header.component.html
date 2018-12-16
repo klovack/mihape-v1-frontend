@@ -2,7 +2,7 @@
   <div class="header-container">
     <div class="left-section">
       <a routerLink="/overview">
-        <div id="logo">
+        <div id="logo" [class.show]="!isUserLoggedIn">
           <img src="assets/logo/logo.svg" alt="Qintoen logo">
         </div>
       </a>

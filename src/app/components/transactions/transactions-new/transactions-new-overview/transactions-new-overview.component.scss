@@ -4,6 +4,10 @@
   width: 70%;
   margin: 0 auto;
   margin-top: 80px;
+
+  &.shrinked {
+    width: 55%;
+  }
 }
 
 .title {
@@ -20,4 +24,11 @@
 
 .overview-title {
   margin-top: 80px;
+}
+
+.overview-footer {
+  button, #submit {
+    margin: 0 auto;
+    display: block;
+  }
 }

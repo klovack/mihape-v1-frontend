@@ -18,6 +18,9 @@ export class TransactionsService {
   private _transactionsUrl = 'http://localhost:3000/api/v1/transactions';
 
   private _newlyCreatedTransaction: Transaction;
+  private _authHeaders = new HttpHeaders({
+    'Authorization': this.authService.authToken,
+  });
 
   constructor(
     private http: HttpClient,
@@ -46,14 +49,54 @@ export class TransactionsService {
       }),
     })
     .pipe(
-      catchError(err => {
-        // this.authService.logoutUser();
-        return new Observable();
-      }),
+      // catchError(err => {
+      //   // this.authService.logoutUser();
+      //   return new Observable();
+      // }),
       map(async (data: TransactionRespond) => {
         return await this._populateTransactions(data);
       })
     );
+  }
+
+  getTransactionById(id: string) {
+
+    return this.http.get(`${this._transactionsUrl}/${id}`, {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.authToken,
+      }),
+    })
+    .pipe(
+      map(async (data) => {
+        return await this._createTransactionObject(data);
+      })
+    );
+  }
+
+  postNewlyCreatedTransaction() {
+    console.log(this._newlyCreatedTransaction);
+    return this.http.post(this._transactionsUrl, {
+      transaction: {
+        name: this._newlyCreatedTransaction.name,
+        fromCurrency: {
+          base: this._newlyCreatedTransaction.rates.fromCurrency.baseString,
+          amount: this._newlyCreatedTransaction.rates.fromCurrency.amount
+        },
+        toCurrency: {
+          base: this._newlyCreatedTransaction.rates.toCurrency.baseString
+        },
+        recipient: this._newlyCreatedTransaction.recipient.id,
+        combineWithFee: this._newlyCreatedTransaction.rates.combineWithFee
+      }
+    }, {
+      headers: this._authHeaders
+    }).toPromise()
+    .then(data => {
+      console.log(data);
+    })
+    .catch(err => {
+      console.error(err);
+    });
   }
 
   clearPreparedTransaction() {
@@ -73,7 +116,7 @@ export class TransactionsService {
 
     // Create new transaction
     this._newlyCreatedTransaction = new Transaction(
-      null, newPurpose, newPaymentDetails, new Date(), new Date(new Date().setDate(new Date().getDate() + 1)),
+      null, newPurpose, newPaymentDetails, new Date(), new Date(new Date().setTime(new Date().getTime() + 1000 * 60 * 60 * 12)),
       null, null, null, '', rates, user.id, newRecipient
     );
 
@@ -100,27 +143,33 @@ export class TransactionsService {
     // Populate transactions with data
     for (let i = 0; i < data.data.length; i++) {
       const currentData = data.data[i];
-      const recipient = await this.recipientsService.getRecipient(currentData.recipient);
-      const newTransaction = new Transaction(
-        currentData._id,
-        currentData.name, currentData.description, currentData.createdAt, currentData.deadlineAt,
-        currentData.receivedAt, currentData.canceledAt, currentData.failedAt, currentData.status,
-        new Rates(
-          new Currency(currentData.fromCurrency.base, currentData.fromCurrency.originalAmount),
-          new Currency(currentData.fromCurrency.base, currentData.fromCurrency.combineAmount),
-          new Currency(currentData.toCurrency.base, currentData.toCurrency.originalAmount),
-          new Currency(currentData.toCurrency.base, currentData.toCurrency.combineAmount),
-          new Currency(currentData.fee.base, currentData.fee.amount),
-          currentData.combineWithFee,
-          new Currency(currentData.toBeTransfered.base, currentData.toBeTransfered.amount),
-        ),
-        currentData.user,
-        recipient
-      );
+      const newTransaction = await this._createTransactionObject(currentData);
       transactions.push(newTransaction);
     }
 
     return transactions;
+  }
+
+  private async _createTransactionObject(currentData): Promise<Transaction> {
+    const recipient = await this.recipientsService.getRecipient(currentData.recipient);
+    const newTransaction = new Transaction(
+      currentData._id,
+      currentData.name, currentData.description, currentData.createdAt, currentData.deadlineAt,
+      currentData.receivedAt, currentData.canceledAt, currentData.failedAt, currentData.status,
+      new Rates(
+        new Currency(currentData.fromCurrency.base, currentData.fromCurrency.originalAmount),
+        new Currency(currentData.fromCurrency.base, currentData.fromCurrency.combineAmount),
+        new Currency(currentData.toCurrency.base, currentData.toCurrency.originalAmount),
+        new Currency(currentData.toCurrency.base, currentData.toCurrency.combineAmount),
+        new Currency(currentData.fee.base, currentData.fee.amount),
+        currentData.combineWithFee,
+        new Currency(currentData.toBeTransfered.base, currentData.toBeTransfered.amount),
+      ),
+      currentData.user,
+      recipient
+    );
+
+    return newTransaction;
   }
 }
 

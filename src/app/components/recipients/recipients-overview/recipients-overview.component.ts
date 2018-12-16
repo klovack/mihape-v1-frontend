@@ -16,6 +16,7 @@ export class RecipientsOverviewComponent implements OnInit, OnDestroy {
   recipients = [];
   faPlus = faPlus;
   faLeft = faArrowLeft;
+  onOwnRoute = false;
   private _subscription: Subscription;
 
   constructor(
@@ -24,6 +25,7 @@ export class RecipientsOverviewComponent implements OnInit, OnDestroy {
     private _dialogService: DialogService) { }
 
   ngOnInit() {
+    this.onOwnRoute = this._activatedRoute.snapshot.url.toString().includes('recipients');
     this._updateRecipients();
   }
 
@@ -38,6 +40,9 @@ export class RecipientsOverviewComponent implements OnInit, OnDestroy {
         this.recipients = data;
       },
       (err) => {
+        if (err.status !== 404) {
+          this._dialogService.viewConnectionError();
+        }
         this.recipients = [];
       }
     );
@@ -57,11 +62,17 @@ export class RecipientsOverviewComponent implements OnInit, OnDestroy {
         }
         if (err.status === 400) {
           // Show error that recipient still in use
-          console.log('should display error');
           this._dialogService.viewUndeletableRecipientError();
         }
         this._updateRecipients();
       });
+  }
+
+  /**
+   * Show the hold notification to delete
+   */
+  onCancelDelete() {
+    this._dialogService.viewHoldToDelete();
   }
 
   get canBack() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { faPlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { DialogService } from 'src/app/services/dialog.service';
@@ -10,11 +10,12 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './transactions-overview.component.html',
   styleUrls: ['./transactions-overview.component.scss']
 })
-export class TransactionsOverviewComponent implements OnInit, OnDestroy {
+export class TransactionsOverviewComponent implements OnInit, OnDestroy, OnChanges {
 
   transactions = [];
   faPlus = faPlus;
   faLeft = faArrowLeft;
+  onOwnRoute = false;
   private _subscription: Subscription;
 
   constructor(
@@ -24,6 +25,10 @@ export class TransactionsOverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._updateTransactions();
+    this.onOwnRoute = this._activatedRoute.snapshot.url.toString().includes('transactions');
+  }
+
+  ngOnChanges() {
   }
 
   ngOnDestroy() {
@@ -46,6 +51,10 @@ export class TransactionsOverviewComponent implements OnInit, OnDestroy {
       });
   }
 
+  showHoldToDeleteWarning() {
+    this._dialogService.viewHoldToDelete();
+  }
+
   private _updateTransactions() {
     this._subscription = this._transactionsService.getAllTransactions().subscribe(
       (data) => {
@@ -55,7 +64,6 @@ export class TransactionsOverviewComponent implements OnInit, OnDestroy {
           })
           .catch(
             (err) => {
-              console.log(err);
               this._dialogService.viewConnectionError();
             }
           );

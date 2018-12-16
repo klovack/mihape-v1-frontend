@@ -1,56 +1,69 @@
-<div class="trx-wrapper">
+<div class="trx-wrapper" [class.no-pointer]="alwaysShowAll">
   <div (click)="onShowDetail()" class="trx-desc">
     <h3 class="title">{{transaction.name}}</h3>
+
     <!-- If detail not shown -->
-    <div *ngIf="!showDetail" class="trx-desc-short">
+    <div *ngIf="!showDetail && transaction.status" class="trx-desc-short">
       <p>
         {{transaction.statusToString}}.
-        <span *ngIf="transaction.status === 'IS_PROCESSED' || transaction.status === 'IS_COMPLETED'">{{transaction.createdAt | date:'H:mm, d LLL y'}}</span>
-        <span *ngIf="transaction.status === 'IS_CANCELED' || transaction.status === 'SENT_BACK'">{{transaction.canceledAt | date:'H:mm, d LLL y'}}</span>
-        <span *ngIf="transaction.status === 'IS_RECEIVED'">{{transaction.receivedAt | date}}</span>
-        <span *ngIf="transaction.status === 'IS_FAILED'">{{transaction.failedAt[transaction.failedAt.length - 1] | date:'H:mm, d LLL y'}}</span>
+        <span *ngIf="transaction.status === 'IS_PROCESSED' || transaction.status === 'IS_COMPLETED'">{{transaction.createdAt | date:'H:mm OO, d LLL y'}}</span>
+        <span *ngIf="transaction.status === 'IS_CANCELED' || transaction.status === 'SENT_BACK'">{{transaction.canceledAt | date:'H:mm OO, d LLL y'}}</span>
+        <span *ngIf="transaction.status === 'IS_RECEIVED'">{{transaction.receivedAt | date:'H:mm OO, d LLL y'}}</span>
+        <span *ngIf="transaction.status === 'IS_FAILED'">{{transaction.failedAt[transaction.failedAt.length - 1] | date:'H:mm OO, d LLL y'}}</span>
       </p>
     </div>
 
     <!-- Detail shown -->
-    <table class="trx-desc-detail" *ngIf="showDetail">
+    <table class="trx-desc-detail" *ngIf="showDetail" [class.full-width]="!showAmount">
+      <tr *ngIf="transaction.id">
+        <th>Transaction ID</th>
+        <td>{{transaction.id}}</td>
+      </tr>
+      <tr *ngIf="transaction.id">
+        <th>Purpose of Transaction</th>
+        <td>{{transaction.name}}</td>
+      </tr>
       <tr *ngIf="transaction.description">
-        <th>Description</th>
+        <th>Payment Details</th>
         <td>{{transaction.description}}</td>
       </tr>
-      <tr>
+      <tr *ngIf="showCreated && transaction.createdAt">
         <th>Created</th>
-        <td>{{transaction.createdAt | date:'H:mm, d LLL y'}}</td>
+        <td>{{transaction.createdAt | date:'H:mm OO, d LLL y'}}</td>
       </tr>
       <tr *ngIf="transaction.receivedAt">
         <th>Received</th>
-        <td>{{transaction.receivedAt | date:'H:mm, d LLL y'}}</td>
+        <td>{{transaction.receivedAt | date:'H:mm OO, d LLL y'}}</td>
       </tr>
-      <tr *ngIf="transaction.failedAt.length > 0">
+      <tr *ngIf="transaction.failedAt && transaction.failedAt.length > 0">
         <th>Failed</th>
-        <td>{{transaction.failedAt[transaction.failedAt.length - 1] | date:'H:mm, d LLL y'}}</td>
+        <td>{{transaction.failedAt[transaction.failedAt.length - 1] | date:'H:mm OO, d LLL y'}}</td>
       </tr>
       <tr *ngIf="transaction.canceledAt">
         <th>Canceled</th>
-        <td>{{transaction.canceledAt | date:'H:mm, d LLL y'}}</td>
+        <td>{{transaction.canceledAt | date:'H:mm OO, d LLL y'}}</td>
       </tr>
-      <tr *ngIf="!(transaction.receivedAt || transaction.canceledAt || transaction.failedAt[transaction.failedAt.length - 1])">
-        <th>Waiting until</th>
-        <td>{{transaction.deadlineAt | date:'H:mm, d LLL y'}}</td>
+      <tr *ngIf="showDeadline && !(transaction.receivedAt || transaction.canceledAt || transaction.failedAt && transaction.failedAt[transaction.failedAt.length - 1])">
+        <th>Deadline</th>
+        <td>{{transaction.deadlineAt | date:'H:mm OO, d LLL y'}}</td>
       </tr>
-      <tr>
-        <th>Recipient</th>
+      <tr *ngIf="showRecipient">
+        <th>Send to</th>
         <td>{{transaction.recipient.name}} in {{transaction.recipient.country}}</td>
       </tr>
     </table>
+    <a *ngIf="showDetail && showMore" [routerLink]="['/transactions', transaction.id]" class="trx-more">
+      Show More
+    </a>
   </div>
   <div class="trx-right">
-    <!-- Temporary -->
-    <h4>{{transaction.rates.fromCurrency.amount | currency:transaction.rates.fromCurrency.baseString:'symbol-narrow':'1.0-0':'id'}}</h4>
-    <p>{{transaction.rates.toCurrency.amount | currency:transaction.rates.toCurrency.baseString:'symbol-narrow':'1.2-2':'id'}}</p>
-    
+    <!-- Amount of money transfered -->
+    <h4 *ngIf="showAmount">
+      {{transaction.rates.fromCurrency.amount | currency:transaction.rates.fromCurrency.baseString:'symbol-narrow':'1.0-0':'id'}}
+    </h4>
   </div>
-  <a *ngIf="showDetail && transaction.status !== 'IS_CANCELED'" (click)="onDelete()" class="trx-edit">
-    <fa-icon [icon]="faTimes" class="trx-del"></fa-icon>
+
+  <a *ngIf="deletable && showDetail && transaction.status !== 'IS_CANCELED'" (mousedown)="prepareToDelete()" (mouseup)="cancelDelete()" (mouseleave)="cancelDelete()" class="trx-edit">
+    <fa-icon [icon]="faTrash" class="trx-del" id="delete-icon"></fa-icon>
   </a>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import Transaction from 'src/app/model/transaction.model';
 
 @Component({
@@ -9,22 +9,58 @@ import Transaction from 'src/app/model/transaction.model';
 })
 export class TransactionsDetailComponent implements OnInit {
 
-  @Input('transaction') transaction;
+  @Input('transaction') transaction: Transaction;
+  @Input('showRecipient') showRecipient = true;
+  @Input('deletable') deletable = true;
+  @Input('alwaysShowAll') alwaysShowAll = false;
+  @Input('expanded') expanded = false;
+  @Input('showCreated') showCreated = true;
+  @Input('showDeadline') showDeadline = true;
+  @Input('showAmount') showAmount = true;
+  @Input('showMore') showMore = false;
   @Output('deleteTrx') deleteTrx = new EventEmitter<Transaction>();
+  @Output('holdToDeleteEvent') holdToDeleteEvent = new EventEmitter<any>();
+
+  deleteTimeoutHandler: any;
   showDetail = false;
-  faTimes = faTimesCircle;
+  faTrash = faTrashAlt;
 
   constructor() { }
 
   ngOnInit() {
+    if (this.alwaysShowAll || this.expanded) {
+      this.showDetail = true;
+    } else {
+      this.showDetail = false;
+    }
   }
 
   onShowDetail() {
-    this.showDetail = !this.showDetail;
+    if (!this.alwaysShowAll) {
+      this.showDetail = !this.showDetail;
+    }
   }
 
-  onDelete() {
-    this.deleteTrx.emit(this.transaction);
+  prepareToDelete() {
+    const deleteIcon = document.getElementById('delete-icon');
+    deleteIcon.classList.add('deleting');
+    this.deleteTimeoutHandler = setTimeout(() => {
+      this.deleteTrx.emit(this.transaction);
+      this.deleteTimeoutHandler = null;
+    }, 1000);
+  }
+
+  cancelDelete() {
+    const deleteIcon = document.getElementById('delete-icon');
+    // Check to see if item is not yet deleted
+    if (deleteIcon) {
+      deleteIcon.classList.remove('deleting');
+    }
+    if (this.deleteTimeoutHandler) {
+      clearTimeout(this.deleteTimeoutHandler);
+      this.deleteTimeoutHandler = null;
+      this.holdToDeleteEvent.emit();
+    }
   }
 
 }

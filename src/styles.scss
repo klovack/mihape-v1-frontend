@@ -211,6 +211,10 @@ mat-select {
   }
 }
 
+.mat-checkbox .mat-checkbox-layout {
+  white-space: normal;
+}
+
 // Delete this
 body {
   background-image: url("./assets/img/smoke-BG.png");

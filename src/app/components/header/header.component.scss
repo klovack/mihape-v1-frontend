@@ -4,7 +4,6 @@
   width: 100%;
   padding: 15px 0;
   position: fixed;
-  background: rgba(255, 255, 255, 0.3);
   z-index: 10;
 }
 
@@ -59,5 +58,20 @@
 @media screen and (max-width: 1000px) {
   #header {
     background: white;
+    box-shadow: 2px 2px 20px rgba(0,0,0,0.2);
+    z-index: 50;
+  }
+
+  #logo {
+    display: none;
+
+    &.show {
+      display: block;
+
+      img {
+        display: block;
+        margin-left: 60%;
+      }
+    }
   }
 }

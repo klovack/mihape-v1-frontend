@@ -2,16 +2,23 @@
   position: absolute;
   top: 0;
   z-index: 99;
-  background: rgb(255, 255, 59);
+  background: #830c0c79;
   padding: 10px;
-  border: 1px solid red;
+  border-radius: 8px;
   border-top: none;
   right: 0;
   left: 0;
+  top: 5px;
   margin-right: auto;
   margin-left: auto;
   text-align: center;
-  width: 40%;
+  width: fit-content;
+  max-width: 500px;
+  color: white;
+}
+
+.message {
+  color: white;
 }
 
 @media screen and (max-width: 1800px) {

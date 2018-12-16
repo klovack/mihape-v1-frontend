@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import Recipient from '../../../model/recipients.model';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { DialogService } from 'src/app/services/dialog.service';
-import { RecipientsService } from 'src/app/services/recipients.service';
 
 @Component({
   selector: 'app-recipients-detail',
@@ -16,9 +14,11 @@ export class RecipientsDetailComponent implements OnInit {
   @Input('alwaysShowAll') alwaysShowAll = false;
   @Input('expanded') expanded = false;
   @Output('deleteRecipient') deleteRecipient = new EventEmitter<Recipient>();
+  @Output('holdToDeleteEvent') holdToDeleteEvent = new EventEmitter<any>();
   faTrash = faTrash;
 
   showDetail = false;
+  deleteTimeoutHandler: any;
 
   constructor() { }
 
@@ -41,7 +41,25 @@ export class RecipientsDetailComponent implements OnInit {
     return accountNumber.substring(accountNumber.length - 4);
   }
 
-  onDelete() {
-    this.deleteRecipient.emit(this.recipient);
+  prepareToDelete() {
+    const deleteIcon = document.getElementById('delete-icon');
+    deleteIcon.classList.add('deleting');
+    this.deleteTimeoutHandler = setTimeout(() => {
+      this.deleteRecipient.emit(this.recipient);
+      this.deleteTimeoutHandler = null;
+    }, 1000);
+  }
+
+  cancelDelete() {
+    const deleteIcon = document.getElementById('delete-icon');
+    // Check to see if item is not yet deleted
+    if (deleteIcon) {
+      deleteIcon.classList.remove('deleting');
+    }
+    if (this.deleteTimeoutHandler) {
+      clearTimeout(this.deleteTimeoutHandler);
+      this.deleteTimeoutHandler = null;
+      this.holdToDeleteEvent.emit();
+    }
   }
 }
