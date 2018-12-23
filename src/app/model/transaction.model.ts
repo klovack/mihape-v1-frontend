@@ -10,6 +10,7 @@ export default class Transaction {
     private _deadlineAt: Date,
     private _receivedAt: Date,
     private _canceledAt: Date,
+    private _completedAt: Date,
     private _failedAt: [any],
     private _status: string,
     private _rates: Rates,
@@ -24,6 +25,7 @@ export default class Transaction {
   public get deadlineAt() { return this._deadlineAt; }
   public get receivedAt() { return this._receivedAt; }
   public get canceledAt() { return this._canceledAt; }
+  public get completedAt() { return this._completedAt; }
   public get failedAt() { return this._failedAt; }
   public get status() { return this._status; }
   public get statusToString() {

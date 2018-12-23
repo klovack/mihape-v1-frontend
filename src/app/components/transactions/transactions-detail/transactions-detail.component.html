@@ -28,23 +28,27 @@
         <td>{{transaction.description}}</td>
       </tr>
       <tr *ngIf="showCreated && transaction.createdAt">
-        <th>Created</th>
+        <th>You created at</th>
         <td>{{transaction.createdAt | date:'H:mm OO, d LLL y'}}</td>
       </tr>
       <tr *ngIf="transaction.receivedAt">
-        <th>Received</th>
+        <th>You confirmed your transfer at</th>
         <td>{{transaction.receivedAt | date:'H:mm OO, d LLL y'}}</td>
       </tr>
       <tr *ngIf="transaction.failedAt && transaction.failedAt.length > 0">
-        <th>Failed</th>
+        <th>Transaction failed at</th>
         <td>{{transaction.failedAt[transaction.failedAt.length - 1] | date:'H:mm OO, d LLL y'}}</td>
       </tr>
       <tr *ngIf="transaction.canceledAt">
-        <th>Canceled</th>
+        <th>You canceled at</th>
         <td>{{transaction.canceledAt | date:'H:mm OO, d LLL y'}}</td>
       </tr>
+      <!-- <tr *ngIf="transaction.completedAt">
+        <th>You completed the transaction at</th>
+        <td>{{transaction.completed at | date:'H:mm OO, d LLL y'}}</td>
+      </tr> -->
       <tr *ngIf="showDeadline && !(transaction.receivedAt || transaction.canceledAt || transaction.failedAt && transaction.failedAt[transaction.failedAt.length - 1])">
-        <th>Deadline</th>
+        <th>Must be transfered before</th>
         <td>{{transaction.deadlineAt | date:'H:mm OO, d LLL y'}}</td>
       </tr>
       <tr *ngIf="showRecipient">
@@ -63,7 +67,7 @@
     </h4>
   </div>
 
-  <a *ngIf="deletable && showDetail && transaction.status !== 'IS_CANCELED'" (mousedown)="prepareToDelete()" (mouseup)="cancelDelete()" (mouseleave)="cancelDelete()" class="trx-edit">
+  <!-- <a *ngIf="deletable && showDetail && transaction.status !== 'IS_CANCELED'" (mousedown)="prepareToDelete()" (mouseup)="cancelDelete()" (mouseleave)="cancelDelete()" class="trx-edit">
     <fa-icon [icon]="faTrash" class="trx-del" id="delete-icon"></fa-icon>
-  </a>
+  </a> -->
 </div>

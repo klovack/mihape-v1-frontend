@@ -91,11 +91,8 @@ export class TransactionsService {
     }, {
       headers: this._authHeaders
     }).toPromise()
-    .then(data => {
-      console.log(data);
-    })
-    .catch(err => {
-      console.error(err);
+    .then((data: {data: any}) => {
+      return data.data;
     });
   }
 
@@ -117,7 +114,7 @@ export class TransactionsService {
     // Create new transaction
     this._newlyCreatedTransaction = new Transaction(
       null, newPurpose, newPaymentDetails, new Date(), new Date(new Date().setTime(new Date().getTime() + 1000 * 60 * 60 * 12)),
-      null, null, null, '', rates, user.id, newRecipient
+      null, null, null, null, '', rates, user.id, newRecipient
     );
 
     // Return newlyCreatedTransaction
@@ -155,7 +152,7 @@ export class TransactionsService {
     const newTransaction = new Transaction(
       currentData._id,
       currentData.name, currentData.description, currentData.createdAt, currentData.deadlineAt,
-      currentData.receivedAt, currentData.canceledAt, currentData.failedAt, currentData.status,
+      currentData.receivedAt, currentData.canceledAt, currentData.completedAt, currentData.failedAt, currentData.status,
       new Rates(
         new Currency(currentData.fromCurrency.base, currentData.fromCurrency.originalAmount),
         new Currency(currentData.fromCurrency.base, currentData.fromCurrency.combineAmount),
@@ -198,6 +195,7 @@ class TransactionRespond {
       deadlineAt: Date,
       receivedAt: Date,
       canceledAt: Date,
+      completedAt: Date,
       failedAt: [any],
       status: string,
       _id: string,

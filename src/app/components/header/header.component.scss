@@ -5,6 +5,9 @@
   padding: 15px 0;
   position: fixed;
   z-index: 10;
+  background: white;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
 }
 
 .header-container {
@@ -19,7 +22,7 @@
   cursor: pointer;
 
   img {
-  height: 50px;
+  height: 40px;
   }
 }
 
@@ -63,7 +66,6 @@
   }
 
   #logo {
-    display: none;
 
     &.show {
       display: block;
@@ -73,5 +75,11 @@
         margin-left: 60%;
       }
     }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #name {
+    display: none;
   }
 }

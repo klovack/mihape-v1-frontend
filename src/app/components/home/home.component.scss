@@ -4,17 +4,16 @@
   width: 100%;
 }
 
-#cover {
-  background-image: url("../../../assets/img/piggybank-temp.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 80vh;
-  padding-top: 100px;
-  padding-bottom: 50px;
-  width: 100%;
-}
+#jumbotron {
+  margin: 20px auto 0 auto;
+  background: white;
 
+  img {
+    display: block;
+    margin: 0 auto;
+    height: 400px;
+  }
+}
 
 .title {
   text-align: center;
@@ -32,4 +31,10 @@
   #highlight {
     color: $font-button-color;
   }
+}
+
+.main {
+  background: #fbfafa;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Transaction from 'src/app/model/transaction.model';
 import { Subscription } from 'rxjs';
 import { DialogService } from 'src/app/services/dialog.service';
+import { faInfoCircle, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-transactions-new-overview',
@@ -14,6 +15,8 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
 
   createdTransaction: Transaction;
   isNewTransaction = true;
+  faInfo = faInfoCircle;
+  faLeft = faArrowLeft;
 
   subscription: Subscription;
 
@@ -61,9 +64,12 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
   onCreateTransaction() {
     this._dialogService.startLoading();
     this._transactionsService.postNewlyCreatedTransaction()
-      .then(() => {
+      .then((data) => {
         this._dialogService.stopLoading();
-        this._router.navigate(['/transactions']);
+        this._router.navigate(['/transactions', data._id]);
+      })
+      .catch(() => {
+        this._dialogService.viewConnectionError();
       });
   }
 

@@ -19,7 +19,14 @@
       [showDeadline]="true"
       [showAmount]="false"></app-transactions-detail>
   </div>
+
   <div class="overview-footer">
+    <div class="back" *ngIf="!isNewTransaction">
+      <a [routerLink]="['/transactions']" class="route-nav back">
+        <fa-icon [icon]="faLeft"></fa-icon>
+        Back
+      </a>
+    </div>
     <button *ngIf="isNewTransaction" id="submit" (click)="onCreateTransaction()">
       Create Transaction
     </button>

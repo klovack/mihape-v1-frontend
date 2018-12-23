@@ -27,8 +27,12 @@
 
 .rec-edit {
   position: absolute;
-  right: 36px;
+  right: 50px;
   bottom: 40px;
+  padding: 10px;
+  background: white;
+  border: 1px solid rgb(247, 204, 204);
+  border-radius: 50%;
 }
 
 .rec-del {
@@ -48,10 +52,12 @@
 
   th {
     padding-left: 5px;
+    width: 50%;
   }
 
   td {
-    padding-left: 15%;
+    // padding-left: 15%;
+    width: 50%;
   }
   
   tr:nth-child(odd) {

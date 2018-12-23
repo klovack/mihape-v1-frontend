@@ -44,6 +44,7 @@ import {
   TransactionsNewOverviewComponent
 } from './components/transactions/transactions-new/transactions-new-overview/transactions-new-overview.component';
 import { RatesDetailComponent } from './components/rates/rates-detail/rates-detail.component';
+import { TransferInfoComponent } from './components/info/transfer-info/transfer-info.component';
 
 registerLocaleData(localeId);
 
@@ -76,7 +77,8 @@ registerLocaleData(localeId);
     RecipientSelectComponent,
     TransactionsNewDataComponent,
     TransactionsNewOverviewComponent,
-    RatesDetailComponent
+    RatesDetailComponent,
+    TransferInfoComponent
   ],
   imports: [
     BrowserModule,

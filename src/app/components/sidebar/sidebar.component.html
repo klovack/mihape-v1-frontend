@@ -4,12 +4,6 @@
     <fa-icon [icon]="faAngleDoubleRight" [flip]="isExpanded ? 'horizontal' : 'none'"></fa-icon>
   </div>
 
-  <a *ngIf="isExpanded" routerLink="/overview">
-    <div id="logo">
-      <img src="assets/logo/logo.svg" alt="Qintoen logo">
-    </div>
-  </a>
-
   <!-- Search -->
   <div class="searchbar">
     <mat-form-field *ngIf="isExpanded" floatLabel="never">
@@ -47,8 +41,8 @@
     </div>
     <div class="navbar-item" id="blog">
       <div class="container">
-        <fa-icon [icon]="faDesktop"></fa-icon>
-        <p *ngIf="isExpanded">Blog</p>
+        <a href="https://blog.mihape.com"><fa-icon [icon]="faDesktop"></fa-icon></a>
+        <p *ngIf="isExpanded"><a href="https://blog.mihape.com">Blog</a></p>
       </div>
     </div>
     <div class="navbar-item" id="faq">
@@ -65,8 +59,8 @@
     </div>
     <div class="navbar-item" id="career">
       <div class="container">
-        <fa-icon [icon]="faBriefcase"></fa-icon>
-        <p *ngIf="isExpanded">Career</p>
+        <a href="https://blog.mihape.com/career/"><fa-icon [icon]="faBriefcase"></fa-icon></a>
+        <p *ngIf="isExpanded"><a href="https://blog.mihape.com/career/">Career</a></p>
       </div>
     </div>
 
