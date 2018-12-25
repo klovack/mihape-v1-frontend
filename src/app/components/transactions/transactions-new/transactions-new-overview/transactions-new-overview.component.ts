@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Transaction from 'src/app/model/transaction.model';
 import { Subscription } from 'rxjs';
 import { DialogService } from 'src/app/services/dialog.service';
-import { faInfoCircle, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faArrowLeft, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-transactions-new-overview',
@@ -17,6 +17,9 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
   isNewTransaction = true;
   faInfo = faInfoCircle;
   faLeft = faArrowLeft;
+  faCheck = faCheck;
+  faTimes = faTimes;
+  isConfirming = false;
 
   subscription: Subscription;
 
@@ -40,18 +43,7 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
     } else {
       this.isNewTransaction = false;
       // Get the transaction with the given id
-      this.subscription = this._transactionsService.getTransactionById(trxId).subscribe(
-        (response) => {
-          response
-          .then((data: Transaction) => {
-            console.log(data);
-            this.createdTransaction = data;
-          })
-          .catch(err => {
-            this._router.navigate(['transaction']);
-          });
-        }
-      );
+      this.updateTransaction(trxId);
     }
   }
 
@@ -69,8 +61,65 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
         this._router.navigate(['/transactions', data._id]);
       })
       .catch(() => {
+        this._dialogService.stopLoading();
         this._dialogService.viewConnectionError();
       });
   }
 
+  onHaveTransfered() {
+    this._dialogService.startLoading();
+    this._transactionsService.onMoneyIsTransfered(this.createdTransaction).subscribe(
+      () => {
+        this.updateTransaction(this.createdTransaction.id);
+        this._dialogService.stopLoading();
+      },
+      () => {
+        this._dialogService.viewConnectionError();
+      }
+    );
+  }
+
+  onPrepareCancelTransaction() {
+    this.isConfirming = true;
+  }
+
+  onUnprepareCancelTransaction() {
+    this.isConfirming = false;
+  }
+
+  onMouseLeavePrepareTransaction(timeout = 500) {
+    if (this.isConfirming) {
+      setTimeout(() => {
+        this.onUnprepareCancelTransaction.bind(this)();
+      }, timeout);
+    }
+  }
+
+  onCancelTransaction() {
+    this._dialogService.startLoading();
+    this.subscription.add(this._transactionsService.deleteTransaction(this.createdTransaction).subscribe(
+        () => {
+          this.updateTransaction(this.createdTransaction.id);
+          this._dialogService.stopLoading();
+        },
+        () => {
+          this._dialogService.stopLoading();
+          this._dialogService.viewConnectionError();
+        }
+      ));
+  }
+
+  private updateTransaction(trxId) {
+    this.subscription = this._transactionsService.getTransactionById(trxId).subscribe(
+      (response) => {
+        response
+        .then((data: Transaction) => {
+          this.createdTransaction = data;
+        })
+        .catch(err => {
+          this._router.navigate(['transaction']);
+        });
+      }
+    );
+  }
 }

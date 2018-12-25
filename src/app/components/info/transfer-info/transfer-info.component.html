@@ -1,6 +1,79 @@
 <div class="container">
-  <h2>Where should i transfer the money?</h2>
-  <p>Transfer to {{transferId}}</p>
-  <p>Amount {{transferAmount}}</p>
-  <p>Deadline {{transferDeadline}}</p>
+  <!-- <h2 class="title">Kemana saya harus transfer?</h2> -->
+  <h2 class="title">Where Should I Transfer The Money?</h2>
+  
+  <!-- <p class="description">
+    Setiap transaksi yang anda buat, anda akan mendapatkan ID transaksi. 
+    <span *ngIf="transaction">
+      ID transaksi anda adalah <span id="trx-id">{{transaction.id}}</span>.
+    </span>
+    Saat anda membuat transfer di Bank anda, jangan lupa cantumkan ID transaksi ini.
+    Ini sangatlah penting untuk anda lakukan, karena jika tidak, kami tidak dapat meneruskan transferan anda.
+  </p> -->
+
+  <p class="description">
+    Every transaction you created, a transaction id will be automatically generated.
+    <span *ngIf="transaction">
+      Your transaction id is <h3 class="highlight" id="trx-id">{{transaction.id}}</h3>
+    </span>
+    As you transfer your money to us, don't forget to write this transaction id on the transfer details.
+    It's very important for you to do so, otherwise we cannot process your transaction.
+  </p>
+
+  <p class="description">
+    Below are our trusted Banks in Indonesia, on which you can transfer your money to:
+  </p>
+
+  <div class="mihape-bank">
+    <div class="logo-bank">
+      <img src="assets/img/bank-bca.png" alt="Logo of Bank Central Asia">
+    </div>
+    <div class="bank-details">
+      <h4>Bank Central Asia (BCA)</h4>
+      <p>Muhammad Rizki Fikriansyah</p>
+      <p>Account No. 1390352588</p>
+    </div>
+  </div>
+
+  <div class="mihape-bank">
+    <div class="bank-details">
+      <h4>Bank Mandiri</h4>
+      <p>Agus Fikri Hadi</p>
+      <p>Account No. 1390352588</p>
+    </div>
+    <div class="logo-bank">
+      <img src="assets/img/bank-mandiri.png" alt="Logo of Bank Mandiri">
+    </div>
+  </div>
+
+  <p class="description">
+    Be sure to transfer the correct amount.
+    We only send back the money if the transaction is canceled. 
+    <span *ngIf="transaction">
+      The Transaction will only be processed if you transfer exactly
+      <h3 class="highlight">{{transaction.rates.total.amount | currency:transaction.rates.fromCurrency.baseString:'symbol-narrow':'1.0-0':'id'}}</h3>
+    </span>
+  </p>
+
+  <p class="description">
+    If you transfer less than the amount specified, you can still transfer the rest of the amount
+    <span *ngIf="transaction; else deadline">
+      until {{transaction.deadlineAt | date:'H:mm OO, d LLL y'}}
+    </span>
+    <ng-template #deadline>
+      before the deadline
+    </ng-template>
+    or it will be canceled and we send your money to you excluding the fee.
+  </p>
+
+  <p class="description">
+    But if you transfer more than the amount specified, you have to contact our <a href="mailto:support@mihape.com">support team</a> and they will help you get your money back.
+  </p>
+  
+  <div class="back">
+    <a (click)="goBack()" class="route-nav back">
+      <fa-icon [icon]="faLeft"></fa-icon>
+      Back
+    </a>
+  </div>
 </div>

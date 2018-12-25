@@ -43,7 +43,9 @@
       </tr>
     </table>
   </div>
-  <a *ngIf="showDetail && deletable" (mousedown)="prepareToDelete()" (mouseup)="cancelDelete()" (mouseleave)="cancelDelete()" class="rec-edit">
-    <fa-icon [icon]="faTrash" id="delete-icon" class="rec-del"></fa-icon>
-  </a>
+  <div *ngIf="showDetail && deletable" class="rec-edit" (mouseleave)="onMouseLeavingDelete()">
+    <fa-icon *ngIf="!hasConfirmation" [icon]="faTrash" id="delete-icon" class="rec-del" (click)="prepareToDelete()"></fa-icon>
+    <fa-icon *ngIf="hasConfirmation" [icon]="faTimes" class="rec-del" id="cancel-icon" (click)="cancelDelete()"></fa-icon>
+    <fa-icon *ngIf="hasConfirmation" [icon]="faCheck" class="rec-del" id="check-icon" (click)="onDelete()"></fa-icon>
+  </div>
 </div>

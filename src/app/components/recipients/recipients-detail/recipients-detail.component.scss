@@ -29,18 +29,25 @@
   position: absolute;
   right: 50px;
   bottom: 40px;
-  padding: 10px;
-  background: white;
-  border: 1px solid rgb(247, 204, 204);
-  border-radius: 50%;
+  padding: 5px 10px;
+  // border: 1px solid #f7cccc;
+  // box-shadow: 2px 2px 6px rgba(0,0,0,.2), 0px 0px 6px #00000022;
+  // border-radius: 4px;
+  background: #dadada26;
+  
+  &:hover, &:focus {
+    background: #dadada8f;
+  }
 }
 
 .rec-del {
   font-size: 20px;
   color: $light-warn-text;
+  transition: font-size 100ms linear;
   
   &:hover {
     color: $dark-warn-text;
+    font-size: 24px;
   }
 }
 
@@ -69,11 +76,15 @@
   cursor: default;
 }
 
-#delete-icon{
-  transition: font-size 1000ms linear;
+#cancel-icon {
+  margin-right: 20px;
+}
 
-  &.deleting {
-    font-size: $font-largest;
+#check-icon {
+  color: green;
+
+  &:hover {
+    color: darken($color: green, $amount: 10);
   }
 }
 

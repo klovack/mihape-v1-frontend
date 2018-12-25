@@ -53,19 +53,26 @@ export class RecipientsService {
     );
   }
 
+  /**
+   * First search in the recipient list array,
+   * if not found then search it in the database
+   * @param recipientId The id of the recipient
+   */
   getRecipient(recipientId: string): Promise<Recipient> | Recipient {
-    if (!this._recipients || this._recipients.length <= 0) {
-      return this.getAllRecipients().toPromise()
-        .then(recipients => {
-          return this._findRecipientById(recipients, recipientId);
-        })
-        .catch(err => {
-          console.log(err);
-          return null;
-        });
-    } else {
-      return this._findRecipientById(this._recipients, recipientId);
+    if (this._recipients || this._recipients.length >= 0) {
+      const foundRecipient = this._findRecipientById(this._recipients, recipientId);
+      if (foundRecipient) {
+        return foundRecipient;
+      }
     }
+    return this.getAllRecipients().toPromise()
+      .then(recipients => {
+        return this._findRecipientById(recipients, recipientId);
+      })
+      .catch(err => {
+        // console.log(err);
+        return null;
+      });
   }
 
   deleteRecipient(recipient: Recipient) {

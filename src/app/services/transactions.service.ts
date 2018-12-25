@@ -32,14 +32,13 @@ export class TransactionsService {
   public get newlyCreatedTransaction() { return this._newlyCreatedTransaction; }
 
   getAllTransactions(limit?: Number) {
-    let params;
+    const params = {
+      newest: 'true',
+      limit: null,
+    };
 
     if (limit) {
-      params = {
-        limit: limit.toString()
-      };
-    } else {
-      params = null;
+      params.limit = limit.toString();
     }
 
     return this.http.get(this._transactionsUrl, {
@@ -68,7 +67,8 @@ export class TransactionsService {
     })
     .pipe(
       map(async (data) => {
-        return await this._createTransactionObject(data);
+        const trx = await this._createTransactionObject(data);
+        return trx;
       })
     );
   }
@@ -128,8 +128,23 @@ export class TransactionsService {
       }),
     }).pipe(
       catchError(err => {
-        this.authService.logoutUser();
-        return new Observable();
+        if (err.status === 401) {
+          this.authService.logoutUser();
+        }
+        throw new Error(err);
+      }),
+    );
+  }
+
+  onMoneyIsTransfered(transaction: Transaction) {
+    return this.http.put(`${this._transactionsUrl}/${transaction.id}/transfered`, {}, {
+      headers: this._authHeaders
+    }).pipe(
+      catchError(err => {
+        if (err.status === 401) {
+          this.authService.logoutUser();
+        }
+        throw new Error(err);
       })
     );
   }

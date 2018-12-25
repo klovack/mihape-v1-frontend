@@ -31,6 +31,7 @@ p, a, input, button, div, section, article {
   color: inherit;
   font-size: $font-medium;
   color: $font-secondary-color;
+  line-height: 24px;
 }
 
 a, button {
@@ -222,5 +223,6 @@ body {
   // background-position-x: right;
   // background-position-y: 100%;
   // background-repeat: no-repeat;
+  background: #fbfafa;
   overflow: hidden;
 }

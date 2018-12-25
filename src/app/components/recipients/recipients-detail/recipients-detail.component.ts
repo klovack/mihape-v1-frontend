@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import Recipient from '../../../model/recipients.model';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-recipients-detail',
@@ -15,10 +15,12 @@ export class RecipientsDetailComponent implements OnInit {
   @Input('expanded') expanded = false;
   @Output('deleteRecipient') deleteRecipient = new EventEmitter<Recipient>();
   @Output('holdToDeleteEvent') holdToDeleteEvent = new EventEmitter<any>();
-  faTrash = faTrash;
+  faTrash = faTrashAlt;
+  faCheck = faCheck;
+  faTimes = faTimes;
 
   showDetail = false;
-  deleteTimeoutHandler: any;
+  hasConfirmation = false;
 
   constructor() { }
 
@@ -42,24 +44,20 @@ export class RecipientsDetailComponent implements OnInit {
   }
 
   prepareToDelete() {
-    const deleteIcon = document.getElementById('delete-icon');
-    deleteIcon.classList.add('deleting');
-    this.deleteTimeoutHandler = setTimeout(() => {
-      this.deleteRecipient.emit(this.recipient);
-      this.deleteTimeoutHandler = null;
-    }, 1000);
+    this.hasConfirmation = true;
   }
 
   cancelDelete() {
-    const deleteIcon = document.getElementById('delete-icon');
-    // Check to see if item is not yet deleted
-    if (deleteIcon) {
-      deleteIcon.classList.remove('deleting');
-    }
-    if (this.deleteTimeoutHandler) {
-      clearTimeout(this.deleteTimeoutHandler);
-      this.deleteTimeoutHandler = null;
-      this.holdToDeleteEvent.emit();
-    }
+    this.hasConfirmation = false;
+  }
+
+  onDelete() {
+    this.deleteRecipient.emit(this.recipient);
+  }
+
+  onMouseLeavingDelete(timeout = 500) {
+    setTimeout(() => {
+      this.cancelDelete.bind(this)();
+    }, timeout);
   }
 }

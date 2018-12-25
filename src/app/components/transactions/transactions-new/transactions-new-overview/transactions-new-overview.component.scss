@@ -7,6 +7,7 @@
 
   &.shrinked {
     width: 55%;
+    padding-bottom: 40px;
   }
 }
 
@@ -30,5 +31,57 @@
   button, #submit {
     margin: 0 auto;
     display: block;
+  }
+}
+
+.overview-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} 
+
+.bank-account-link {
+  color: $dark-primary-text;
+
+  a {
+    color: inherit;
+  }
+}
+
+.transaction-action {
+  display: flex;
+  align-items: center;
+
+  > * {
+    margin-left: 20px;
+  }
+}
+
+#cancel-transaction {
+  color: $dark-warn-text;
+  cursor: pointer;
+}
+
+#no-delete, #yes-delete {
+  font-size: 20px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+#no-delete {
+  color: $dark-warn-text;
+
+  &:hover {
+    font-size: 24px;
+    color: darken($color: $dark-warn-text, $amount: 5);
+  }
+}
+
+#yes-delete {
+  color: green;
+
+  &:hover {
+    font-size: 24px;
+    color: darken($color: green, $amount: 5);
   }
 }

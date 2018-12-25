@@ -6,10 +6,11 @@
   min-height: 100vh;
   height: 100%;
   width: 50px;
-  position: relative;
+  position: absolute;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
   transition: width 350ms ease-in-out;
-  z-index: 99;
+  z-index: 10;
+  padding-top: 75px;
 
   &.expanded {
     width: 300px;
@@ -40,11 +41,20 @@ fa-icon {
   width: 40px;
   height: 40px;
   right: -40px;
-  top: 20px;
+  top: 90px;
   box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
   border-radius: 0px 10px 10px 0px;
   cursor: pointer;
+  opacity: .5;
   z-index: 9999;
+
+  &.expanded {
+    opacity: 1;
+  }
+
+  &:hover, &:focus {
+    opacity: 1;
+  }
 }
 
 .searchbar {

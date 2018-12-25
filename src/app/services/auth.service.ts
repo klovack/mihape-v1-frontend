@@ -36,7 +36,11 @@ export class AuthService {
       return false;
     }
 
-    return !this._jwtHelper.isTokenExpired(token);
+    const tokenExpired = this._jwtHelper.isTokenExpired(token);
+    if (tokenExpired) {
+      this.removeTokenFromStorage();
+    }
+    return !tokenExpired;
   }
 
   logoutUser() {

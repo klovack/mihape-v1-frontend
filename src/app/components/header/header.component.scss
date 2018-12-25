@@ -14,8 +14,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
-  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 #logo {
@@ -65,6 +65,11 @@
     z-index: 50;
   }
 
+  .header-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
   #logo {
 
     &.show {
@@ -72,7 +77,6 @@
 
       img {
         display: block;
-        margin-left: 60%;
       }
     }
   }

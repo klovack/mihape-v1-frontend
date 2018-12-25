@@ -20,6 +20,20 @@
       [showAmount]="false"></app-transactions-detail>
   </div>
 
+  <div *ngIf="!isNewTransaction && createdTransaction" class="overview-action">
+    <h4 *ngIf="!createdTransaction.isMoneyTransfered" class="bank-account-link"><a [routerLink]="['/bank-accounts', createdTransaction.id]">What to do next?</a></h4>
+    <div class="transaction-action">
+      <div class="cancel-container" (mouseleave)="onMouseLeavePrepareTransaction()">
+        <span *ngIf="!createdTransaction.isDone && !isConfirming" id="cancel-transaction" (click)="onPrepareCancelTransaction()">Cancel Transaction</span>
+        
+        <span *ngIf="isConfirming">Are you sure? </span>
+        <fa-icon *ngIf="isConfirming" (click)="onUnprepareCancelTransaction()" [icon]="faTimes" id="no-delete"></fa-icon>
+        <fa-icon *ngIf="isConfirming" (click)="onCancelTransaction()" [icon]="faCheck" id="yes-delete"></fa-icon>
+      </div>
+      <button *ngIf="!createdTransaction.isMoneyTransfered" id="finish-transaction" (click)="onHaveTransfered()">I've Transfered</button>
+    </div>
+  </div>
+
   <div class="overview-footer">
     <div class="back" *ngIf="!isNewTransaction">
       <a [routerLink]="['/transactions']" class="route-nav back">

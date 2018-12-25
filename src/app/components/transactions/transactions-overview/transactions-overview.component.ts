@@ -24,8 +24,8 @@ export class TransactionsOverviewComponent implements OnInit, OnDestroy, OnChang
     private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this._updateTransactions();
     this.onOwnRoute = this._activatedRoute.snapshot.url.toString().includes('transactions');
+    this._updateTransactions();
   }
 
   ngOnChanges() {
@@ -56,7 +56,8 @@ export class TransactionsOverviewComponent implements OnInit, OnDestroy, OnChang
   }
 
   private _updateTransactions() {
-    this._subscription = this._transactionsService.getAllTransactions().subscribe(
+    const limit = this.onOwnRoute ? null : 3;
+    this._subscription = this._transactionsService.getAllTransactions(limit).subscribe(
       (data) => {
         data.then(
           (trx) => {

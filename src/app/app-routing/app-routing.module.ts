@@ -23,9 +23,11 @@ import {
 import {
   TransactionsNewOverviewComponent
 } from '../components/transactions/transactions-new/transactions-new-overview/transactions-new-overview.component';
+import { TransferInfoComponent } from '../components/info/transfer-info/transfer-info.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
+  { path: 'home', redirectTo: '/' },
   { path: 'overview', component: OverviewComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
   { path: 'transactions', component: TransactionsOverviewComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
   { path: 'transactions/new', component: TransactionsNewComponent, canLoad: [UserOnlyGuard], children: [
@@ -40,6 +42,8 @@ const routes: Routes = [
   { path: 'recipients/new', component: RecipientsNewComponent },
   { path: 'email-confirm', component: ConfirmationComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
   { path: 'email-received/:emailToken', component: ReceivedComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
+  { path: 'bank-accounts', component: TransferInfoComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
+  { path: 'bank-accounts/:transactionId', component: TransferInfoComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
   { path: 'error', component: InternalErrorComponent },
   { path: '**', component: NotFoundComponent }
 ];

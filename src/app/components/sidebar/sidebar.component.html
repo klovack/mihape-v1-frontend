@@ -1,6 +1,6 @@
 <div [class]="isExpanded ? 'sidebar expanded' : 'sidebar'">
   <!-- Toggler -->
-  <div (click)="onExpand()" id="toggler">
+  <div (click)="onExpand()" id="toggler" [class.expanded]="isExpanded">
     <fa-icon [icon]="faAngleDoubleRight" [flip]="isExpanded ? 'horizontal' : 'none'"></fa-icon>
   </div>
 
