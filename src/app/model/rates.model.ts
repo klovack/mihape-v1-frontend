@@ -23,6 +23,10 @@ export default class Rates {
     return this._combineWithFee ? this._fromCombineCurrency : this._fromOriginalCurrency;
   }
 
+  get fromOriginalCurrency(): Currency {
+    return this._fromOriginalCurrency;
+  }
+
   get fee(): Currency {
     return this._fee;
   }

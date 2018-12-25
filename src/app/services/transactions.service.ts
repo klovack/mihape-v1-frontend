@@ -79,8 +79,8 @@ export class TransactionsService {
       transaction: {
         name: this._newlyCreatedTransaction.name,
         fromCurrency: {
-          base: this._newlyCreatedTransaction.rates.fromCurrency.baseString,
-          amount: this._newlyCreatedTransaction.rates.fromCurrency.amount
+          base: this._newlyCreatedTransaction.rates.fromOriginalCurrency.baseString,
+          amount: this._newlyCreatedTransaction.rates.fromOriginalCurrency.amount,
         },
         toCurrency: {
           base: this._newlyCreatedTransaction.rates.toCurrency.baseString
@@ -93,6 +93,13 @@ export class TransactionsService {
     }).toPromise()
     .then((data: {data: any}) => {
       return data.data;
+    })
+    .catch((err) => {
+      console.error(err);
+      if (err.status === 401) {
+        this.authService.logoutUser();
+      }
+      throw new Error(err);
     });
   }
 
