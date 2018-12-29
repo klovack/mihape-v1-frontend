@@ -1,0 +1,23 @@
+:host {
+  padding: 40px 0;
+  display: block;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  max-width: 1000px;
+  margin: 56px auto;
+  position: relative;
+
+  > * {
+    margin: 20px 0;
+  }
+}
+
+.title {
+  text-align: center;
+}

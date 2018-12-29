@@ -85,3 +85,13 @@
     color: darken($color: green, $amount: 5);
   }
 }
+
+@media screen and (max-width: 900px) {
+  .container {
+    width: 95%;
+    
+    &.shrinked {
+      width: 95%;
+    }
+  }
+}

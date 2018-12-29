@@ -1,0 +1,15 @@
+<div *ngIf="imageSrc" class="thumbnail-container"
+  [class.top]="imageOnTop"
+  [class.left]="imageOnLeft"
+  [class.right]="imageOnRight"
+  [class.bottom]="imageOnBottom"
+  [ngStyle]="containerStyle"
+  >
+  <div class="thumbnail">
+    <img [ngStyle]="imageStyle" [src]="imageSrc" [alt]="imageDesc">
+  </div>
+  <div [ngStyle]="imageStyle" class="description">
+    <h4 class="title">{{ title }}</h4>
+    <p class="body">{{ body }}</p>
+  </div>
+</div>

@@ -109,6 +109,17 @@ export class AuthService {
     });
   }
 
+  resetPassword(token: string, password: string) {
+    return this.http.post(`${this._authUrl}/reset-password`, {
+      token,
+      password,
+    }).toPromise()
+    .then((user: LoginRespond) => {
+      this._storeUserData(user.data);
+      return;
+    });
+  }
+
   checkForValidToken() {
     return this.http.get(`${this._authUrl}/login`, {
       headers: this._authHeaders,
@@ -128,8 +139,24 @@ export class AuthService {
     });
   }
 
+  checkForValidResetPassword(resetPasswordToken: string) {
+    return this.http.get(`${this._authUrl}/reset-password/${resetPasswordToken}`).toPromise()
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+  }
+
   sendConfirmationEmail(email: string) {
     return this.http.post(`${this._authUrl}/confirm`, {
+      email: email,
+    });
+  }
+
+  sendForgotPasswordEmail(email: string) {
+    return this.http.post(`${this._authUrl}/forgot-password`, {
       email: email,
     });
   }

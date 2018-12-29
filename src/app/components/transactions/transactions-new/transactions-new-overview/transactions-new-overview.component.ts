@@ -97,16 +97,19 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
 
   onCancelTransaction() {
     this._dialogService.startLoading();
-    this.subscription.add(this._transactionsService.deleteTransaction(this.createdTransaction).subscribe(
+    this._transactionsService.deleteTransaction(this.createdTransaction).toPromise()
+    .then(
         () => {
           this.updateTransaction(this.createdTransaction.id);
           this._dialogService.stopLoading();
-        },
-        () => {
-          this._dialogService.stopLoading();
-          this._dialogService.viewConnectionError();
         }
-      ));
+      )
+    .catch(
+      () => {
+        this._dialogService.stopLoading();
+        this._dialogService.viewConnectionError();
+      }
+    );
   }
 
   private updateTransaction(trxId) {

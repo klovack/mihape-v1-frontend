@@ -45,6 +45,13 @@ import {
 } from './components/transactions/transactions-new/transactions-new-overview/transactions-new-overview.component';
 import { RatesDetailComponent } from './components/rates/rates-detail/rates-detail.component';
 import { TransferInfoComponent } from './components/info/transfer-info/transfer-info.component';
+import { StringSpacerPipe } from './pipes/string-spacer.pipe';
+import { ForgotPasswordComponent } from './components/password/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/password/reset-password/reset-password.component';
+import { AlphaTestComponent } from './components/util/alpha-test/alpha-test.component';
+import { ThumbnailsComponent } from './components/templates/thumbnails/thumbnails.component';
+import { HowWeWorkShortComponent } from './components/how-we-work/how-we-work-short/how-we-work-short.component';
+import { WhyUsComponent } from './components/how-we-work/why-us/why-us.component';
 
 registerLocaleData(localeId);
 
@@ -78,7 +85,14 @@ registerLocaleData(localeId);
     TransactionsNewDataComponent,
     TransactionsNewOverviewComponent,
     RatesDetailComponent,
-    TransferInfoComponent
+    TransferInfoComponent,
+    StringSpacerPipe,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    AlphaTestComponent,
+    ThumbnailsComponent,
+    HowWeWorkShortComponent,
+    WhyUsComponent,
   ],
   imports: [
     BrowserModule,

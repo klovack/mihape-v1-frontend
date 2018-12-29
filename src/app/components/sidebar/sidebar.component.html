@@ -7,8 +7,9 @@
   <!-- Search -->
   <div class="searchbar">
     <mat-form-field *ngIf="isExpanded" floatLabel="never">
-      <input matInput #searchInput placeholder="Search..." type="text" id="search-input">
-      <fa-icon matSuffix (click)="onSearch(searchInput)" id="search-icon" [icon]="faSearch"></fa-icon>
+      <input matInput #searchInput placeholder="Cari..." type="text" id="search-input" (keyup.enter)="onSearch(searchInput)">
+      <fa-icon matSuffix (click)="onSearch(searchInput, searchLink)" id="search-icon" [icon]="faSearch" title="Buka pencarian di tab baru"></fa-icon>
+      <a target="_blank" #searchLink href="#" style="visibility: hidden;"></a>
     </mat-form-field>
     <fa-icon [hidden]="isExpanded" (click)="onSearch()" id="search-icon" [icon]="faSearch"></fa-icon>
   </div>
@@ -18,27 +19,27 @@
     <div *ngIf="!isUserLoggedIn" (click)="onSignup()" [class.active]="dialogService.showSignup" class="navbar-item" id="signup">
       <div class="container">
         <fa-icon [icon]="faPlusSquare"></fa-icon>
-        <p *ngIf="isExpanded">Sign Up</p>
+        <p *ngIf="isExpanded">Daftar</p>
       </div>
     </div>
     <div *ngIf="!isUserLoggedIn" (click)="onSignin()" [class.active]="dialogService.showSignin" class="navbar-item" id="login">
       <div class="container">
         <fa-icon [icon]="faUserCircle"></fa-icon>
-        <p *ngIf="isExpanded">Login</p>
+        <p *ngIf="isExpanded">Masuk</p>
       </div>
     </div>
     <div class="navbar-item" id="about">
       <div class="container">
         <fa-icon [icon]="faUsers"></fa-icon>
-        <p *ngIf="isExpanded">About us</p>
+        <p *ngIf="isExpanded">Tentang Kami</p>
       </div>
     </div>
-    <div class="navbar-item" id="service">
+    <!-- <div class="navbar-item" id="service">
       <div class="container">
         <fa-icon [icon]="faGlobeAsia"></fa-icon>
         <p *ngIf="isExpanded">Service</p>
       </div>
-    </div>
+    </div> -->
     <div class="navbar-item" id="blog">
       <div class="container">
         <a href="https://blog.mihape.com"><fa-icon [icon]="faDesktop"></fa-icon></a>
@@ -54,18 +55,20 @@
     <div class="navbar-item" id="contact">
       <div class="container">
         <fa-icon [icon]="faPhone"></fa-icon>
-        <p *ngIf="isExpanded">Contact Us</p>
+        <p *ngIf="isExpanded">Hubungi Kami</p>
       </div>
     </div>
     <div class="navbar-item" id="career">
-      <div class="container">
-        <a href="https://blog.mihape.com/career/"><fa-icon [icon]="faBriefcase"></fa-icon></a>
-        <p *ngIf="isExpanded"><a href="https://blog.mihape.com/career/">Career</a></p>
-      </div>
+      <a target="_blank" rel="Career Mihape at Mihape Blog" href="https://blog.mihape.com/career/">
+        <div class="container">
+          <fa-icon [icon]="faBriefcase"></fa-icon>
+          <p *ngIf="isExpanded">Karir</p>
+        </div>
+      </a>
     </div>
 
     <div *ngIf="isExpanded" class="soc-med">
-      <p>Follow Us:</p>
+      <p>Ikuti Kami:</p>
       <div class="soc-med-icon">
         <a target="_blank" href="https://www.facebook.com/mfikriansyah"><fa-icon [icon]="faFacebook"></fa-icon></a>
         <a target="_blank" href="https://www.facebook.com/mfikriansyah"><fa-icon [icon]="faInstagram"></fa-icon></a>

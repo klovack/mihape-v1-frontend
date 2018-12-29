@@ -13,8 +13,8 @@ export class RatesService {
   private _ratesUrl = 'http://localhost:3000/api/v1/rates';
   private _currencyTypes = [
     { name: 'EUR', type: CurrencyType.EUR },
-    { name: 'IDR', type: CurrencyType.IDR },
-    { name: 'USD', type: CurrencyType.USD },
+    // { name: 'IDR', type: CurrencyType.IDR },
+    // { name: 'USD', type: CurrencyType.USD },
   ];
   private _rates: Rates;
   private _maxTransaction = 10000000; // In Rupiah

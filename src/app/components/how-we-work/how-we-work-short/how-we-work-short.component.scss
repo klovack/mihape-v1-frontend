@@ -1,0 +1,40 @@
+@import '../../../../vars';
+
+:host {
+  background: white;
+  padding: 40px 0;
+  height: fit-content;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+.title {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  max-width: 1000px;
+  margin: 20px auto;
+  position: relative;
+  padding-bottom: 40px;
+}
+
+#about-us-link {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: $dark-primary-text;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .container {
+    flex-wrap: wrap;
+  }
+}

@@ -18,8 +18,6 @@ export class TransactionsDetailComponent implements OnInit {
   @Input('showDeadline') showDeadline = true;
   @Input('showAmount') showAmount = true;
   @Input('showMore') showMore = false;
-  @Output('deleteTrx') deleteTrx = new EventEmitter<Transaction>();
-  @Output('holdToDeleteEvent') holdToDeleteEvent = new EventEmitter<any>();
 
   deleteTimeoutHandler: any;
   showDetail = false;
@@ -40,27 +38,4 @@ export class TransactionsDetailComponent implements OnInit {
       this.showDetail = !this.showDetail;
     }
   }
-
-  prepareToDelete() {
-    const deleteIcon = document.getElementById('delete-icon');
-    deleteIcon.classList.add('deleting');
-    this.deleteTimeoutHandler = setTimeout(() => {
-      this.deleteTrx.emit(this.transaction);
-      this.deleteTimeoutHandler = null;
-    }, 1000);
-  }
-
-  cancelDelete() {
-    const deleteIcon = document.getElementById('delete-icon');
-    // Check to see if item is not yet deleted
-    if (deleteIcon) {
-      deleteIcon.classList.remove('deleting');
-    }
-    if (this.deleteTimeoutHandler) {
-      clearTimeout(this.deleteTimeoutHandler);
-      this.deleteTimeoutHandler = null;
-      this.holdToDeleteEvent.emit();
-    }
-  }
-
 }

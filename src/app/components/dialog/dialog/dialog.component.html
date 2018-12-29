@@ -10,8 +10,8 @@
     Your input exceeds maximum limit of transaction
   </div>
   <div
-    *ngIf="showHoldToDelete"
+    *ngIf="tokenExpired"
     class="message error">
-    Please hold the icon to delete
+    The link is expired
   </div>
 </div>

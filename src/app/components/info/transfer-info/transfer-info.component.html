@@ -14,7 +14,7 @@
   <p class="description">
     Every transaction you created, a transaction id will be automatically generated.
     <span *ngIf="transaction">
-      Your transaction id is <h3 class="highlight" id="trx-id">{{transaction.id}}</h3>
+      Your transaction id is <h3 class="highlight" id="trx-id">{{transaction.id | stringSpacer:4:'&nbsp;&nbsp;'}}</h3>
     </span>
     As you transfer your money to us, don't forget to write this transaction id on the transfer details.
     It's very important for you to do so, otherwise we cannot process your transaction.
@@ -31,7 +31,7 @@
     <div class="bank-details">
       <h4>Bank Central Asia (BCA)</h4>
       <p>Muhammad Rizki Fikriansyah</p>
-      <p>Account No. 1390352588</p>
+      <p>Account No. {{'1390352588' | stringSpacer:3}}</p>
     </div>
   </div>
 
@@ -39,7 +39,7 @@
     <div class="bank-details">
       <h4>Bank Mandiri</h4>
       <p>Agus Fikri Hadi</p>
-      <p>Account No. 1390352588</p>
+      <p>Account No. {{'1310000061616' | stringSpacer:3}}</p>
     </div>
     <div class="logo-bank">
       <img src="assets/img/bank-mandiri.png" alt="Logo of Bank Mandiri">
@@ -51,7 +51,7 @@
     We only send back the money if the transaction is canceled. 
     <span *ngIf="transaction">
       The Transaction will only be processed if you transfer exactly
-      <h3 class="highlight">{{transaction.rates.total.amount | currency:transaction.rates.fromCurrency.baseString:'symbol-narrow':'1.0-0':'id'}}</h3>
+      <h3 class="highlight">{{transaction.rates.total.amount | currency:transaction.rates.fromCurrency.baseString:'symbol-narrow':'1.0-0'}}</h3>
     </span>
   </p>
 

@@ -1,7 +1,7 @@
 <div id="header">
   <div class="header-container">
     <div class="left-section">
-      <a routerLink="/overview">
+      <a (click)="onNavigateHome()">
         <div id="logo" [class.show]="!isUserLoggedIn">
           <img src="assets/logo/logo.png" alt="Qintoen logo">
         </div>
@@ -22,7 +22,8 @@
         <fa-icon mat-icon-button [matMenuTriggerFor]="navMenu" [icon]="faUser" id="user-icon"></fa-icon>
       </div> 
 
-      <div id="language">
+      <!-- Start Language -->
+      <!-- <div id="language">
         <mat-form-field class="language-select">
           <mat-select
             name="language" 
@@ -36,7 +37,8 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-      </div>
+      </div> -->
+      <!-- End Language -->
     </div>
   </div>
 </div>

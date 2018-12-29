@@ -16,7 +16,7 @@ export class DialogService {
     show: false,
     showUndeletableRecipient: false,
     showMaxLimit: false,
-    showHoldToDelete: false,
+    tokenExpired: false,
   };
 
   constructor() { }
@@ -63,8 +63,8 @@ export class DialogService {
 
   // Show Dialog Error
   viewUndeletableRecipientError() {
-    this.dialogMessage.show = true;
     this.dialogMessage.showUndeletableRecipient = true;
+    this.dialogMessage.show = true;
     this.prepareForClosing(this.stopUndeletableRecipientError);
   }
 
@@ -75,9 +75,9 @@ export class DialogService {
 
   // Show Dialog Max Limit Error
   viewMaxLimit() {
-    this.dialogMessage.show = true;
     this.dialogMessage.showMaxLimit = true;
-    this.prepareForClosing(this.stopUndeletableRecipientError);
+    this.dialogMessage.show = true;
+    this.prepareForClosing(this.stopMaxLimit);
   }
 
   stopMaxLimit() {
@@ -86,14 +86,14 @@ export class DialogService {
   }
 
   // Show Dialog Hold To Delete
-  viewHoldToDelete() {
-    this.dialogMessage.showHoldToDelete = true;
+  viewTokenExpired() {
+    this.dialogMessage.tokenExpired = true;
     this.dialogMessage.show = true;
-    this.prepareForClosing(this.stopHoldToDelete);
+    this.prepareForClosing(this.stopTokenExpired);
   }
 
-  stopHoldToDelete() {
-    this.dialogMessage.showHoldToDelete = false;
+  stopTokenExpired() {
+    this.dialogMessage.tokenExpired = false;
     this.dialogMessage.show = false;
   }
 

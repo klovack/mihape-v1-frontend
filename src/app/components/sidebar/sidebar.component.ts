@@ -53,9 +53,14 @@ export class SidebarComponent implements DoCheck {
     this.isExpanded = !this.isExpanded;
   }
 
-  onSearch(searchInput?: HTMLInputElement) {
+  onSearch(searchInput?: HTMLInputElement, searchLink?: HTMLAnchorElement) {
     if (this.isExpanded) {
-      console.log('GO SEARCH');
+      if (searchLink) {
+        searchLink.href = `https://blog.mihape.com/?s=${searchInput.value}`;
+        searchLink.click();
+      } else {
+        document.location.href =  `https://blog.mihape.com/?s=${searchInput.value}`;
+      }
     } else {
       this.isExpanded = true;
     }

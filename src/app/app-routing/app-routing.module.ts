@@ -24,6 +24,8 @@ import {
   TransactionsNewOverviewComponent
 } from '../components/transactions/transactions-new/transactions-new-overview/transactions-new-overview.component';
 import { TransferInfoComponent } from '../components/info/transfer-info/transfer-info.component';
+import { ForgotPasswordComponent } from '../components/password/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from '../components/password/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
@@ -44,6 +46,11 @@ const routes: Routes = [
   { path: 'email-received/:emailToken', component: ReceivedComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
   { path: 'bank-accounts', component: TransferInfoComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
   { path: 'bank-accounts/:transactionId', component: TransferInfoComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
+  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
+  // Reset password when user is logged in
+  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
+  // Reset password when user forgot their password
+  { path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
   { path: 'error', component: InternalErrorComponent },
   { path: '**', component: NotFoundComponent }
 ];

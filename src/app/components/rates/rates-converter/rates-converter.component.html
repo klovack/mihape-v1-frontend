@@ -2,7 +2,7 @@
 <form (change)="onConvert()" [formGroup]="_converterForm" novalidate>
   <div class="converter">
     <div class="input">
-      <label for="from-amount">Send</label>
+      <label for="from-amount">Kirim</label>
       <mat-form-field class="converter-amount-input">
         <input
           matInput
@@ -29,7 +29,7 @@
     <app-loading-bounce [isBouncing]="isLoading"></app-loading-bounce>
   
     <div class="input">
-      <label for="from-amount">Estimation</label>
+      <label for="from-amount">Perkiraan</label>
       <mat-form-field class="converter-amount-input">
         <input
           matInput
@@ -62,14 +62,14 @@
     id="combine-fee" 
     formControlName="combineFee"
     (change)="onConvert()"
-    color="primary">Combine With Fee
+    color="primary">Gabung dengan biaya
     <div *ngIf="combineTooltip" id="combine-tooltip">
       <p>
-        Check this if you want the fee to be included.
+        Centang kotak ini jika biaya diambil dari uang yang dikirim.
       </p>
     </div>
   </mat-checkbox>
 
 </form>
 <app-rates-description [rates]="_ratesService.rates"></app-rates-description>
-<button class="primary-button main" (click)="onSend()">Send</button>
+<button class="primary-button main" (click)="onSend()">Kirim</button>

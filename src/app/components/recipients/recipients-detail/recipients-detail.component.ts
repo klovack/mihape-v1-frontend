@@ -14,7 +14,6 @@ export class RecipientsDetailComponent implements OnInit {
   @Input('alwaysShowAll') alwaysShowAll = false;
   @Input('expanded') expanded = false;
   @Output('deleteRecipient') deleteRecipient = new EventEmitter<Recipient>();
-  @Output('holdToDeleteEvent') holdToDeleteEvent = new EventEmitter<any>();
   faTrash = faTrashAlt;
   faCheck = faCheck;
   faTimes = faTimes;

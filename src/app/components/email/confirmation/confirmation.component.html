@@ -3,12 +3,6 @@
     <h1>Confirm Your Email</h1>
     <p>To continue using our service, you have to confirm your email so we know that it's really you.</p>
     <p>If you've already received our email, just click on the link and it will confirm your email.</p>
-    <p>Or if you've already confirmed just sign in, but if you don't have any account just sign up.</p>
-
-    <div class="signin-signup">
-      <button (click)="onSignUp()">Sign Up</button>
-      <button (click)="onSignIn()">Sign In</button>
-    </div>
     
     <form *ngIf="!emailSent" (ngSubmit)="onSendConfirmation()" #emailForm="ngForm" class="email-form">
       <mat-form-field>
@@ -28,6 +22,14 @@
       <span *ngSwitchCase="500">Internal server error</span>
       <span *ngSwitchDefault>Ooops we don't know what happen, but we can't send you the email</span>
     </p>
+
+    <p>But if you're here by mistake or already confirmed your email,</p>
+    <p>just sign up or sign in to explore Mihape services.</p>
+
+    <div class="signin-signup">
+      <button (click)="onSignUp()">Sign Up</button>
+      <button (click)="onSignIn()">Sign In</button>
+    </div>
 
     <a routerLink="/">Back to home</a>
   </div>

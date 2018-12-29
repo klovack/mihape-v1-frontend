@@ -55,6 +55,10 @@ export class SigninComponent implements OnInit {
     this.dialogService.closeSignin();
   }
 
+  onForgotPassword() {
+    this.dialogService.closeSignin();
+  }
+
   onSubmit() {
     // add loading animation
     this.dialogService.startLoading();
@@ -77,14 +81,14 @@ export class SigninComponent implements OnInit {
         switch (err.status) {
           case 404:
           case 401:
-            this.errorMessage = 'Wrong email or password';
+            this.errorMessage = 'Kata sandi atau email salah';
             break;
           case 400:
-            this.errorMessage = 'You haven\'t confirmed your email';
+            this.errorMessage = 'Email belum dikonfirmasi';
             this.isUserInactive = true;
             break;
           case 500:
-            this.errorMessage = 'Oops, something wrong with the server';
+            this.errorMessage = 'Kesalahan pada server';
             break;
           default: console.log('Default');
         }

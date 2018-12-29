@@ -68,13 +68,6 @@ export class RecipientsOverviewComponent implements OnInit, OnDestroy {
       });
   }
 
-  /**
-   * Show the hold notification to delete
-   */
-  onCancelDelete() {
-    this._dialogService.viewHoldToDelete();
-  }
-
   get canBack() {
     return this._activatedRoute.snapshot.url[0].path === 'recipients';
   }

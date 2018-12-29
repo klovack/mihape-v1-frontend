@@ -17,7 +17,7 @@
     <table class="trx-desc-detail" *ngIf="showDetail" [class.full-width]="!showAmount">
       <tr *ngIf="transaction.id">
         <th>Transaction ID</th>
-        <td>{{transaction.id}}</td>
+        <td>{{transaction.id | stringSpacer:4:'&nbsp;&nbsp;'}}</td>
       </tr>
       <tr *ngIf="transaction.id">
         <th>Purpose of Transaction</th>
@@ -56,18 +56,14 @@
         <td>{{transaction.recipient.name}} in {{transaction.recipient.country}}</td>
       </tr>
     </table>
-    <a *ngIf="showDetail && showMore" [routerLink]="['/transactions', transaction.id]" class="trx-more">
+    <a *ngIf="showDetail && showMore" [routerLink]="['/transactions', transaction.id]" class="trx-more link">
       Show More
     </a>
   </div>
   <div class="trx-right">
     <!-- Amount of money transfered -->
     <h4 *ngIf="showAmount">
-      {{transaction.rates.fromCurrency.amount | currency:transaction.rates.fromCurrency.baseString:'symbol-narrow':'1.0-0':'id'}}
+      {{transaction.rates.fromCurrency.amount | currency:transaction.rates.fromCurrency.baseString:'symbol-narrow':'1.0-0'}}
     </h4>
   </div>
-
-  <!-- <a *ngIf="deletable && showDetail && transaction.status !== 'IS_CANCELED'" (mousedown)="prepareToDelete()" (mouseup)="cancelDelete()" (mouseleave)="cancelDelete()" class="trx-edit">
-    <fa-icon [icon]="faTrash" class="trx-del" id="delete-icon"></fa-icon>
-  </a> -->
 </div>

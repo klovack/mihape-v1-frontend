@@ -38,6 +38,11 @@ a, button {
   cursor: pointer;
 }
 
+a.link {
+  color: $dark-primary-text;
+  text-decoration: none;
+}
+
 input, button, select, mat-form-field.mat-form-field, .button {
   padding: 10px 12px;
   border-radius: $border-radius-size;
@@ -225,4 +230,12 @@ body {
   // background-repeat: no-repeat;
   background: #fbfafa;
   overflow: hidden;
+}
+
+@media screen and (max-width: 500px) {
+  .mat-menu-panel {
+    position: relative;
+    top: 50px;
+    left: 0px;
+  }
 }

@@ -50,12 +50,13 @@
     position: absolute;
     background: #0a203f99;
     border-radius: 8px;
+    width: 400px;
     max-width: 500px;
     max-height: 200px;
     p {
       color: white;
       word-wrap: break-word;
-      text-align: start;
+      text-align: justify;
     }
     padding: 10px;
     box-shadow: 0px 2px 10px rgba(0,0,0,0.2);

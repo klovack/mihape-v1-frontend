@@ -35,26 +35,6 @@ export class TransactionsOverviewComponent implements OnInit, OnDestroy, OnChang
     this._subscription.unsubscribe();
   }
 
-  deleteTrx(event) {
-    this._dialogService.startLoading();
-    this._transactionsService.deleteTransaction(event)
-      .toPromise()
-      .then(() => {
-        this._dialogService.stopLoading();
-        this._updateTransactions();
-      })
-      .catch((err) => {
-        if (err.status !== 404) {
-          this._dialogService.viewConnectionError();
-        }
-        this._dialogService.stopLoading();
-      });
-  }
-
-  showHoldToDeleteWarning() {
-    this._dialogService.viewHoldToDelete();
-  }
-
   private _updateTransactions() {
     const limit = this.onOwnRoute ? null : 3;
     this._subscription = this._transactionsService.getAllTransactions(limit).subscribe(

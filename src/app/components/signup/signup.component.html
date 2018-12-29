@@ -3,27 +3,27 @@
     <!-- Close Icon here -->
     <fa-icon (click)="onClose()" [icon]="faTimes" class="close"></fa-icon>
   
-    <h2 class="title">Create New Account</h2>
+    <h2 class="title">Buat Akun Baru</h2>
   
     <form (submit)="onSubmit()" [formGroup]="signupForm" class="signup-form" novalidate>
       <!-- First Name & Last Name -->
       <div class="form-field">
         <div class="input full-width">
-          <label for="first-name">First Name</label>
+          <label for="first-name">Nama Depan</label>
           <mat-form-field>
             <input matInput type="text" id="first-name" name="first-name" formControlName="firstNameControlForm">
             <mat-error>
-              First Name is <strong>required</strong>
+              Nama depan harus diisi
             </mat-error>
           </mat-form-field>
         </div>
         
         <div class="input full-width">
-          <label for="last-name">Last Name</label>
+          <label for="last-name">Nama Belakang</label>
           <mat-form-field>
             <input matInput type="text" id="last-name" name="last-name" formControlName="lastNameControlForm">
             <mat-error>
-              Last Name is <strong>required</strong>
+              Nama belakang harus diisi
             </mat-error>
           </mat-form-field>
         </div>
@@ -32,14 +32,14 @@
       <!-- Date of Birth -->
       <div class="form-field">
         <div class="input half-width">
-          <label for="date-of-birth">Date of Birth</label>
+          <label for="date-of-birth">Tanggal Lahir</label>
           <mat-form-field>
             <input matInput type="date" id="date-of-birth" name="date-of-birth" formControlName="dateOfBirthControlForm">
             <mat-error *ngIf="dateOfBirthControlForm.hasError('required')">
-              Date of Birth is <strong>required</strong>
+              Tanggal lahir harus diisi
             </mat-error>
             <mat-error *ngIf="dateOfBirthControlForm.hasError('isOldEnough')">
-              You must be at least 18 years old
+              Kamu harus berusia minimal 18 tahun
             </mat-error>
           </mat-form-field>
         </div>
@@ -53,33 +53,33 @@
           <mat-form-field>
             <input matInput type="email" id="email" name="email" formControlName="emailControlForm">
             <mat-error *ngIf="emailControlForm.hasError('required')">
-              Email is <strong>required</strong>
+              Email harus diisi
             </mat-error>
             <mat-error *ngIf="emailControlForm.hasError('email')">
-              Email is <strong>not a valid email</strong>
+              Email yang dimasukan salah
             </mat-error>
             <mat-error *ngIf="emailControlForm.hasError('isNotAvailable')">
-              Email is <strong>already taken</strong>
+              Email sudah terdaftar
             </mat-error>
             <mat-hint *ngIf="emailControlForm.pending">
-              Checking
+              Sedang dicek
             </mat-hint>
           </mat-form-field>
         </div>
 
         <div class="input full-width">
           <!-- Password -->
-          <label for="password">Password</label>
+          <label for="password">Kata Sandi</label>
           <mat-form-field>
             <input matInput type="password" id="password" #password name="password" formControlName="passwordControlForm">
             <mat-error *ngIf="passwordControlForm.hasError('required')">
-              Password is <strong>required</strong>
+              Kata sandi harus diisi
             </mat-error>
             <mat-error *ngIf="passwordControlForm.hasError('minlength')">
-              Password must contain at least 8 characters
+              Kata sandi harus terdiri minimal 8 karakter
             </mat-error>
             <mat-error *ngIf="passwordControlForm.hasError('pattern')">
-              Password must contain at least 1 upper-, 1 lowercase letter and 1 number 
+              Kata sandi harus terdiri minimal satu huruf kapital, satu huruf kecil dan satu angka
             </mat-error>
             <fa-icon matSuffix (click)="onShowPassword(password)" id="show-password-icon" [icon]="faEye"></fa-icon>
           </mat-form-field>
@@ -89,7 +89,7 @@
       <!-- Country -->
       <div class="form-field">
         <div class="input full-width">
-          <label for="country">Country</label>
+          <label for="country">Negara</label>
           <mat-form-field>
             <mat-select
               formControlName="countryControlForm"
@@ -107,7 +107,7 @@
         <!-- Province -->
         <div class="input full-width">
           <!-- Province -->
-          <label for="province">Province</label>
+          <label for="province">Provinsi</label>
           <mat-form-field>
             <mat-select
               formControlName="provinceControlForm"
@@ -119,7 +119,7 @@
                   {{province.name}}
                 </mat-option>
                 <mat-option value="other">
-                  Other
+                  Lainnya
                 </mat-option>
             </mat-select>
           </mat-form-field>
@@ -135,7 +135,7 @@
               name="province-other" 
               id="province-other">
             <mat-error *ngIf="provinceControlForm.hasError('required')">
-              City is <strong>required</strong>
+              Provinsi harus diisi
             </mat-error>
           </mat-form-field>
         </div>
@@ -145,7 +145,7 @@
       <div class="form-field">
         <div class="input two-third-width">
           <!-- City -->
-          <label for="city">City</label>
+          <label for="city">Kota</label>
           <mat-form-field>
             <input 
               matInput 
@@ -154,14 +154,14 @@
               name="city" 
               id="city">
             <mat-error *ngIf="emailControlForm.hasError('required')">
-              City is <strong>required</strong>
+              Kota harus diisi
             </mat-error>
           </mat-form-field>
         </div>
 
         <div class="input one-third-width">
           <!-- Postcode -->
-          <label for="postcode">Postcode</label>
+          <label for="postcode">Kode Pos</label>
           <mat-form-field>
             <input 
               matInput 
@@ -170,10 +170,10 @@
               name="postcode" 
               id="postcode">
             <mat-error *ngIf="postcodeControlForm.hasError('required')">
-              Postcode is <strong>required</strong>
+              Kode pos harus diisi
             </mat-error>
             <mat-error *ngIf="!postcodeControlForm.hasError('required') && postcodeControlForm.hasError('isNotPostcode')">
-              Postcode is <strong>invalid</strong>
+              Kode pos salah
             </mat-error>
           </mat-form-field>
         </div>
@@ -182,7 +182,7 @@
       <div class="form-field">
         <div class="input three-fourth-width">
           <!-- Street -->
-          <label for="street">Street</label>
+          <label for="street">Alamat</label>
           <mat-form-field>
             <input 
               matInput 
@@ -191,14 +191,14 @@
               name="street" 
               id="street">
             <mat-error *ngIf="streetControlForm.hasError('required')">
-              Street is <strong>required</strong>
+              Alamat harus diisi
             </mat-error>
           </mat-form-field>
         </div>
 
         <div class="input one-fourth-width">
           <!-- House Number -->
-          <label for="house-number">House Nr.</label>
+          <label for="house-number">No. Rumah</label>
           <mat-form-field>
             <input 
               matInput 
@@ -207,7 +207,7 @@
               name="house-number" 
               id="house-number">
             <mat-error *ngIf="houseNumberControlForm.hasError('required')">
-              House number is <strong>required</strong>
+              Nomor rumah harus diisi
             </mat-error>
           </mat-form-field>
         </div>
@@ -219,20 +219,20 @@
           name="agreement" 
           id="agreement"
           color="primary">
-          I have read and agree to the terms of the <a href="#">Qintoen Customer Agreement</a>  
+          Saya telah membaca dan menyetujui <a target="_blank" href="https://blog.mihape.com/terms-and-conditions/">syarat dan ketentuan</a> yang berlaku.
           <span *ngIf="agreementControlForm.hasError('required')" class="important">*</span>
         </mat-checkbox>
       </div>
 
       <div class="form-field center">
-        <button class="form-field" type="submit" class="submit-button" [disabled]="signupForm.status === 'INVALID'" [class.disabled]="signupForm.status === 'INVALID'">Sign Up</button>
-        <button class="form-field" type="button" class="cancel-button" (click)="onClose()">Cancel</button>
+        <button class="form-field" type="submit" class="submit-button" [disabled]="signupForm.status === 'INVALID'" [class.disabled]="signupForm.status === 'INVALID'">Daftar</button>
+        <button class="form-field" type="button" class="cancel-button" (click)="onClose()">Batalkan</button>
       </div>
     </form>
 
     <div class="have-account">
       <a (click)="onHaveAccount()">
-        Already have an account?
+        Sudah punya akun?
       </a>
     </div>
   </div>

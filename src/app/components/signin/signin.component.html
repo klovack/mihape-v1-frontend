@@ -3,11 +3,11 @@
     <!-- Close Icon here -->
     <fa-icon (click)="onClose()" [icon]="faTimes" class="close"></fa-icon>
   
-    <h2 class="title">Hi, Welcome</h2>
+    <h2 class="title">Selamat Datang</h2>
 
     <div *ngIf="errorMessage" class="alert center">
       {{errorMessage}}
-      <a *ngIf='isUserInactive' routerLink="/email-confirm" [queryParams]="{ email: emailFormControl.value }" (click)="onConfirm()">Click here to confirm</a>
+      <a *ngIf='isUserInactive' routerLink="/email-confirm" [queryParams]="{ email: emailFormControl.value }" (click)="onConfirm()">Klik disini untuk konfirmasi</a>
     </div>
 
     <form (submit)="onSubmit()" [formGroup]="signinForm" class="signin-form" novalidate>
@@ -16,30 +16,30 @@
         <mat-form-field class="full-width">
           <input matInput type="email" id="email" name="email" formControlName="emailFormControl">
           <mat-error>
-            Email is <strong>required</strong>
+            Email harus diisi
           </mat-error>
         </mat-form-field>
       </div>
       <div class="form-field">
-        <label for="password">Password</label>
+        <label for="password">Kata Sandi</label>
         <mat-form-field class="full-width">
           <input matInput type="password" id="password" #password name="password" formControlName="passwordFormControl">
           <mat-error>
-            Password is <strong>required</strong>
+            Kata Sandi harus diisi
           </mat-error>
           <fa-icon matSuffix (click)="onShowPassword(password)" id="show-password-icon" [icon]="faEye"></fa-icon>
         </mat-form-field>
       </div>
       <div class="forgot-password">
-        <a href="#">Forgot password?</a>
+        <a (click)="onForgotPassword()" [routerLink]="'/forgot-password'">Lupa Kata Sandi?</a>
       </div>
 
-      <button class="form-field" type="submit" class="submit-button" [disabled]="signinForm.status === 'INVALID'" [class.disabled]="signinForm.status === 'INVALID'">Sign In</button>
+      <button class="form-field" type="submit" class="submit-button" [disabled]="signinForm.status === 'INVALID'" [class.disabled]="signinForm.status === 'INVALID'">Masuk</button>
     </form>
 
     <div class="no-account">
       <a (click)="onNoAccount()">
-        Don't have account?
+        Tidak memiliki akun?
       </a>
     </div>
   </div>
