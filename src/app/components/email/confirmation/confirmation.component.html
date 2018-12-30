@@ -1,36 +1,36 @@
 <div class="container">
   <div class="email-confirm">
-    <h1>Confirm Your Email</h1>
-    <p>To continue using our service, you have to confirm your email so we know that it's really you.</p>
-    <p>If you've already received our email, just click on the link and it will confirm your email.</p>
+    <h1>Konfirmasi Email Kamu</h1>
+    <p>Untuk bisa menggunakan layanan kami, kamu harus melakukan konfirmasi email supaya kami tahu bahwa itu benar-benar kamu.</p>
+    <p>Jika kamu telah menerima email konfirmasi dari kami, kamu hanya perlu klik tombol tautan yang ada.</p>
     
     <form *ngIf="!emailSent" (ngSubmit)="onSendConfirmation()" #emailForm="ngForm" class="email-form">
       <mat-form-field>
-        <input placeholder="Your email" type="email" matInput required #emailInput="ngModel" name="email" [(ngModel)]="email">
+        <input placeholder="Email Kamu" type="email" matInput required #emailInput="ngModel" name="email" [(ngModel)]="email">
         <mat-error>
-          Email is required
+          Email harus diisi
         </mat-error>
       </mat-form-field>
-      <button [disabled]="!emailForm.form.valid" type="submit">Send Confirmation</button>
+      <button [disabled]="!emailForm.form.valid" type="submit">Kirim Konfirmasi</button>
     </form>
 
-    <p class="notification" *ngIf="emailSent">Your email has been sent to your inbox. Please wait a few moment until it arrives</p>
+    <p class="notification" *ngIf="emailSent">Email konfirmasi telah dikirim dan akan sampai dalam beberapa saat.</p>
     <p class="notification error" *ngIf="error.isError" [ngSwitch]="error.status">
       <!-- For better internationalization -->
-      <span *ngSwitchCase="400">You already have confirmed your email</span>
-      <span *ngSwitchCase="404">No user found with that email</span>
-      <span *ngSwitchCase="500">Internal server error</span>
-      <span *ngSwitchDefault>Ooops we don't know what happen, but we can't send you the email</span>
+      <span *ngSwitchCase="400">Email telah dikonfirmasi</span>
+      <span *ngSwitchCase="404">Email tidak terdaftar</span>
+      <span *ngSwitchCase="500">Kesalahan pada server</span>
+      <span *ngSwitchDefault>Telah terjadi kesalahan sehingga email tidak terkirim</span>
     </p>
 
-    <p>But if you're here by mistake or already confirmed your email,</p>
-    <p>just sign up or sign in to explore Mihape services.</p>
+    <p>Jika kamu telah dikonfirmasi atau belum memiliki akun Mihape,</p>
+    <p>pilih daftar atau masuk akun untuk menggunakan layanan kami.</p>
 
     <div class="signin-signup">
-      <button (click)="onSignUp()">Sign Up</button>
-      <button (click)="onSignIn()">Sign In</button>
+      <button (click)="onSignUp()">Daftar</button>
+      <button (click)="onSignIn()">Masuk Akun</button>
     </div>
 
-    <a routerLink="/">Back to home</a>
+    <a routerLink="/">Kembali ke Halaman Utama</a>
   </div>
 </div>

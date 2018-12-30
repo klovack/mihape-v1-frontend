@@ -18,7 +18,9 @@ export default class Transaction {
     private _rates: Rates,
     private _userId: string,
     private _recipient: Recipient,
-  ) {}
+  ) {
+    moment.locale('id');
+  }
 
   public get id() { return this._id; }
   public get name() { return this._name; }
@@ -55,12 +57,12 @@ export default class Transaction {
   public get status() { return this._status; }
   public get statusToString() {
     switch (this._status) {
-      case 'IS_PROCESSED': return 'Waiting';
-      case 'IS_RECEIVED': return 'Processed';
-      case 'IS_CANCELED': return 'Canceled';
-      case 'IS_FAILED': return 'Failed';
-      case 'IS_COMPLETED': return 'Succeeded';
-      case 'SENT_BACK': return 'Sent Back';
+      case 'IS_PROCESSED': return 'Menunggu';
+      case 'IS_RECEIVED': return 'Sedang Diproses';
+      case 'IS_CANCELED': return 'Dibatalkan';
+      case 'IS_FAILED': return 'Gagal';
+      case 'IS_COMPLETED': return 'Sukses';
+      case 'SENT_BACK': return 'Dikirim Kembali';
       default: return null;
     }
   }

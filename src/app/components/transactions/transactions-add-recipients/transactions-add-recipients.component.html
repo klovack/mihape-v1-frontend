@@ -7,7 +7,7 @@
     #addRecipient
     (change)="onAbleToAddRecipient(addRecipient)"
     color="primary">
-    Add Recipient
+    Tambahkan Penerima
   </mat-checkbox>
   <div id="recipient-detail">
     <app-recipients-detail *ngIf="!!chosenRecipient && !canAddNewRecipient" [recipient]="chosenRecipient" [deletable]="false" [expanded]="true"></app-recipients-detail>

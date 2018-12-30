@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CountryService } from 'src/app/services/country.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidator } from 'src/app/validation/custom.validators';
-import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown, faCaretUp, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { RecipientsService } from 'src/app/services/recipients.service';
 import Recipient from 'src/app/model/recipients.model';
 import BankAccount from 'src/app/model/bankAccount.model';
@@ -19,6 +19,7 @@ export class RecipientsNewComponent implements OnInit {
   @Output('addNewRecipient') addNewRecipient = new EventEmitter<Recipient>();
 
   faCaret = faCaretDown;
+  faLeft = faArrowLeft;
   moreInfoExpanded = false;
 
   newRecipientForm = new FormGroup({

@@ -136,3 +136,13 @@ body {
     clear: both;
   }
 }
+
+@media screen and (max-width: 1000px) {
+  #crumbs ul li a {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+}

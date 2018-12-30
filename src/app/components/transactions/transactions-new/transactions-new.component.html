@@ -1,13 +1,13 @@
 <div class="container">
   <h1 class="title">
-      New Transaction
+    Buat Transaksi
   </h1>
   <div id="crumbs">
     <ul>
-      <li><a [routerLink]="['/transactions', 'new', 'rates']" routerLinkActive="active">Rates</a></li>
-      <li><a [routerLink]="['/transactions', 'new', 'recipient']" routerLinkActive="active" [class.disabled]="!conditions.hasRates">Recipient</a></li>
-      <li><a [routerLink]="['/transactions', 'new', 'data']" routerLinkActive="active" [class.disabled]="!conditions.hasRecipients">Info</a></li>
-      <li><a [routerLink]="['/transactions', 'new', 'overview']" routerLinkActive="active" [class.disabled]="!conditions.hasData">Overview</a></li>
+      <li><a [routerLink]="['/transactions', 'new', 'rates']" routerLinkActive="active">Nilai Tukar</a></li>
+      <li><a [routerLink]="['/transactions', 'new', 'recipient']" routerLinkActive="active" [class.disabled]="!conditions.hasRates">Penerima</a></li>
+      <li><a [routerLink]="['/transactions', 'new', 'data']" routerLinkActive="active" [class.disabled]="!conditions.hasRecipients">Informasi</a></li>
+      <li><a [routerLink]="['/transactions', 'new', 'overview']" routerLinkActive="active" [class.disabled]="!conditions.hasData">Kilasan</a></li>
     </ul>
   </div>
 
@@ -16,14 +16,14 @@
   <div class="container small-nav">
     <a *ngIf="!!backUrl" [routerLink]="['/transactions/new', backUrl]" class="route-nav back">
       <fa-icon [icon]="faLeft"></fa-icon>
-      Back
+      Kembali
     </a>
     <a [routerLink]="['/transactions']" class="route-nav cancel">
       <fa-icon [icon]="faTimes"></fa-icon>
-      Cancel
+      Batalkan
     </a>
     <a *ngIf="!!forwardUrl" id="trx-next" (click)="onGoNext()" class="route-nav success">
-      Next
+      Lanjutkan
       <fa-icon [icon]="faRight"></fa-icon>
     </a>
   </div>

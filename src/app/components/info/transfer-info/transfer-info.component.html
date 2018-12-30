@@ -1,6 +1,6 @@
 <div class="container">
   <!-- <h2 class="title">Kemana saya harus transfer?</h2> -->
-  <h2 class="title">Where Should I Transfer The Money?</h2>
+  <h2 class="title">Kemana Saya Harus Transfer Uangnya?</h2>
   
   <!-- <p class="description">
     Setiap transaksi yang anda buat, anda akan mendapatkan ID transaksi. 
@@ -12,16 +12,16 @@
   </p> -->
 
   <p class="description">
-    Every transaction you created, a transaction id will be automatically generated.
+    Untuk setiap transaksi, akan dibuat satu ID secara otomatis.
     <span *ngIf="transaction">
-      Your transaction id is <h3 class="highlight" id="trx-id">{{transaction.id | stringSpacer:4:'&nbsp;&nbsp;'}}</h3>
+      ID Transaksi kamu adalah <h3 class="highlight" id="trx-id">{{transaction.id | stringSpacer:4:'&nbsp;&nbsp;'}}</h3>
     </span>
-    As you transfer your money to us, don't forget to write this transaction id on the transfer details.
-    It's very important for you to do so, otherwise we cannot process your transaction.
+    Saat kamu melakukan transfer uang ke Bank kami, jangan lupa cantumkan ID Transaksi yang kamu terima.
+    Jika tidak, transaksi tidak akan dilanjutkan.
   </p>
 
   <p class="description">
-    Below are our trusted Banks in Indonesia, on which you can transfer your money to:
+    Di bawah ini merupakan daftar bank yang kami gunakan:
   </p>
 
   <div class="mihape-bank">
@@ -31,7 +31,7 @@
     <div class="bank-details">
       <h4>Bank Central Asia (BCA)</h4>
       <p>Muhammad Rizki Fikriansyah</p>
-      <p>Account No. {{'1390352588' | stringSpacer:3}}</p>
+      <p>No. Rekening {{'1390352588' | stringSpacer:3}}</p>
     </div>
   </div>
 
@@ -39,7 +39,7 @@
     <div class="bank-details">
       <h4>Bank Mandiri</h4>
       <p>Agus Fikri Hadi</p>
-      <p>Account No. {{'1310000061616' | stringSpacer:3}}</p>
+      <p>No. {{'1310000061616' | stringSpacer:3}}</p>
     </div>
     <div class="logo-bank">
       <img src="assets/img/bank-mandiri.png" alt="Logo of Bank Mandiri">
@@ -47,33 +47,36 @@
   </div>
 
   <p class="description">
-    Be sure to transfer the correct amount.
-    We only send back the money if the transaction is canceled. 
+    Pastikan uang yang kamu kirim sesuai dengan jumlah yang tercantum dalam setap transaksi. 
+    Pengembalian hanya akan dilakukan apabila transaksi dibatalkan<span class="small warning">*</span>. 
     <span *ngIf="transaction">
-      The Transaction will only be processed if you transfer exactly
+      Jumlah uang yang harus kamu transfer untuk transaksi saat ini sebesar
       <h3 class="highlight">{{transaction.rates.total.amount | currency:transaction.rates.fromCurrency.baseString:'symbol-narrow':'1.0-0'}}</h3>
     </span>
   </p>
 
   <p class="description">
-    If you transfer less than the amount specified, you can still transfer the rest of the amount
+    Apabila uang yang dikirim kepada kami kurang dari jumlah yang telah ditentukan, maka kamu masih bisa menambah kekurangannya sebelum
     <span *ngIf="transaction; else deadline">
-      until {{transaction.deadlineAt | date:'H:mm OO, d LLL y'}}
+      {{transaction.deadlineAt | date:'H:mm OO, d LLL y'}}
     </span>
     <ng-template #deadline>
-      before the deadline
+      masa transaksi kadaluwarsa
     </ng-template>
-    or it will be canceled and we send your money to you excluding the fee.
+    atau transaksi akan dibatalkan secara otomatis dan uang akan dikembalikan setelah dipotong biaya transaksi<span class="small warning">**</span>.
   </p>
 
   <p class="description">
-    But if you transfer more than the amount specified, you have to contact our <a href="mailto:support@mihape.com">support team</a> and they will help you get your money back.
+    Apabila uang yang kami terima lebih dari jumlah yang seharusnya, silakan hubungi <a href="mailto:support@mihape.com">tim support kami</a> untuk mendapatkan uangmu kembali.
   </p>
+
+  <p class="small point margin-top"><span class="small warning">*</span> Lihat <a routerLink="/faq">FAQ</a> untuk melihat syarat dan cara membatalkan transaksi</p>
+  <p class="small point"><span class="warning">**</span> Sisa transfer akan muncul pada kolom <strong>nilai tukar</strong> di detail transaksi dan tombol <strong>Saya Sudah Transfer</strong> akan kembali aktif</p>
   
   <div class="back">
     <a (click)="goBack()" class="route-nav back">
       <fa-icon [icon]="faLeft"></fa-icon>
-      Back
+      Kembali
     </a>
   </div>
 </div>

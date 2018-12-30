@@ -14,6 +14,8 @@ export class ThumbnailsComponent implements OnInit {
   @Input('body') body: string;
   @Input('height') height: string;
   @Input('width') width: string;
+  @Input('imageWidth') imageWidth: string;
+  @Input('imageHeight') imageHeight: string;
   imageOnTop = false;
   imageOnLeft = false;
   imageOnRight = false;
@@ -26,10 +28,14 @@ export class ThumbnailsComponent implements OnInit {
   }
 
   get imageStyle() {
-    let width = (this.imageOnTop || this.imageOnBottom) && !this.width ? '85%' : 'auto';
+    let width = (this.imageOnTop || this.imageOnBottom) && !this.width ? '70%' : 'auto';
     width = this.imageOnLeft || this.imageOnRight ? '100%' : width;
     let height = (this.imageOnLeft || this.imageOnRight) && !this.height ? '85%' : 'auto';
     height = this.imageOnTop || this.imageOnBottom ? '60%' : height;
+
+    width = this.imageWidth ? this.imageWidth : width;
+    height = this.imageHeight ? this.imageHeight : height;
+
     return {
       'width': width,
       'height': height,
@@ -39,6 +45,13 @@ export class ThumbnailsComponent implements OnInit {
   }
 
   get containerStyle() {
+    return {
+      'width': this.width,
+      'height': this.height,
+    };
+  }
+
+  get descriptionStyle() {
     return {
       'width': this.width,
       'height': this.height,

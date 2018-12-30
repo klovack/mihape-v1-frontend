@@ -14,15 +14,15 @@
     <!-- Detail shown -->
     <table class="rec-desc-detail" *ngIf="showDetail">
       <tr>
-        <th>Bank Name</th>
+        <th>Nama Bank</th>
         <td>{{recipient.bankAccount.name}}</td>
       </tr>
       <tr *ngIf="recipient.bankAccount.accountNumber">
-        <th>Account Number</th>
+        <th>Nomor Rekening</th>
         <td>{{recipient.bankAccount.accountNumber}}</td>
       </tr>
       <tr *ngIf="recipient.bankAccount.bankCode">
-        <th>Bank Code</th>
+        <th>Kode Bank</th>
         <td>{{recipient.bankAccount.bic}}</td>
       </tr>
       <tr>
@@ -34,7 +34,7 @@
         <td>{{recipient.bankAccount.bic}}</td>
       </tr>
       <tr>
-        <th>Phone Number</th>
+        <th>Nomor Telepon</th>
         <td>{{recipient.phoneNumber}}</td>
       </tr>
       <tr *ngIf="recipient.bankAccount.email">

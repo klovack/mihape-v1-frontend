@@ -1,17 +1,18 @@
 <div class="container">
-  <h2 class="title">Add Transaction Info</h2>
-  <p id="show-desc-toggle">Why do i need to fill this?
+  <h2 class="title">Masukkan Informasi Transaksi</h2>
+  <p id="show-desc-toggle">Kenapa harus diisi?
     <fa-icon (mouseenter)="showDesc()" (mouseleave)="showDesc()" [icon]="faInfo"></fa-icon>
   </p>
   <div class="description" [class.expand]="doShowDescription">
-    <p>It allows you to differentiate which transaction belongs to which person. The purpose field is necessary, but the payment details is not.</p>
-    <p>However, we will only write to the recipient what is written in the payment details field.</p>
+    <p>Untuk membedakan setiap transaksi berdasarkan pada kategori.</p> 
+    <p>Tujuan transaksi harus diisi, namun berita transaksi opsional.</p>
+    <p>Berita transaksi akan dituliskan pada berita pengiriman ke penerima.</p>
   </div>
 
   <!-- Transaction Data Form -->
   <form (ngSubmit)="onSubmit()" #dataForm="ngForm" class="trx-form">
     <div class="form-field">
-      <label for="name">Purpose*</label>
+      <label for="name">Tujuan*</label>
       <mat-form-field class="full-width" >
         <mat-select [(ngModel)]="data.purpose" #purpose="ngModel" [(value)]="data.purpose" name="purpose" required>
           <mat-option 
@@ -21,12 +22,12 @@
           </mat-option>
         </mat-select>
         <mat-error>
-          Purpose field is required
+          Tujuan transaksi harus diisi
         </mat-error>
       </mat-form-field>
     </div>
     <div class="form-field">
-      <label for="payment-details">Payment Details</label>
+      <label for="payment-details">Berita Transaksi</label>
       <mat-form-field class="full-width">
         <textarea matInput [(ngModel)]="data.paymentDetails" #paymentDetails="ngModel" name="paymentDetails" maxlength="120" id="payment-details" name="payment-details"></textarea>
         <mat-hint align="end">{{data.paymentDetails.length}} / 120</mat-hint>
@@ -37,7 +38,7 @@
       type="submit" 
       class="submit-button center"
       [class.disabled]="data.purpose === ''">
-      {{data.purpose ? 'Update' : 'Add'}} Info
+      {{data.purpose ? 'Perbaharui' : 'Tambahkan'}} Informasi
     </button>
   </form>
 </div>

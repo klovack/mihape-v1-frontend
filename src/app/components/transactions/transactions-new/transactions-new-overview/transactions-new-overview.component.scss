@@ -28,33 +28,29 @@
 }
 
 .overview-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   button, #submit {
     margin: 0 auto;
     display: block;
   }
 }
 
-.overview-action {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-} 
-
 .bank-account-link {
   color: $dark-primary-text;
 
   a {
     color: inherit;
+    text-decoration: none;
   }
 }
 
-.transaction-action {
-  display: flex;
-  align-items: center;
-
-  > * {
-    margin-left: 20px;
-  }
+#finish-transaction {
+  display: block;
+  margin: 20px auto;
+  width: fit-content;
 }
 
 #cancel-transaction {

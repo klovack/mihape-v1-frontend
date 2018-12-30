@@ -77,6 +77,14 @@ button, .button {
   }
 }
 
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
 mat-form-field.mat-form-field {
   font-size: $font-large;
   padding: 5px 10px 5px 10px;
@@ -168,8 +176,8 @@ mat-select {
 
 .mat-menu-panel {
   position: relative;
-  top: 50px;
-  left: -80px;
+  top: 30px;
+  left: 0;
 }
 
 .container {
@@ -215,6 +223,14 @@ mat-select {
       color: darken($color: $light-warn-text, $amount: 20);
     }
   }
+}
+
+.small {
+  font-size: $font-small;
+}
+
+.warning {
+  color: $light-warn-text;
 }
 
 .mat-checkbox .mat-checkbox-layout {

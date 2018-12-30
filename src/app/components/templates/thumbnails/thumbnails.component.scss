@@ -19,8 +19,9 @@
   &.top, &.bottom {
     flex-direction: column;
     text-align: center;
-
+    
     .thumbnail {
+      margin-bottom: 45px;
       flex-direction: column;
     }
   }
@@ -51,11 +52,19 @@
 
   &.bottom {
     flex-direction: column-reverse;
+    
+    .thumbnail {
+      margin-top: 45px;
+    }
   }
 }
 
 @media screen and (max-width: 800px) {
   .thumbnail-container {
     flex-wrap: wrap;
+
+    &.top, &.left, &.bottom, &.right {
+      text-align: center;
+    }
   }
 }

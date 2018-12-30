@@ -1,19 +1,19 @@
 <div class="container" id="new-recipient">
-  <h2 class="title">Add Recipient</h2>
+  <h2 class="title">Tambah Penerima</h2>
 
   <form (submit)="onSubmit()" [formGroup]="newRecipientForm" class="rec-form" novalidate>
     <div class="form-field">
-      <label for="name">Name*</label>
+      <label for="name">Nama*</label>
       <mat-form-field class="full-width">
         <input matInput type="text" id="name" name="name" formControlName="nameFormControl">
         <mat-error>
-          Name is <strong>required</strong>
+          Nama harus diisi
         </mat-error>
       </mat-form-field>
     </div>
     
     <div class="form-field">
-      <label for="country">Country*</label>
+      <label for="country">Negara*</label>
       <mat-form-field class="full-width">
         <mat-select
           formControlName="countryFormControl"
@@ -26,28 +26,28 @@
           </mat-option>
         </mat-select>
         <mat-error>
-          Country is <strong>required</strong>
+          Negara harus diisi
         </mat-error>
       </mat-form-field>
     </div>
 
     <div class="form-field">
-      <label for="phone-number">Phone Number*</label>
+      <label for="phone-number">Nomor Telepon*</label>
       <mat-form-field class="full-width">
         <span matPrefix>{{callPrefix}} &nbsp;</span>
         <input matInput type="tel" id="phone-number" name="phone-number" formControlName="phoneNumberFormControl">
         <mat-error>
-          Phone number is <strong>required</strong>
+          Nomor telepon harus diisi
         </mat-error>
       </mat-form-field>
     </div>
 
     <div class="form-field">
-      <label for="bank-name">Bank Name*</label>
+      <label for="bank-name">Nama Bank*</label>
       <mat-form-field class="full-width">
         <input type="text" matInput id="bank-name" name="bank-name" formControlName="bankNameFormControl">
         <mat-error>
-          Bank Name is <strong>required</strong>
+          Nama bank harus diisi
         </mat-error>
       </mat-form-field>
     </div>
@@ -57,7 +57,7 @@
       <mat-form-field class="full-width">
         <input type="text" matInput id="iban" name="iban" formControlName="IBANFormControl">
         <mat-error>
-          Bank Name is <strong>required and must be valid IBAN and contains no spaces or other special characters</strong>
+          IBAN harus diisi tanpa spasi maupun karakter istimewa lainnya
         </mat-error>
       </mat-form-field>
     </div>
@@ -67,24 +67,24 @@
       <mat-form-field class="full-width">
         <input type="text" matInput id="bic" name="bic" formControlName="bicFormControl">
         <mat-error>
-          Bank International Code (BIC) is <strong>required</strong>
+          Bank International Code (BIC) harus diisi
         </mat-error>
       </mat-form-field>
     </div>
 
-    <p id="more-info" *ngIf="!moreInfoExpanded"><a (click)="onMoreInfo()"><fa-icon [icon]="faCaret"></fa-icon> Add more information</a></p>
+    <p id="more-info" *ngIf="!moreInfoExpanded"><a (click)="onMoreInfo()"><fa-icon [icon]="faCaret"></fa-icon> Tambahkan Informasi Lainnya</a></p>
 
     <ng-container *ngIf="moreInfoExpanded">
       <div formGroupName="moreInfoForm" class="more-info">
-        <p>Additional Information</p>
+        <p>Informasi Tambahan</p>
         <div class="form-field">
-          <label for="account-number">Account Number</label>
+          <label for="account-number">Nomor Rekening</label>
           <mat-form-field class="full-width">
             <input type="text" matInput id="account-number" name="account-number" formControlName="accountNumberFormControl">
           </mat-form-field>
         </div>
         <div class="form-field">
-          <label for="bankCode">Bank Code</label>
+          <label for="bankCode">Kode Bank</label>
           <mat-form-field class="full-width">
             <input type="text" matInput id="bankCode" name="bankCode" formControlName="bankCodeFormControl">
           </mat-form-field>
@@ -99,7 +99,12 @@
     </ng-container>
 
     <div class="submit-cancel">
-      <a *ngIf="showBackButton" class="cancel" (click)="goBack()">Back</a>
+      <div class="cancel" *ngIf="showBackButton">
+        <a (click)="goBack()" class="route-nav back">
+          <fa-icon [icon]="faLeft"></fa-icon>
+          Kembali
+        </a>
+      </div>
 
       <button
         type="submit" 
@@ -107,7 +112,7 @@
         [disabled]="newRecipientForm.status === 'INVALID'" 
         [class.disabled]="newRecipientForm.status === 'INVALID'"
         [class.center]="!showBackButton">
-        Save Recipient
+        Simpan Penerima
       </button>
     </div>
   </form>

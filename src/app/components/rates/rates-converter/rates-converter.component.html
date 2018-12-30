@@ -2,7 +2,7 @@
 <form (change)="onConvert()" [formGroup]="_converterForm" novalidate>
   <div class="converter">
     <div class="input">
-      <label for="from-amount">Kirim</label>
+      <label for="from-amount">Mengirim</label>
       <mat-form-field class="converter-amount-input">
         <input
           matInput
@@ -72,4 +72,4 @@
 
 </form>
 <app-rates-description [rates]="_ratesService.rates"></app-rates-description>
-<button class="primary-button main" (click)="onSend()">Kirim</button>
+<button class="primary-button main" (click)="onSend()" id="send-button">Kirim</button>

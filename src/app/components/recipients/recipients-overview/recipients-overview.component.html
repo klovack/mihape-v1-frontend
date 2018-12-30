@@ -1,21 +1,21 @@
 <div class="container" [class.no-top-margin]="!onOwnRoute">
   <h2 class="title">
     <a [routerLink]="['/recipients']">
-      Recipients
+      Penerima
     </a>
   </h2>
   <app-recipients-detail 
     *ngFor="let recipient of recipients" 
     [recipient]="recipient"
     (deleteRecipient)="deleteRecipient($event)"></app-recipients-detail>
-  <div *ngIf="recipients.length <= 0" class="no-recipients">You don't have any recipient</div>
+  <div *ngIf="recipients.length <= 0" class="no-recipients">Kamu tidak Memiliki Daftar Penerima</div>
   <div class="see-more" *ngIf="showMore">
-    <a [routerLink]="['/recipients']" class="route-nav more">See More</a>
+    <a [routerLink]="['/recipients']" class="route-nav more">Selengkapnya</a>
   </div>
   <div class="back" *ngIf="canBack">
     <a [routerLink]="['/overview']" class="route-nav back">
       <fa-icon [icon]="faLeft"></fa-icon>
-      Back
+      Kembali
     </a>
   </div>
 

@@ -2,16 +2,16 @@
   <div
     *ngIf="showUndeletableRecipient"
     class="message error">
-    Recipient cannot be deleted because it has already been used.
+    Penerima tidak bisa dihapus karena ada dalam daftar transaksi
   </div>
   <div
     *ngIf="showMaxLimit"
     class="message error">
-    Your input exceeds maximum limit of transaction
+    Jumlah transaksi yang dimasukkan melebihi batas yang telah ditentukan
   </div>
   <div
     *ngIf="tokenExpired"
     class="message error">
-    The link is expired
+    Tautan kadaluwarsa
   </div>
 </div>

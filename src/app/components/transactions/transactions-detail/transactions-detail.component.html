@@ -16,31 +16,31 @@
     <!-- Detail shown -->
     <table class="trx-desc-detail" *ngIf="showDetail" [class.full-width]="!showAmount">
       <tr *ngIf="transaction.id">
-        <th>Transaction ID</th>
+        <th>ID Transaksi</th>
         <td>{{transaction.id | stringSpacer:4:'&nbsp;&nbsp;'}}</td>
       </tr>
       <tr *ngIf="transaction.id">
-        <th>Purpose of Transaction</th>
+        <th>Tujuan Transaksi</th>
         <td>{{transaction.name}}</td>
       </tr>
       <tr *ngIf="transaction.description">
-        <th>Payment Details</th>
+        <th>Detail Pengiriman</th>
         <td>{{transaction.description}}</td>
       </tr>
       <tr *ngIf="showCreated && transaction.createdAt">
-        <th>You created</th>
+        <th>Transaksi Dibuat</th>
         <td>{{transaction.createdAtFromNow}}</td>
       </tr>
       <tr *ngIf="transaction.receivedAt">
-        <th>You confirmed your transfer</th>
+        <th>Transfer Kami Terima</th>
         <td>{{transaction.receivedAtFromNow}}</td>
       </tr>
       <tr *ngIf="transaction.failedAt && transaction.failedAt.length > 0">
-        <th>Transaction failed</th>
+        <th>Transaksi Gagal</th>
         <td>{{transaction.failedAtFromNow}}</td>
       </tr>
       <tr *ngIf="transaction.canceledAt">
-        <th>You canceled</th>
+        <th>Transaksi Dibatalkan</th>
         <td>{{transaction.canceledAtFromNow}}</td>
       </tr>
       <!-- <tr *ngIf="transaction.completedAt">
@@ -48,16 +48,16 @@
         <td>{{transaction.completed at | date:'H:mm OO, d LLL y'}}</td>
       </tr> -->
       <tr *ngIf="showDeadline && !(transaction.receivedAt || transaction.canceledAt || transaction.failedAt && transaction.failedAt[transaction.failedAt.length - 1])">
-        <th>Must be transfered</th>
+        <th>Harus Ditransfer</th>
         <td>{{transaction.deadlineAtFromNow}}</td>
       </tr>
       <tr *ngIf="showRecipient">
-        <th>Send to</th>
+        <th>Penerima</th>
         <td>{{transaction.recipient.name}} in {{transaction.recipient.country}}</td>
       </tr>
     </table>
     <a *ngIf="showDetail && showMore" [routerLink]="['/transactions', transaction.id]" class="trx-more link">
-      Show More
+      Selengkapnya
     </a>
   </div>
   <div class="trx-right">

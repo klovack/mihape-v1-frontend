@@ -1,24 +1,24 @@
 <div class="wrapper">
   <table class="rates-table">
     <tr>
-      <td>You send</td>
-      <td>{{rates.fromCurrency.amount | currency:rates.fromCurrency.baseString:'symbol-narrow':'1.0-0':'id'}}</td>
+      <td>Kamu Mengirim</td>
+      <td>{{rates.fromCurrency.amount | currency:rates.fromCurrency.baseString:'symbol-narrow':'1.0-0'}}</td>
     </tr>
     <tr id="estimation">
-      <td>Estimation</td>
-      <td>{{rates.toCurrency.amount | currency:rates.toCurrency.baseString:'symbol-narrow':'1.2-2':'id'}}</td>
+      <td>Perkiraan</td>
+      <td>{{rates.toCurrency.amount | currency:rates.toCurrency.baseString:'symbol-narrow':'1.2-2'}}</td>
     </tr>
     <tr>
-      <td>Fee</td>
-      <td>{{rates.fee.amount | currency:rates.fee.baseString:'symbol-narrow':'1.0-0':'id'}}</td>
+      <td>Biaya</td>
+      <td>{{rates.fee.amount | currency:rates.fee.baseString:'symbol-narrow':'1.0-0'}}</td>
     </tr>
     <tr id="total">
       <td>Total</td>
-      <td>{{rates.total.amount | currency:rates.total.baseString:'symbol-narrow':'1.0-0':'id'}}</td>
+      <td>{{rates.total.amount | currency:rates.total.baseString:'symbol-narrow':'1.0-0'}}</td>
     </tr>
     <tr *ngIf="rates.toFinalCurrency" id="final">
-      <td>End Rates</td>
-      <td>{{rates.toFinalCurrency.amount | currency:rates.toFinalCurrency.baseString:'symbol-narrow':'1.2-2':'id'}}</td>
+      <td>Nilai Tukar Akhir</td>
+      <td>{{rates.toFinalCurrency.amount | currency:rates.toFinalCurrency.baseString:'symbol-narrow':'1.2-2'}}</td>
     </tr>
   </table>
 </div> 

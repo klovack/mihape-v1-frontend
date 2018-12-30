@@ -2,7 +2,7 @@
 
 .rates-desc {
   background: rgba(255, 255, 255, 0.6);
-  max-width: 30%;
+  max-width: 800px;
   padding: 10px 0;
   margin: 0 auto;
 
@@ -43,7 +43,7 @@
 
 @media screen and (max-width: 1000px) {
   .rates-desc {
-    max-width: 60%;
+    max-width: 600px;
   }
 }
 
@@ -53,7 +53,7 @@
   }
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 420px) {
   .small {
     text-align: right;
 

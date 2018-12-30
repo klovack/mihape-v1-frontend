@@ -11,11 +11,11 @@
       <div *ngIf="isUserLoggedIn" id="user">
         <mat-menu id="user-menu" #navMenu="matMenu">
           <ng-template matMenuContent>
-            <a routerLink="/overview" mat-menu-item class="menu-item">Overview</a>
-            <a routerLink="/transactions" mat-menu-item class="menu-item">Transactions</a>
-            <a routerLink="/recipients" mat-menu-item class="menu-item">Recipients</a>
-            <a mat-menu-item class="menu-item">Help</a>
-            <a mat-menu-item (click)="onLogout()" class="menu-item">Logout</a>
+            <a routerLink="/overview" mat-menu-item class="menu-item">Kilasan</a>
+            <a routerLink="/transactions" mat-menu-item class="menu-item">Transaksi</a>
+            <a routerLink="/recipients" mat-menu-item class="menu-item">Penerima</a>
+            <a mat-menu-item class="menu-item">Bantuan</a>
+            <a mat-menu-item (click)="onLogout()" class="menu-item">Keluar</a>
           </ng-template>
         </mat-menu>
         <span id="name">{{ authService.authUser.name }}</span>
