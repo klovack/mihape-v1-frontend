@@ -11,6 +11,7 @@ export class DialogComponent implements OnInit, DoCheck {
   showMaxLimit = false;
   showUndeletableRecipient = false;
   tokenExpired = false;
+  showMinLimit = false;
 
   constructor(private _dialogService: DialogService) { }
 
@@ -19,6 +20,7 @@ export class DialogComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.showMaxLimit = this._dialogService.dialogMessage.showMaxLimit;
+    this.showMinLimit = this._dialogService.dialogMessage.showMinLimit;
     this.showUndeletableRecipient = this._dialogService.dialogMessage.showUndeletableRecipient;
     this.tokenExpired = this._dialogService.dialogMessage.tokenExpired;
   }

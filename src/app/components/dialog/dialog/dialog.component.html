@@ -10,6 +10,11 @@
     Jumlah transaksi yang dimasukkan melebihi batas yang telah ditentukan
   </div>
   <div
+    *ngIf="showMinLimit"
+    class="message error">
+    Jumlah transaksi yang dimasukkan kurang dari batas yang telah ditentukan
+  </div>
+  <div
     *ngIf="tokenExpired"
     class="message error">
     Tautan kadaluwarsa

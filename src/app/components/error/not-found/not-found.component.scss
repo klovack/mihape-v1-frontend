@@ -1,0 +1,49 @@
+.container {
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 80px;
+  margin-bottom: -50px;
+  min-height: 95vh;
+  position: relative;
+  display: block; 
+}
+
+.container::after {
+  content: "";
+  padding-bottom: 20px;
+  background-image: url("/assets/img/euro.png");
+  background-size: initial;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.3;
+  top: -10%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+#info {
+  position: absolute;
+  top: 70%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  opacity: 0.7;
+
+  p {
+    line-height: 2em;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .container::after {
+    background-position: right;
+  }
+
+  #info {
+    top: 40%;
+  }
+}

@@ -16,6 +16,7 @@ export class DialogService {
     show: false,
     showUndeletableRecipient: false,
     showMaxLimit: false,
+    showMinLimit: false,
     tokenExpired: false,
   };
 
@@ -85,6 +86,18 @@ export class DialogService {
     this.dialogMessage.show = false;
   }
 
+  // Show Dialog Min Limit Error
+  viewMinLimit() {
+    this.dialogMessage.showMinLimit = true;
+    this.dialogMessage.show = true;
+    this.prepareForClosing(this.stopMinLimit);
+  }
+
+  stopMinLimit() {
+    this.dialogMessage.showMinLimit = false;
+    this.dialogMessage.show = false;
+  }
+
   // Show Dialog Hold To Delete
   viewTokenExpired() {
     this.dialogMessage.tokenExpired = true;
@@ -98,7 +111,7 @@ export class DialogService {
   }
 
   // Delay before the dialog close
-  private prepareForClosing(closingFunction: Function, timeLimit = 2000) {
+  private prepareForClosing(closingFunction: Function, timeLimit = 3000) {
     setTimeout(() => {
       closingFunction.bind(this)();
     }, timeLimit);

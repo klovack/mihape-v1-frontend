@@ -63,6 +63,8 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
     this.checkForValidInput();
     // If user entered more than max transaction
     this.checkForMaxTransaction();
+    // If user entered less than min transaction
+    this.checkForMinTransaction();
 
     // If user wants to switch between combine fee or not
     if (this._combineFeeBeforeValue !== this.combineFee.value) {
@@ -103,6 +105,19 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  /**
+   * Temporary function to limit the transaction
+   * Later should implement more robust max transaction
+   * with the limit that can be injected
+   */
+  private checkForMinTransaction() {
+    if (!this._ratesService.isAboveMinTransaction(Number(Currency.parseCurrency(this.fromAmount.value.toString())))) {
+      this._dialogService.viewMinLimit();
+      this.fromAmount.setValue(this._ratesService.minTransaction);
+    }
+  }
+
 
   onCombineChange() {
     this._ratesService.rates.combineWithFee = this.combineFee.value;

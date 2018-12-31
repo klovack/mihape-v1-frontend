@@ -41,16 +41,20 @@
       </div>
     </div> -->
     <div class="navbar-item" id="blog">
-      <div class="container">
-        <a href="https://blog.mihape.com"><fa-icon [icon]="faDesktop"></fa-icon></a>
-        <p *ngIf="isExpanded"><a href="https://blog.mihape.com">Blog</a></p>
-      </div>
+      <a href="https://blog.mihape.com" rel="Mihape Blog" target="_blank">
+        <div class="container">
+          <fa-icon [icon]="faDesktop"></fa-icon>
+          <p *ngIf="isExpanded">Blog</p>
+        </div>
+      </a>
     </div>
     <div class="navbar-item" id="faq">
-      <div class="container">
-        <fa-icon [icon]="faInfoCircle"></fa-icon>
-        <p *ngIf="isExpanded">FAQ</p>
-      </div>
+      <a routerLink="/faq" rel="Frequently Asked Question">
+        <div class="container">
+          <fa-icon [icon]="faInfoCircle"></fa-icon>
+          <p *ngIf="isExpanded">FAQ</p>
+        </div>
+      </a>
     </div>
     <div class="navbar-item" id="contact">
       <div class="container">

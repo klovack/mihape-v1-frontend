@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-thumbnails',
@@ -6,6 +6,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./thumbnails.component.scss']
 })
 export class ThumbnailsComponent implements OnInit {
+
+  @HostBinding('style.width') hostWidth: string;
+  @HostBinding('style.height') hostHeight: string;
 
   @Input('imageSrc') imageSrc: string;
   @Input('imageDesc') imageDesc: string;
@@ -25,6 +28,7 @@ export class ThumbnailsComponent implements OnInit {
 
   ngOnInit() {
     this.arrangeImagePosition();
+    this.adjustHostSize();
   }
 
   get imageStyle() {
@@ -46,8 +50,8 @@ export class ThumbnailsComponent implements OnInit {
 
   get containerStyle() {
     return {
-      'width': this.width,
-      'height': this.height,
+      // 'width': this.width,
+      // 'height': this.height,
     };
   }
 
@@ -88,6 +92,11 @@ export class ThumbnailsComponent implements OnInit {
     this.imageOnLeft = false;
     this.imageOnRight = false;
     this.imageOnBottom = false;
+  }
+
+  adjustHostSize() {
+    this.hostWidth = this.width;
+    this.hostHeight = this.height;
   }
 
 }

@@ -17,7 +17,8 @@ export class RatesService {
     // { name: 'USD', type: CurrencyType.USD },
   ];
   private _rates: Rates;
-  private _maxTransaction = 10000000; // In Rupiah
+  private _maxTransaction = 5000000; // In Rupiah
+  private _minTransaction = 100000; // In Rupiah
 
   constructor(private http: HttpClient) {}
 
@@ -43,6 +44,7 @@ export class RatesService {
   public get currencyTypes() { return this._currencyTypes; }
   public get rates() { return this._rates; }
   public get maxTransaction() { return this._maxTransaction; }
+  public get minTransaction() { return this._minTransaction; }
 
   public clearRates() {
     this._rates = null;
@@ -50,6 +52,10 @@ export class RatesService {
 
   public isBelowMaxTransaction(toBeChecked: Number) {
     return this._maxTransaction >= toBeChecked;
+  }
+
+  public isAboveMinTransaction(toBeChecked: Number) {
+    return this._minTransaction <= toBeChecked;
   }
 
   private toRates(toBeConverted: RespondRates) {

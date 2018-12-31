@@ -52,6 +52,9 @@ import { AlphaTestComponent } from './components/util/alpha-test/alpha-test.comp
 import { ThumbnailsComponent } from './components/templates/thumbnails/thumbnails.component';
 import { HowWeWorkShortComponent } from './components/how-we-work/how-we-work-short/how-we-work-short.component';
 import { WhyUsComponent } from './components/how-we-work/why-us/why-us.component';
+import { FaqComponent } from './components/info/faq/faq.component';
+import { AboutUsComponent } from './components/how-we-work/about-us/about-us.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 
 registerLocaleData(localeId);
 
@@ -93,6 +96,9 @@ registerLocaleData(localeId);
     ThumbnailsComponent,
     HowWeWorkShortComponent,
     WhyUsComponent,
+    FaqComponent,
+    AboutUsComponent,
+    PrivacyPolicyComponent,
   ],
   imports: [
     BrowserModule,

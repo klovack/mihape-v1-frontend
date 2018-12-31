@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 
 import { HomeComponent } from '../components/home/home.component';
 import { ConfirmationComponent } from '../components/email/confirmation/confirmation.component';
@@ -26,10 +26,13 @@ import {
 import { TransferInfoComponent } from '../components/info/transfer-info/transfer-info.component';
 import { ForgotPasswordComponent } from '../components/password/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from '../components/password/reset-password/reset-password.component';
+import { FaqComponent } from '../components/info/faq/faq.component';
+import { PrivacyPolicyComponent } from '../components/privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
   { path: 'home', redirectTo: '/' },
+  { path: 'faq', component: FaqComponent },
   { path: 'overview', component: OverviewComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
   { path: 'transactions', component: TransactionsOverviewComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
   { path: 'transactions/new', component: TransactionsNewComponent, canLoad: [UserOnlyGuard], children: [
@@ -51,9 +54,13 @@ const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
   // Reset password when user forgot their password
   { path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'error', component: InternalErrorComponent },
   { path: '**', component: NotFoundComponent }
 ];
+
+const routesOpts: ExtraOptions = {
+};
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

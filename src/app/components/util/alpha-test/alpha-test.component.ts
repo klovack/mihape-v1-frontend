@@ -12,9 +12,8 @@ export class AlphaTestComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    const acceptAlpha = localStorage.getItem('acceptAlpha');
-    console.log(acceptAlpha);
-    if (acceptAlpha) {
+    const alphaPermission: {accept: boolean, expiresIn: number} = JSON.parse(localStorage.getItem('acceptAlpha'));
+    if (alphaPermission.accept && alphaPermission.expiresIn >= Date.now()) {
       this.isShowing = false;
     } else {
       this.isShowing = true;
@@ -23,7 +22,11 @@ export class AlphaTestComponent implements OnInit {
 
   onAccept() {
     this.isShowing = false;
-    localStorage.setItem('acceptAlpha', 'true');
+    const alphaPermission = {
+      accept: true,
+      expiresIn: new Date().setTime(Date.now() + (1000 * 60 * 60 * 24 * 7)), // One week
+    };
+    localStorage.setItem('acceptAlpha', JSON.stringify(alphaPermission));
   }
 
 }
