@@ -10,6 +10,6 @@
 </mat-progress-spinner>
 
 <div id="info-bar" *ngIf="showInfoBar">
-  <p>Anda mempunyai waktu {{timeoutDisplay}} menit sampai anda keluar dengan otomatis</p>
+  <p>Anda mempunyai waktu {{timeoutDisplay}} <span *ngIf="!isSecond; else second">menit</span><ng-template #second>detik</ng-template> sampai anda keluar dengan otomatis</p>
   <button *ngIf="showUpdateTokenPrompt" (click)="onUpdateLoginToken()">Tambahkan Waktu</button>
 </div>

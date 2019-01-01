@@ -121,7 +121,7 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
           this.createdTransaction = data;
         })
         .catch(err => {
-          this._router.navigate(['transaction']);
+          this._router.navigate(['overview', 'transactions']);
         });
       }
     );

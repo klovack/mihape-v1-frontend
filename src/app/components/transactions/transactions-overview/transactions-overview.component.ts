@@ -59,10 +59,13 @@ export class TransactionsOverviewComponent implements OnInit, OnDestroy, OnChang
   }
 
   get canBack() {
-    return this._activatedRoute.snapshot.url[0].path === 'transactions';
+    return this._activatedRoute.snapshot.url[0] && this._activatedRoute.snapshot.url[0].path === 'transactions';
   }
 
   get showMore() {
-    return this.transactions.length > 0 && this._activatedRoute.snapshot.url[0].path !== 'transactions';
+    if (this._activatedRoute.snapshot.url[0] && this._activatedRoute.snapshot.url[0].path.includes('transactions')) {
+      return false;
+    }
+    return this.transactions.length > 0;
   }
 }

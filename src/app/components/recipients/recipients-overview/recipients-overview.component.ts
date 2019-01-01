@@ -25,7 +25,7 @@ export class RecipientsOverviewComponent implements OnInit, OnDestroy {
     private _dialogService: DialogService) { }
 
   ngOnInit() {
-    this.onOwnRoute = this._activatedRoute.snapshot.url.toString().includes('recipients');
+    this.onOwnRoute = this._activatedRoute.parent.snapshot.url.toString().includes('recipients');
     this._updateRecipients();
   }
 
@@ -69,11 +69,17 @@ export class RecipientsOverviewComponent implements OnInit, OnDestroy {
   }
 
   get canBack() {
-    return this._activatedRoute.snapshot.url[0].path === 'recipients';
+    if (this._activatedRoute.parent.snapshot.url[0]) {
+      return this._activatedRoute.parent.snapshot.url[0].path === 'recipients';
+    }
+    return false;
   }
 
   get showMore() {
-    return this.recipients.length > 0 && this._activatedRoute.snapshot.url[0].path !== 'recipients';
+    if (this._activatedRoute.snapshot.url[0] && this._activatedRoute.snapshot.url[0].path.includes('recipients')) {
+      return false;
+    }
+    return this.recipients.length > 0;
   }
 
 }

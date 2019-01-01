@@ -132,10 +132,10 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
   onSend() {
     // If user is logged in, redirect it to new transaction.
     if (this._authService.isUserLoggedIn) {
-      this._router.navigate(['/transactions/new/recipient']);
+      this._router.navigate(['/overview/transactions/new/recipient']);
     } else {
       // Otherwise show login form
-      this._dialogService.viewSignin('/transactions/new');
+      this._dialogService.viewSignin('/overview/transactions/new');
     }
   }
 

@@ -56,7 +56,7 @@
         <td>{{transaction.recipient.name}} in {{transaction.recipient.country}}</td>
       </tr>
     </table>
-    <a *ngIf="showDetail && showMore" [routerLink]="['/transactions', transaction.id]" class="trx-more link">
+    <a *ngIf="showDetail && showMore" [routerLink]="['/overview','transactions', transaction.id]" class="trx-more link">
       Selengkapnya
     </a>
   </div>

@@ -133,6 +133,6 @@ export class RecipientsNewComponent implements OnInit {
   }
 
   private _isOnTransactionRoute() {
-    return this.router.url === '/transactions/new/recipient';
+    return this.router.url.includes('/transactions/new');
   }
 }

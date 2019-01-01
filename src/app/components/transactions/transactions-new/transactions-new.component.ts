@@ -37,7 +37,7 @@ export class TransactionsNewComponent implements DoCheck, OnDestroy {
     this.conditions.hasRecipients = !!this._recipientsService.chosenRecipient;
     this.conditions.hasData = !!this._transactionsService.newlyCreatedTransaction;
 
-    const url = `/transactions/new`;
+    const url = `/overview/transactions/new`;
     switch (this._router.url) {
       case `${url}/rates`:
         this.backUrl = null;
@@ -73,6 +73,6 @@ export class TransactionsNewComponent implements DoCheck, OnDestroy {
     //   this._transactionsService.prepareTransaction(null);
     // }
 
-    this._router.navigate(['/transactions/new', this.forwardUrl]);
+    this._router.navigate(['/overview/transactions/new', this.forwardUrl]);
   }
 }

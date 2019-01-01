@@ -38,7 +38,7 @@ export class TransactionsNewDataComponent implements OnInit {
   onSubmit() {
     if (this.data.purpose !== '') {
       this._transactionsService.prepareTransaction(this.data.purpose, this.data.paymentDetails);
-      this._router.navigate(['transactions', 'new', 'overview']);
+      this._router.navigate(['overview', 'transactions', 'new', 'overview']);
     }
   }
 

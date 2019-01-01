@@ -4,21 +4,21 @@
   </h1>
   <div id="crumbs">
     <ul>
-      <li><a [routerLink]="['/transactions', 'new', 'rates']" routerLinkActive="active">Nilai Tukar</a></li>
-      <li><a [routerLink]="['/transactions', 'new', 'recipient']" routerLinkActive="active" [class.disabled]="!conditions.hasRates">Penerima</a></li>
-      <li><a [routerLink]="['/transactions', 'new', 'data']" routerLinkActive="active" [class.disabled]="!conditions.hasRecipients">Informasi</a></li>
-      <li><a [routerLink]="['/transactions', 'new', 'overview']" routerLinkActive="active" [class.disabled]="!conditions.hasData">Kilasan</a></li>
+      <li><a [routerLink]="['/overview/transactions', 'new', 'rates']" routerLinkActive="active">Nilai Tukar</a></li>
+      <li><a [routerLink]="['/overview/transactions', 'new', 'recipient']" routerLinkActive="active" [class.disabled]="!conditions.hasRates">Penerima</a></li>
+      <li><a [routerLink]="['/overview/transactions', 'new', 'data']" routerLinkActive="active" [class.disabled]="!conditions.hasRecipients">Informasi</a></li>
+      <li><a [routerLink]="['/overview/transactions', 'new', 'overview']" routerLinkActive="active" [class.disabled]="!conditions.hasData">Kilasan</a></li>
     </ul>
   </div>
 
   <router-outlet></router-outlet>
 
   <div class="container small-nav">
-    <a *ngIf="!!backUrl" [routerLink]="['/transactions/new', backUrl]" class="route-nav back">
+    <a *ngIf="!!backUrl" [routerLink]="['/overview/transactions/new', backUrl]" class="route-nav back">
       <fa-icon [icon]="faLeft"></fa-icon>
       Kembali
     </a>
-    <a [routerLink]="['/transactions']" class="route-nav cancel">
+    <a [routerLink]="['/overview/transactions']" class="route-nav cancel">
       <fa-icon [icon]="faTimes"></fa-icon>
       Batalkan
     </a>

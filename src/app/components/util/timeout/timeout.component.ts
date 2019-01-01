@@ -23,6 +23,8 @@ export class TimeoutComponent implements DoCheck {
   showUpdateTokenPrompt = false;
   showInfoBar = false;
 
+  isSecond = false;
+
   constructor(private _authService: AuthService, private _dialogService: DialogService) { }
 
   ngDoCheck() {
@@ -63,7 +65,6 @@ export class TimeoutComponent implements DoCheck {
   }
 
   private updateTimer() {
-    console.log('update timer');
     this.stopTimer();
     this.loginTokenLifetime = this._authService.expiresTokenIn;
     this.coundownInterval = setInterval(function() {
@@ -72,31 +73,42 @@ export class TimeoutComponent implements DoCheck {
       const now = new Date().getTime();
 
       if (!this.loginTokenLifetime) {
-        console.log('no login token found');
         this.stopTimer();
       } else {
         // Find the distance between now and the count down date
         const distance = this.loginTokenLifetime - now;
         // Time calculations for minutes
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        // const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        this.timeoutDisplay = `${minutes}`;
+        if (minutes > 0) {
+          this.timeoutDisplay = `${minutes}`;
+          this.isSecond = false;
+        } else {
+          this.timeoutDisplay = `${seconds}`;
+          this.isSecond = true;
+        }
 
         this.spinnerValue = minutes / this.fullTokenLifetime * 100;
 
         if (this.spinnerValue > 50) {
           this.spinnerColor = 'primary';
-        } else if (this.spinnerValue <= 50) {
+        } else if (this.spinnerValue <= 50 && this.spinnerValue > 15) {
           this.spinnerColor = 'accent';
-        } else if (this.spinnerValue <= 15) {
+        } else if (this.spinnerValue <= 25) {
           this.spinnerColor = 'warn';
           this.showUpdateTokenPrompt = true;
+
+          if (this.spinnerValue <= 5) {
+            this.showInfoBar = true;
+          }
         }
 
-        // If the count down is finished, write some text
-        if (distance < 0) {
+
+        // If the count down is finished, logout
+        if (distance <= 0) {
           this.stopTimer();
+          this._authService.logoutUser();
         }
       }
     }.bind(this), 1000);
@@ -105,7 +117,9 @@ export class TimeoutComponent implements DoCheck {
   private stopTimer() {
     this.loginTokenLifetime = null;
     clearInterval(this.coundownInterval);
-    this.timeoutDisplay = '';
+    this.timeoutDisplay = null;
+    this.showInfoBar = false;
+    this.showUpdateTokenPrompt = false;
   }
 
 }

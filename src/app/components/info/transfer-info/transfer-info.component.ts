@@ -41,7 +41,7 @@ export class TransferInfoComponent implements OnInit {
 
   goBack() {
     if (this.transaction) {
-      this._router.navigate(['transactions', this.transaction.id]);
+      this._router.navigate(['overview', 'transactions', this.transaction.id]);
     } else {
       this._router.navigate(['/overview']);
     }
