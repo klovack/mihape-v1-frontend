@@ -10,7 +10,11 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private dialogService: DialogService, private authService: AuthService) {}
+  dialogService: DialogService;
+
+  constructor(private authService: AuthService, dialogService: DialogService) {
+    this.dialogService = dialogService;
+  }
 
   ngOnInit() {
     this.authService.checkForValidToken();

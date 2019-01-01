@@ -20,9 +20,9 @@
       [showAmount]="false"></app-transactions-detail>
   </div>
 
-  <h4 *ngIf="!createdTransaction.isMoneyTransfered" class="bank-account-link"><a [routerLink]="['/bank-accounts', createdTransaction.id]">Langkah Selanjutnya...</a></h4>
+  <h4 *ngIf="!isNewTransaction && !createdTransaction.isMoneyTransfered" class="bank-account-link"><a [routerLink]="['/bank-accounts', createdTransaction.id]">Kemana saya harus transfer?</a></h4>
 
-  <button *ngIf="!createdTransaction.isMoneyTransfered" id="finish-transaction" (click)="onHaveTransfered()">Saya Sudah Transfer</button>
+  <button *ngIf="!isNewTransaction && !createdTransaction.isMoneyTransfered" id="finish-transaction" (click)="onHaveTransfered()">Saya Sudah Transfer</button>
 
   <div class="overview-footer">
     <div class="back" *ngIf="!isNewTransaction">

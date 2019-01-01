@@ -1,4 +1,6 @@
-<div class="container" [class.no-top-margin]="!onOwnRoute">
+<div class="container" 
+  [class.no-top-margin]="!onOwnRoute" 
+  [class.with-bottom-margin]="onOwnRoute || (onOwnRoute && transactions.length <= 0)">
   <h2 class="title">
     <a [routerLink]="['/transactions']">
       Transaksi

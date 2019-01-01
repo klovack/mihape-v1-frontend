@@ -18,6 +18,7 @@ export class DialogService {
     showMaxLimit: false,
     showMinLimit: false,
     tokenExpired: false,
+    showIHaveTransfered: false,
   };
 
   constructor() { }
@@ -98,7 +99,7 @@ export class DialogService {
     this.dialogMessage.show = false;
   }
 
-  // Show Dialog Hold To Delete
+  // Show Dialog token expired
   viewTokenExpired() {
     this.dialogMessage.tokenExpired = true;
     this.dialogMessage.show = true;
@@ -107,6 +108,18 @@ export class DialogService {
 
   stopTokenExpired() {
     this.dialogMessage.tokenExpired = false;
+    this.dialogMessage.show = false;
+  }
+
+  // Show dialog to success transfered
+  viewSuccessTransfered() {
+    this.dialogMessage.showIHaveTransfered = true;
+    this.dialogMessage.show = true;
+    this.prepareForClosing(this.stopSuccessTransfered);
+  }
+
+  stopSuccessTransfered() {
+    this.dialogMessage.showIHaveTransfered = false;
     this.dialogMessage.show = false;
   }
 

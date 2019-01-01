@@ -52,7 +52,7 @@ export default class Transaction {
       return true;
     }
 
-    return this._receivedAt && this._rates.toBeTransfered.amount <= 0;
+    return !!this._receivedAt && !!(this._rates.toBeTransfered.amount <= 0);
   }
   public get status() { return this._status; }
   public get statusToString() {

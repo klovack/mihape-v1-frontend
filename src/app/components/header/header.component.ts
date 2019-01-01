@@ -1,6 +1,6 @@
 import { Component, DoCheck } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { faUserTie } from '@fortawesome/free-solid-svg-icons';
+import { faUserTie, faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements DoCheck {
 
-  faUser = faUserTie;
+  faUser = faUserAstronaut;
   isUserLoggedIn = false;
 
   constructor(private authService: AuthService, private router: Router) { }

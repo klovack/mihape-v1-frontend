@@ -1,0 +1,91 @@
+@import '../../../vars';
+
+:host {
+  margin-top: 40px;
+  padding-top: 20px;
+  z-index: 9999;
+}
+
+#copyright {
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+  
+  p {
+    font-size: $font-smallest;
+    color: white;
+  }
+}
+
+#socmed-part {
+  background: #1c2d44;
+  color: $dark-primary-text;
+}
+
+.socmed-icon {
+  text-align: center;
+  margin: 0 60px;
+
+  fa-icon {
+    color: white;
+    font-size: 40px;
+  }
+
+  p {
+    color: white;
+    font-size: $font-small;
+  }
+}
+
+.container {
+  width: 70%;
+  margin: 0 auto;
+  min-height: 10vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  &.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.column {
+      flex-direction: row;
+    }
+  }
+}
+
+#sitemap-part {
+  background: #1c2d44;
+}
+
+#sitemap {
+
+  ul {
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    
+    li {
+      padding: 0 16px;
+      border-right: 1px solid white;
+      
+      &:last-child {
+        border-right: none;
+      }
+
+      &:hover a, &:active a {
+        font-weight: bold;
+      }
+      
+      a {
+        font-size: $font-small;
+        color: white;
+      }
+    }   
+  } 
+}

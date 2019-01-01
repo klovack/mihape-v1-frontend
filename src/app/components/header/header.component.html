@@ -8,6 +8,7 @@
       </a>
     </div>
     <div class="right-section">
+
       <div *ngIf="isUserLoggedIn" id="user">
         <mat-menu id="user-menu" #navMenu="matMenu">
           <ng-template matMenuContent>
@@ -21,6 +22,8 @@
         <span id="name">{{ authService.authUser.name }}</span>
         <fa-icon mat-icon-button [matMenuTriggerFor]="navMenu" [icon]="faUser" id="user-icon"></fa-icon>
       </div> 
+
+      <app-timeout displayColor="#7A9ED4"></app-timeout>
 
       <!-- Start Language -->
       <!-- <div id="language">

@@ -72,15 +72,19 @@
           <label for="password">Kata Sandi</label>
           <mat-form-field>
             <input matInput type="password" id="password" #password name="password" formControlName="passwordControlForm">
-            <mat-error *ngIf="passwordControlForm.hasError('required')">
+            <mat-error *ngIf="passwordControlForm.hasError('required'); else showPasswordLengthError">
               Kata sandi harus diisi
             </mat-error>
-            <mat-error *ngIf="passwordControlForm.hasError('minlength')">
-              Kata sandi harus terdiri minimal 8 karakter
-            </mat-error>
-            <mat-error *ngIf="passwordControlForm.hasError('pattern')">
-              Kata sandi harus terdiri minimal satu huruf kapital, satu huruf kecil dan satu angka
-            </mat-error>
+            <ng-template #showPasswordLengthError>
+              <mat-error *ngIf="passwordControlForm.hasError('minlength'); else showPasswordPatternError">
+                Kata sandi harus terdiri minimal 8 karakter
+              </mat-error>
+            </ng-template>
+            <ng-template #showPasswordPatternError>
+              <mat-error *ngIf="passwordControlForm.hasError('pattern')">
+                Kata sandi harus terdiri minimal 1 huruf kapital, 1 huruf kecil dan 1 angka
+              </mat-error>
+            </ng-template>
             <fa-icon matSuffix (click)="onShowPassword(password)" id="show-password-icon" [icon]="faEye"></fa-icon>
           </mat-form-field>
         </div>
@@ -225,8 +229,8 @@
           name="agreement" 
           id="agreement"
           color="primary">
-          Saya telah membaca dan menyetujui <a target="_blank" href="https://blog.mihape.com/terms-and-conditions/">syarat dan ketentuan</a> yang berlaku.
-          <span *ngIf="agreementControlForm.hasError('required')" class="important">*</span>
+          Saya telah membaca dan menyetujui <a target="_blank" routerLink="/terms-condition">Syarat dan Ketentuan</a> 
+          dan juga <a routerLink="/privacy-policy" target="_blank">Kebijakan Privasi</a> yang berlaku.<span *ngIf="agreementControlForm.hasError('required')" class="important">*</span>
         </mat-checkbox>
       </div>
 

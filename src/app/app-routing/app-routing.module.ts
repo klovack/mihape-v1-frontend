@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, ExtraOptions } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions, Router, Scroll } from '@angular/router';
 
 import { HomeComponent } from '../components/home/home.component';
 import { ConfirmationComponent } from '../components/email/confirmation/confirmation.component';
@@ -28,6 +28,8 @@ import { ForgotPasswordComponent } from '../components/password/forgot-password/
 import { ResetPasswordComponent } from '../components/password/reset-password/reset-password.component';
 import { FaqComponent } from '../components/info/faq/faq.component';
 import { PrivacyPolicyComponent } from '../components/privacy-policy/privacy-policy.component';
+import { ViewportScroller } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
@@ -60,10 +62,37 @@ const routes: Routes = [
 ];
 
 const routesOpts: ExtraOptions = {
+  scrollPositionRestoration: 'top',
+  anchorScrolling: 'enabled',
+  scrollOffset: [0, 56],
 };
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'top',
+    anchorScrolling: 'enabled',
+    scrollOffset: [0, 56],
+  })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+  constructor(router: Router, viewportScroller: ViewportScroller) {
+    router.events.pipe(
+      filter(event => event instanceof Scroll)
+    )
+    .subscribe((e: Scroll) => {
+      const scrollable = document.getElementById('main-content');
+      if (e.position) {
+        viewportScroller.scrollToPosition(e.position);
+        scrollable.scrollTo(e.position[0], e.position[1]);
+      } else if (e.anchor) {
+        viewportScroller.scrollToAnchor(e.anchor);
+      } else {
+        viewportScroller.scrollToPosition([0, 0]);
+        document.getElementById('main-content').scrollTo(0, 0);
+      }
+    });
+  }
+
+}

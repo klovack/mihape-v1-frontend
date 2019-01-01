@@ -7,11 +7,14 @@
   width: 70%;
   max-width: 1000px;
   position: relative;
-
+  
   &.no-top-margin {
     margin-top: 0;
-    min-width: 90vh;
     padding-bottom: 60px;
+  }
+  
+  &.with-bottom-margin {
+    min-height: 80vh;
   }
 }
 

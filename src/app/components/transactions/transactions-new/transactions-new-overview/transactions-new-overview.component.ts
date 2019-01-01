@@ -58,7 +58,7 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
     this._transactionsService.postNewlyCreatedTransaction()
       .then((data) => {
         this._dialogService.stopLoading();
-        this._router.navigate(['/transactions', data._id]);
+        this._router.navigate(['/bank-accounts', data._id]);
       })
       .catch(() => {
         this._dialogService.stopLoading();
@@ -72,6 +72,7 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
       () => {
         this.updateTransaction(this.createdTransaction.id);
         this._dialogService.stopLoading();
+        this._dialogService.viewSuccessTransfered();
       },
       () => {
         this._dialogService.viewConnectionError();

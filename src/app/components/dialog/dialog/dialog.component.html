@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="showError">
   <div
     *ngIf="showUndeletableRecipient"
     class="message error">
@@ -18,5 +18,12 @@
     *ngIf="tokenExpired"
     class="message error">
     Tautan kadaluwarsa
+  </div>
+</div>
+<div class="container-success" *ngIf="showSuccess">
+  <div
+    *ngIf="showIHaveTransfered"
+    class="message">
+    Terima Kasih telah melakukan transfer. Transaksi akan segera kami proses
   </div>
 </div>

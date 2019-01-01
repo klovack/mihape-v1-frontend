@@ -14,6 +14,7 @@ export class AuthService {
   private _authUrl = 'http://localhost:3000/api/v1/user';
   private _jwtHelper = new JwtHelperService();
 
+  private _expiresTokenIn: Date;
 
   private _authHeaders = new HttpHeaders({
     'Authorization': this.authToken,
@@ -29,6 +30,10 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('user'));
   }
 
+  get expiresTokenIn() {
+    return this._expiresTokenIn;
+  }
+
   get isUserLoggedIn() {
     const token = localStorage.getItem('token');
 
@@ -37,8 +42,12 @@ export class AuthService {
     }
 
     const tokenExpired = this._jwtHelper.isTokenExpired(token);
+    this._expiresTokenIn = this._jwtHelper.getTokenExpirationDate(token);
+
     if (tokenExpired) {
-      this.removeTokenFromStorage();
+      // this.removeTokenFromStorage();
+      this.logoutUser();
+      return false;
     }
     return !tokenExpired;
   }
@@ -48,6 +57,7 @@ export class AuthService {
       headers: this._authHeaders
     }).toPromise()
     .then(() => {
+      this._expiresTokenIn = null;
       this.removeTokenFromStorage();
       this.router.navigate(['/']);
     })
@@ -60,6 +70,7 @@ export class AuthService {
   }
 
   removeTokenFromStorage() {
+    this._expiresTokenIn = null;
     localStorage.removeItem('token');
     localStorage.removeItem('user');
   }
@@ -101,6 +112,7 @@ export class AuthService {
     }).toPromise()
     .then((user: LoginRespond) => {
       this._storeUserData(user.data);
+      this._expiresTokenIn = this._jwtHelper.getTokenExpirationDate(user.data.token);
       if (this.dialogService.nextNavigation) {
         this.router.navigate([this.dialogService.nextNavigation]);
       } else {
@@ -117,6 +129,17 @@ export class AuthService {
     .then((user: LoginRespond) => {
       this._storeUserData(user.data);
       return;
+    });
+  }
+
+  updateLoginToken() {
+    return this.http.get(`${this._authUrl}/update-login-token`, {
+      headers: this._authHeaders,
+    }).toPromise()
+    .then((user: LoginRespond) => {
+      this._storeUserData(user.data);
+      this._expiresTokenIn = this._jwtHelper.getTokenExpirationDate(user.data.token);
+      return this._expiresTokenIn;
     });
   }
 

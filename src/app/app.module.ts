@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, ViewportScroller } from '@angular/common';
 import localeId from '@angular/common/locales/id';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -55,6 +55,10 @@ import { WhyUsComponent } from './components/how-we-work/why-us/why-us.component
 import { FaqComponent } from './components/info/faq/faq.component';
 import { AboutUsComponent } from './components/how-we-work/about-us/about-us.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { Router, Scroll } from '@angular/router';
+import { filter, first, map, switchMap, timeout } from 'rxjs/operators';
+import { TimeoutComponent } from './components/util/timeout/timeout.component';
 
 registerLocaleData(localeId);
 
@@ -99,6 +103,8 @@ registerLocaleData(localeId);
     FaqComponent,
     AboutUsComponent,
     PrivacyPolicyComponent,
+    FooterComponent,
+    TimeoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,4 +121,4 @@ registerLocaleData(localeId);
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
