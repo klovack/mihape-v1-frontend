@@ -60,7 +60,8 @@ export class SignupComponent implements OnInit, OnDestroy {
     ]),
     agreementControlForm: new FormControl('', [
       Validators.requiredTrue
-    ])
+    ]),
+    recaptchaControlForm: new FormControl(null, Validators.required)
   });
   subscription = new Subscription();
 
@@ -89,6 +90,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   get streetControlForm() { return this.signupForm.get('streetControlForm'); }
   get houseNumberControlForm() { return this.signupForm.get('houseNumberControlForm'); }
   get agreementControlForm() { return this.signupForm.get('agreementControlForm'); }
+  get recaptchaControlForm() { return this.signupForm.get('recaptchaControlForm'); }
 
   /** Toggle show password on and off */
   onShowPassword(password: HTMLInputElement) {

@@ -13,9 +13,9 @@
         <mat-menu id="user-menu" #navMenu="matMenu">
           <ng-template matMenuContent>
             <a routerLink="/overview" mat-menu-item class="menu-item">Kilasan</a>
-            <a routerLink="/transactions" mat-menu-item class="menu-item">Transaksi</a>
+            <a routerLink="/overview/transactions" mat-menu-item class="menu-item">Transaksi</a>
             <a routerLink="/recipients" mat-menu-item class="menu-item">Penerima</a>
-            <a mat-menu-item class="menu-item">Bantuan</a>
+            <a mat-menu-item class="menu-item" routerLink="/faq">Bantuan</a>
             <a mat-menu-item (click)="onLogout()" class="menu-item">Keluar</a>
           </ng-template>
         </mat-menu>

@@ -31,15 +31,27 @@
         Kembali
       </a>
     </div>
-    <div *ngIf="!isNewTransaction && createdTransaction" class="cancel-container" (mouseleave)="onMouseLeavePrepareTransaction()">
-      <span *ngIf="!createdTransaction.isDone && !isConfirming" id="cancel-transaction" (click)="onPrepareCancelTransaction()">Batalkan Transaksi</span>
-      
-      <span *ngIf="isConfirming">Anda yakin? </span>
-      <fa-icon *ngIf="isConfirming" (click)="onUnprepareCancelTransaction()" [icon]="faTimes" id="no-delete"></fa-icon>
-      <fa-icon *ngIf="isConfirming" (click)="onCancelTransaction()" [icon]="faCheck" id="yes-delete"></fa-icon>
+    <div *ngIf="!isNewTransaction; else newTransaction">
+      <div *ngIf="!isNewTransaction && createdTransaction" class="cancel-container" (mouseleave)="onMouseLeavePrepareTransaction()">
+        <span *ngIf="!createdTransaction.isDone && !isConfirming" id="cancel-transaction" (click)="onPrepareCancelTransaction()">Batalkan Transaksi</span>
+        
+        <span *ngIf="isConfirming">Anda yakin? </span>
+        <fa-icon *ngIf="isConfirming" (click)="onUnprepareCancelTransaction()" [icon]="faTimes" id="no-delete"></fa-icon>
+        <fa-icon *ngIf="isConfirming" (click)="onCancelTransaction()" [icon]="faCheck" id="yes-delete"></fa-icon>
+      </div>
     </div>
-    <button *ngIf="isNewTransaction" id="submit" (click)="onCreateTransaction()">
-      Buat Transaksi
-    </button>
+    <ng-template #newTransaction>
+      <div id="new-transaction">
+        <div *ngIf="isNewTransaction" class="full-width center">
+          <re-captcha (resolved)="resolved($event)" required>
+          </re-captcha>
+        </div>
+        <div class="full-width">
+          <button *ngIf="isNewTransaction" [disabled]="!hasRecaptcha" [class.disabled]="!hasRecaptcha" id="submit" (click)="onCreateTransaction(captcha)">
+            Buat Transaksi
+          </button>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>

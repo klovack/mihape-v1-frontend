@@ -13,6 +13,8 @@ export class DialogComponent implements OnInit, DoCheck {
   showIHaveTransfered = false;
   tokenExpired = false;
   showMinLimit = false;
+  showTransactionDeleted = false;
+  showRecipientDeleted = false;
 
   constructor(private _dialogService: DialogService) { }
 
@@ -25,6 +27,8 @@ export class DialogComponent implements OnInit, DoCheck {
     this.showUndeletableRecipient = this._dialogService.dialogMessage.showUndeletableRecipient;
     this.tokenExpired = this._dialogService.dialogMessage.tokenExpired;
     this.showIHaveTransfered = this._dialogService.dialogMessage.showIHaveTransfered;
+    this.showTransactionDeleted = this._dialogService.dialogMessage.showTransactionDeleted;
+    this.showRecipientDeleted = this._dialogService.dialogMessage.showRecipientDeleted;
   }
 
   get showError() {

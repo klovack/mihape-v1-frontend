@@ -41,7 +41,7 @@ const routes: Routes = [
   // Reset password when user forgot their password
   { path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
-  { path: 'error', component: InternalErrorComponent },
+  // { path: 'error', component: InternalErrorComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

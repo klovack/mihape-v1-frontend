@@ -54,6 +54,7 @@ export class RecipientsOverviewComponent implements OnInit, OnDestroy {
     this._recipientsService.deleteRecipient(deleted)
       .toPromise()
       .then(() => {
+        this._dialogService.viewRecipientDeleted();
         this._updateRecipients();
       })
       .catch((err) => {
@@ -76,10 +77,9 @@ export class RecipientsOverviewComponent implements OnInit, OnDestroy {
   }
 
   get showMore() {
-    if (this._activatedRoute.snapshot.url[0] && this._activatedRoute.snapshot.url[0].path.includes('recipients')) {
-      return false;
-    }
-    return this.recipients.length > 0;
+    return this.recipients.length > 0
+    && this._activatedRoute.snapshot.url[0]
+    && !this._activatedRoute.snapshot.url[0].path.includes('recipients');
   }
 
 }

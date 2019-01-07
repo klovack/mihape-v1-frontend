@@ -7,7 +7,7 @@ import { LoadingCircleComponent } from 'src/app/components/util/loading-circle/l
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
   declarations: [
     StringSpacerPipe,
@@ -17,7 +17,7 @@ import { LoadingCircleComponent } from 'src/app/components/util/loading-circle/l
   exports: [
     StringSpacerPipe,
     LoadingBounceComponent,
-    LoadingCircleComponent,
-  ]
+    LoadingCircleComponent
+  ],
 })
 export class SharedModule { }

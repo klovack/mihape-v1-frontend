@@ -26,4 +26,14 @@
     class="message">
     Terima Kasih telah melakukan transfer. Transaksi akan segera kami proses
   </div>
+  <div
+    *ngIf="showTransactionDeleted"
+    class="message">
+    Transaksi telah berhasil di batalkan
+  </div>
+  <div
+    *ngIf="showRecipientDeleted"
+    class="message">
+    Penerima telah berhasil di hapus
+  </div>
 </div>

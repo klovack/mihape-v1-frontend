@@ -152,6 +152,7 @@ export class TransactionsService {
         if (err.status === 401) {
           this.authService.logoutUser();
         }
+        // console.error(err);
         throw new Error(err);
       })
     );

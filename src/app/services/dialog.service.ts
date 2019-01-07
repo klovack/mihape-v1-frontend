@@ -19,6 +19,8 @@ export class DialogService {
     showMinLimit: false,
     tokenExpired: false,
     showIHaveTransfered: false,
+    showTransactionDeleted: false,
+    showRecipientDeleted: false,
   };
 
   constructor() { }
@@ -120,6 +122,30 @@ export class DialogService {
 
   stopSuccessTransfered() {
     this.dialogMessage.showIHaveTransfered = false;
+    this.dialogMessage.show = false;
+  }
+
+  // Show Transaction Deleted
+  viewTransactionDeleted() {
+    this.dialogMessage.showTransactionDeleted = true;
+    this.dialogMessage.show = true;
+    this.prepareForClosing(this.stopTransactionDeleted);
+  }
+
+  stopTransactionDeleted() {
+    this.dialogMessage.showTransactionDeleted = false;
+    this.dialogMessage.show = false;
+  }
+
+  // Show Recipient Deleted
+  viewRecipientDeleted() {
+    this.dialogMessage.showRecipientDeleted = true;
+    this.dialogMessage.show = true;
+    this.prepareForClosing(this.stopRecipientDeleted);
+  }
+
+  stopRecipientDeleted() {
+    this.dialogMessage.showRecipientDeleted = false;
     this.dialogMessage.show = false;
   }
 

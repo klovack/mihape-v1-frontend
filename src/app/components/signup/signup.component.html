@@ -223,7 +223,7 @@
         </div>
       </div>
 
-      <div class="form-field">
+      <div class="form-field center">
         <mat-checkbox
           formControlName="agreementControlForm"
           name="agreement" 
@@ -232,6 +232,10 @@
           Saya telah membaca dan menyetujui <a target="_blank" routerLink="/terms-condition">Syarat dan Ketentuan</a> 
           dan juga <a routerLink="/privacy-policy" target="_blank">Kebijakan Privasi</a> yang berlaku.<span *ngIf="agreementControlForm.hasError('required')" class="important">*</span>
         </mat-checkbox>
+      </div>
+
+      <div class="form-field center">
+        <re-captcha formControlName="recaptchaControlForm"></re-captcha>
       </div>
 
       <div class="form-field center">

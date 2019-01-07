@@ -22,6 +22,8 @@ import { SharedModule } from '../shared/shared.module';
 import { RecipientsModule } from '../recipients/recipients.module';
 import { RatesModule } from '../rates/rates.module';
 import { OverviewComponent } from 'src/app/components/overview/overview.component';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 
 @NgModule({
   imports: [
@@ -34,6 +36,8 @@ import { OverviewComponent } from 'src/app/components/overview/overview.componen
     RatesModule,
     RecipientsModule,
     SharedModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
   ],
   declarations: [
     OverviewComponent,

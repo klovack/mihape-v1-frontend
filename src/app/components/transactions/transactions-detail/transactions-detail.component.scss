@@ -17,6 +17,10 @@
     cursor: default;
   }
 
+  &.expandedMore {
+    padding-bottom: 60px;
+  }
+
   p {
     line-height: 1.3em;
   }
@@ -81,6 +85,9 @@
   display: block;
   color: $dark-primary-text;
   font-size: $font-small;
+  text-align: right;
+  position: absolute;
+  right: 40px;
 }
 
 #delete-icon{

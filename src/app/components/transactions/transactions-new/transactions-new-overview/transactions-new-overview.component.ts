@@ -20,6 +20,7 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
   faCheck = faCheck;
   faTimes = faTimes;
   isConfirming = false;
+  hasRecaptcha = false;
 
   subscription: Subscription;
 
@@ -68,7 +69,8 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
 
   onHaveTransfered() {
     this._dialogService.startLoading();
-    this._transactionsService.onMoneyIsTransfered(this.createdTransaction).subscribe(
+    this.subscription.unsubscribe();
+    this.subscription = this._transactionsService.onMoneyIsTransfered(this.createdTransaction).subscribe(
       () => {
         this.updateTransaction(this.createdTransaction.id);
         this._dialogService.stopLoading();
@@ -76,6 +78,7 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
       },
       () => {
         this._dialogService.viewConnectionError();
+        this._dialogService.stopLoading();
       }
     );
   }
@@ -103,6 +106,7 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
         () => {
           this.updateTransaction(this.createdTransaction.id);
           this._dialogService.stopLoading();
+          this._dialogService.viewTransactionDeleted();
         }
       )
     .catch(
@@ -111,6 +115,10 @@ export class TransactionsNewOverviewComponent implements OnInit, OnDestroy {
         this._dialogService.viewConnectionError();
       }
     );
+  }
+
+  resolved(captchaResponse: string) {
+    this.hasRecaptcha = true;
   }
 
   private updateTransaction(trxId) {

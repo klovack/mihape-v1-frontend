@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, OnChanges } from '@angular/core';
+import { Component, DoCheck, Input, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { DialogService } from 'src/app/services/dialog.service';
 
@@ -7,7 +7,7 @@ import { DialogService } from 'src/app/services/dialog.service';
   templateUrl: './timeout.component.html',
   styleUrls: ['./timeout.component.scss']
 })
-export class TimeoutComponent implements DoCheck {
+export class TimeoutComponent implements DoCheck, OnDestroy {
 
   @Input() displayColor: string;
 
@@ -28,8 +28,12 @@ export class TimeoutComponent implements DoCheck {
   constructor(private _authService: AuthService, private _dialogService: DialogService) { }
 
   ngDoCheck() {
-    // check if we already have logintokenlifetime
-    if (!!this._authService.expiresTokenIn) {
+    if (!this._authService.isUserLoggedIn) {
+      if (this.coundownInterval) {
+        this.stopTimer();
+      }
+      return;
+    } else {
       // then we check if the logintokenlifetime is uptodate
       if (!!this.loginTokenLifetime) {
         const isTokenUptodate = this.loginTokenLifetime.getTime() === this._authService.expiresTokenIn.getTime();
@@ -42,11 +46,12 @@ export class TimeoutComponent implements DoCheck {
         // if the logintokenlifetime is undefined clear interval
         this.updateTimer();
       }
-    } else {
-      // console.log('stop timer because there\'s no token');
-      // we stop the timer
-      this.stopTimer();
     }
+
+  }
+
+  ngOnDestroy() {
+    this.stopTimer();
   }
 
   onToggleInfoBar() {
@@ -117,6 +122,7 @@ export class TimeoutComponent implements DoCheck {
   private stopTimer() {
     this.loginTokenLifetime = null;
     clearInterval(this.coundownInterval);
+    this.coundownInterval = null;
     this.timeoutDisplay = null;
     this.showInfoBar = false;
     this.showUpdateTokenPrompt = false;

@@ -14,7 +14,7 @@
       <button [disabled]="!emailForm.form.valid" type="submit">Kirim Konfirmasi</button>
     </form>
 
-    <p class="notification" *ngIf="emailSent">Email konfirmasi telah dikirim dan akan sampai dalam beberapa saat.</p>
+    <p class="notification" *ngIf="emailSent">Email konfirmasi telah dikirim. Apabila email tidak kunjung datang, harap perbaharui browser kamu dan tunggu maksimal 30 menit sebelum kamu meminta ulang email konfirmasi</p>
     <p class="notification error" *ngIf="error.isError" [ngSwitch]="error.status">
       <!-- For better internationalization -->
       <span *ngSwitchCase="400">Email telah dikonfirmasi</span>

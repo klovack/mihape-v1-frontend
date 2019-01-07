@@ -1,6 +1,10 @@
-<div class="trx-wrapper" [class.no-pointer]="alwaysShowAll">
+<div class="trx-wrapper" [class.no-pointer]="alwaysShowAll" [class.expandedMore]="showDetail && showMore">
   <div (click)="onShowDetail()" class="trx-desc">
-    <h3 class="title">{{transaction.name}}</h3>
+    <h3 class="title">
+      <fa-icon [icon]="faStatus"></fa-icon>
+      &nbsp;
+      {{transaction.name}}
+    </h3>
 
     <!-- If detail not shown -->
     <div *ngIf="!showDetail && transaction.status" class="trx-desc-short">
