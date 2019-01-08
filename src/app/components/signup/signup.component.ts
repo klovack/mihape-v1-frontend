@@ -65,7 +65,11 @@ export class SignupComponent implements OnInit, OnDestroy {
   });
   subscription = new Subscription();
 
-  constructor(private countryService: CountryService, private authService: AuthService, private dialogService: DialogService) { }
+  countryService: CountryService;
+
+  constructor(_countryService: CountryService, private authService: AuthService, private dialogService: DialogService) {
+    this.countryService = _countryService;
+  }
 
   ngOnInit() {
     this.subscription = this.countryControlForm.valueChanges.pipe(debounceTime(500)).subscribe((value) => {

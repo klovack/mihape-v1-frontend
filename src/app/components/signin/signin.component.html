@@ -7,7 +7,7 @@
 
     <div *ngIf="errorMessage" class="alert center">
       {{errorMessage}}
-      <a *ngIf='isUserInactive' routerLink="/email-confirm" [queryParams]="{ email: emailFormControl.value }" (click)="onConfirm()">Klik disini untuk konfirmasi</a>
+      <a *ngIf='isUserInactive' routerLink="/email/confirm" [queryParams]="{ email: emailFormControl.value }" (click)="onConfirm()">Klik disini untuk konfirmasi</a>
     </div>
 
     <form (submit)="onSubmit()" [formGroup]="signinForm" class="signin-form" novalidate>
@@ -31,7 +31,7 @@
         </mat-form-field>
       </div>
       <div class="forgot-password">
-        <a (click)="onForgotPassword()" [routerLink]="'/forgot-password'">Lupa Kata Sandi?</a>
+        <a (click)="onForgotPassword()" [routerLink]="'/password/forgot'">Lupa Kata Sandi?</a>
       </div>
 
       <button class="form-field" type="submit" class="submit-button" [disabled]="signinForm.status === 'INVALID'" [class.disabled]="signinForm.status === 'INVALID'">Masuk</button>

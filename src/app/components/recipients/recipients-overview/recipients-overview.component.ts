@@ -77,9 +77,10 @@ export class RecipientsOverviewComponent implements OnInit, OnDestroy {
   }
 
   get showMore() {
-    return this.recipients.length > 0
-    && this._activatedRoute.snapshot.url[0]
-    && !this._activatedRoute.snapshot.url[0].path.includes('recipients');
+    if (this._activatedRoute.parent.snapshot.url[0] && this._activatedRoute.parent.snapshot.url[0].path.includes('recipients')) {
+      return false;
+    }
+    return this.recipients.length > 0 && !this._activatedRoute.parent.snapshot.url[0].path.includes('recipients');
   }
 
 }

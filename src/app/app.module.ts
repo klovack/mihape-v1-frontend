@@ -28,9 +28,7 @@ import { AboutUsComponent } from './components/how-we-work/about-us/about-us.com
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TimeoutComponent } from './components/util/timeout/timeout.component';
-import { TransactionsModule } from './modules/transactions/transactions.module';
 import { SharedModule } from './modules/shared/shared.module';
-import { RecipientsModule } from './modules/recipients/recipients.module';
 import { RatesModule } from './modules/rates/rates.module';
 import { AuthModule } from './modules/auth/auth.module';
 
@@ -42,7 +40,6 @@ registerLocaleData(localeId);
     SidebarComponent,
     HeaderComponent,
     HomeComponent,
-    // OverviewComponent,
     InternalErrorComponent,
     NotFoundComponent,
     DialogComponent,
@@ -66,8 +63,6 @@ registerLocaleData(localeId);
     MaterialModule,
     SharedModule,
     AuthModule,
-    // RecipientsModule,
-    // TransactionsModule,
     RatesModule,
     AppRoutingModule,
   ],

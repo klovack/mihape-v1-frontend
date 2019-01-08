@@ -7,7 +7,7 @@ import { UserOnlyGuard } from 'src/app/services/auth-guard/user-area-only.servic
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: RecipientsOverviewComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
-  { path: 'new', component: RecipientsNewComponent },
+  { path: 'new', component: RecipientsNewComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
 ];
 
 @NgModule({

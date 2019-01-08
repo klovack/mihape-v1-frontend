@@ -20,7 +20,7 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
   private _initialFromCurrency = new Currency(CurrencyType.IDR, 1000000);
   private _initialToCurrency = new Currency(CurrencyType.EUR, 1);
   private _subscription: Subscription = new Subscription;
-  private _converterForm = new FormGroup({
+  _converterForm = new FormGroup({
     fromAmount: new FormControl(this._initialFromCurrency.amount, Validators.required),
     fromBase: new FormControl(this._initialFromCurrency.baseString, Validators.required),
     toAmount: new FormControl(this._initialToCurrency.amount, Validators.required),
@@ -28,21 +28,26 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
     combineFee: new FormControl(false),
   });
 
-  currencyTypes = this._ratesService.currencyTypes;
+  currencyTypes: any[];
   isLoading = false;
   errorMessage = '';
   combineTooltip = false;
 
+  ratesService: RatesService;
+
   constructor(
-    private _ratesService: RatesService,
+    _ratesService: RatesService,
     private _dialogService: DialogService,
     private _authService: AuthService,
     private _router: Router
-    ) {}
+    ) {
+    this.ratesService = _ratesService;
+    this.currencyTypes = this.ratesService.currencyTypes;
+  }
 
   ngOnInit() {
-    if (this._ratesService.rates) {
-      this.populateForm(this._ratesService.rates);
+    if (this.ratesService.rates) {
+      this.populateForm(this.ratesService.rates);
     }
     this.onConvert();
   }
@@ -71,7 +76,7 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
       this.isLoading = false;
       return this.onCombineChange();
     }
-    this._subscription = this._ratesService.convertRates(
+    this._subscription = this.ratesService.convertRates(
       new Currency(this.fromBase.value, this.fromAmount.value),
       Currency.toCurrencyType(this.toBase.value),
       this.combineFee.value,
@@ -98,10 +103,10 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
    * with the limit that can be injected
    */
   private checkForMaxTransaction() {
-    if (!this._ratesService.isBelowMaxTransaction(Number(Currency.parseCurrency(this.fromAmount.value.toString())))) {
+    if (!this.ratesService.isBelowMaxTransaction(Number(Currency.parseCurrency(this.fromAmount.value.toString())))) {
       if (this._router.url.includes('transactions/new')) {
         this._dialogService.viewMaxLimit();
-        this.fromAmount.setValue(this._ratesService.maxTransaction);
+        this.fromAmount.setValue(this.ratesService.maxTransaction);
       }
     }
   }
@@ -112,16 +117,16 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
    * with the limit that can be injected
    */
   private checkForMinTransaction() {
-    if (!this._ratesService.isAboveMinTransaction(Number(Currency.parseCurrency(this.fromAmount.value.toString())))) {
+    if (!this.ratesService.isAboveMinTransaction(Number(Currency.parseCurrency(this.fromAmount.value.toString())))) {
       this._dialogService.viewMinLimit();
-      this.fromAmount.setValue(this._ratesService.minTransaction);
+      this.fromAmount.setValue(this.ratesService.minTransaction);
     }
   }
 
 
   onCombineChange() {
-    this._ratesService.rates.combineWithFee = this.combineFee.value;
-      this.populateForm(this._ratesService.rates);
+    this.ratesService.rates.combineWithFee = this.combineFee.value;
+      this.populateForm(this.ratesService.rates);
       return;
   }
 

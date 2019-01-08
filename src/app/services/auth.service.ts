@@ -93,10 +93,12 @@ export class AuthService {
     return this.http.post(`${this._authUrl}/register`, {
       user: user.toJSON(),
     }).toPromise().then((data: RegisterRespond) => {
-      this.router.navigate(['/email-confirm', { email: data.savedUser.email }]);
+      this.router.navigate(['/email/confirm', { email: data.savedUser.email }]);
     }).catch(err => {
       // console.log(err);
-      this.router.navigate(['/error', { errorMessage: err.error.message }]);
+      this.dialogService.viewConnectionError();
+      this.router.navigate(['/']);
+      // this.router.navigate(['/error', { errorMessage: err.error.message }]);
     });
   }
 

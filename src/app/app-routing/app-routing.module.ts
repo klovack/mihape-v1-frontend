@@ -21,25 +21,15 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
   { path: 'home', redirectTo: '/' },
   { path: 'faq', component: FaqComponent },
-  // { path: 'overview', component: OverviewComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
   { path: 'overview',
     loadChildren: '../modules/transactions/transactions.module#TransactionsModule',
     canLoad: [UserOnlyGuard]
   },
-  // { path: 'transactions',
-  //   loadChildren: '../modules/transactions/transactions.module#TransactionsModule',
-  //   canLoad: [UserOnlyGuard]
-  // },
   { path: 'recipients', loadChildren: '../modules/recipients/recipients.module#RecipientsModule', canLoad: [UserOnlyGuard]},
-  { path: 'email-confirm', component: ConfirmationComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
-  { path: 'email-received/:emailToken', component: ReceivedComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
+  { path: 'email', loadChildren: '../modules/email/email.module#EmailModule', canLoad: [NonUserOnlyGuard] },
   { path: 'bank-accounts', component: TransferInfoComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
   { path: 'bank-accounts/:transactionId', component: TransferInfoComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
-  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
-  // Reset password when user is logged in
-  { path: 'reset-password', component: ResetPasswordComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
-  // Reset password when user forgot their password
-  { path: 'reset-password/:token', component: ResetPasswordComponent, canActivate: [NonUserOnlyGuard], canLoad: [NonUserOnlyGuard] },
+  { path: 'password', loadChildren: '../modules/password/password.module#PasswordModule' },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   // { path: 'error', component: InternalErrorComponent },
   { path: '**', component: NotFoundComponent }

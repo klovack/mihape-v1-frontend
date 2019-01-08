@@ -36,7 +36,7 @@ export class DialogComponent implements OnInit, DoCheck {
   }
 
   get showSuccess() {
-    return this.showIHaveTransfered;
+    return this.showIHaveTransfered || this.showTransactionDeleted || this.showRecipientDeleted;
   }
 
 }

@@ -43,12 +43,16 @@ export class RecipientsNewComponent implements OnInit {
   });
   callPrefix = '';
 
+  countryService: CountryService;
+
   constructor(
-    private countryService: CountryService,
+    _countryService: CountryService,
     private recipientsService: RecipientsService,
     private dialogService: DialogService,
     private router: Router
-    ) { }
+    ) {
+    this.countryService = _countryService;
+  }
 
   ngOnInit() {
     if (this._isOnTransactionRoute()) {

@@ -117,7 +117,7 @@ export class DialogService {
   viewSuccessTransfered() {
     this.dialogMessage.showIHaveTransfered = true;
     this.dialogMessage.show = true;
-    this.prepareForClosing(this.stopSuccessTransfered);
+    this.prepareForClosing(this.stopSuccessTransfered, 5000);
   }
 
   stopSuccessTransfered() {
