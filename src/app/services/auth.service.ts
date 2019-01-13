@@ -5,13 +5,14 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import User from '../model/user.model';
 import { Router } from '@angular/router';
 import { DialogService } from './dialog.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private _authUrl = 'http://localhost:3000/api/v1/user';
+  private _authUrl = environment.production ? '/api/v1/user' : 'http://localhost:3000/api/v1/user';
   private _jwtHelper = new JwtHelperService();
 
   private _expiresTokenIn: Date;

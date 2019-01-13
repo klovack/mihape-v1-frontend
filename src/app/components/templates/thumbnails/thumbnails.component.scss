@@ -63,8 +63,14 @@
   .thumbnail-container {
     flex-wrap: wrap;
 
-    &.top, &.left, &.bottom, &.right {
+    &.top, &.left, &.bottom, &.right {   
+      flex-direction: column;
       text-align: center;
+      
+      .thumbnail {
+        margin-bottom: 45px;
+        flex-direction: column;
+      }
     }
   }
 }

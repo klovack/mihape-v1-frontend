@@ -89,3 +89,42 @@
     }   
   } 
 }
+
+@media screen and (max-width: 750px) {
+  .socmed-icon {
+    margin: 0 30px;
+  
+    fa-icon {
+      color: white;
+      font-size: 30px;
+    }
+
+    p {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .socmed-icon {
+    margin: 0 15px;
+  
+    fa-icon {
+      color: white;
+      font-size: 30px;
+    }
+  }
+
+  .container {
+    min-height: 5vh;
+  }
+
+  #sitemap ul {
+    flex-direction: column;
+    align-items: center;
+
+    li {
+      border: none;
+    }
+  }
+}

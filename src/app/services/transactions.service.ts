@@ -9,13 +9,15 @@ import Currency from '../model/currency.model';
 import { RecipientsService } from './recipients.service';
 import { Observable } from 'rxjs';
 import { RatesService } from './rates.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransactionsService {
 
-  private _transactionsUrl = 'http://localhost:3000/api/v1/transactions';
+  private _transactionsUrl = environment.production ?
+    '/api/v1/transactions' : 'http://localhost:3000/api/v1/transactions';
 
   private _newlyCreatedTransaction: Transaction;
   private _authHeaders = new HttpHeaders({

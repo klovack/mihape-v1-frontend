@@ -5,13 +5,15 @@ import { map } from 'rxjs/operators';
 import Recipient from '../model/recipients.model';
 import BankAccount from '../model/bankAccount.model';
 import { of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipientsService {
 
-  private _recipientsUrl = 'http://localhost:3000/api/v1/recipients';
+  private _recipientsUrl = environment.production ?
+    '/api/v1/recipients' : 'http://localhost:3000/api/v1/recipients';
   private _deletedRecipients: Recipient[] = [];
   private _recipients: Recipient[] = [];
   private _recentlyChosenRecipient: Recipient;

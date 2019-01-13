@@ -4,20 +4,21 @@ import Rates from '../model/rates.model';
 import Currency, { CurrencyType } from '../model/currency.model';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RatesService {
 
-  private _ratesUrl = 'http://localhost:3000/api/v1/rates';
+  private _ratesUrl = environment.production ? '/api/v1/rates' : 'http://localhost:3000/api/v1/rates';
   private _currencyTypes = [
     { name: 'EUR', type: CurrencyType.EUR },
     // { name: 'IDR', type: CurrencyType.IDR },
     // { name: 'USD', type: CurrencyType.USD },
   ];
   private _rates: Rates;
-  private _maxTransaction = 5000000; // In Rupiah
+  private _maxTransaction = 45000000; // In Rupiah
   private _minTransaction = 100000; // In Rupiah
 
   constructor(private http: HttpClient) {}

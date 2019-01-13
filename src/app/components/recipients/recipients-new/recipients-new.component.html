@@ -76,7 +76,11 @@
 
     <ng-container *ngIf="moreInfoExpanded">
       <div formGroupName="moreInfoForm" class="more-info">
-        <p>Informasi Tambahan</p>
+        <h4>Informasi Tambahan</h4>
+        <p>
+          Apabila terjadi kesalahan dalam penulisan IBAN dan BIC, kami akan melanjutkan transaksi melalui nomor rekening dan kode bank yang dicantumkan.
+          Kami juga akan melakukan konfirmasi kepada penerima melalui email yang tercantum di bawah ini.
+        </p>
         <div class="form-field">
           <label for="account-number">Nomor Rekening</label>
           <mat-form-field class="full-width">
@@ -90,7 +94,7 @@
           </mat-form-field>
         </div>
         <div class="form-field">
-          <label for="email">Email</label>
+          <label for="email">Email Penerima</label>
           <mat-form-field class="full-width">
             <input type="email" matInput id="email" name="email" formControlName="emailFormControl">
           </mat-form-field>
@@ -112,7 +116,7 @@
         [disabled]="newRecipientForm.status === 'INVALID'" 
         [class.disabled]="newRecipientForm.status === 'INVALID'"
         [class.center]="!showBackButton">
-        Simpan Penerima
+        Simpan
       </button>
     </div>
   </form>

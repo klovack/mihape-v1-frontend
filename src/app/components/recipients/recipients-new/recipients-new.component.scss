@@ -82,7 +82,13 @@ button {
 }
 
 .more-info {
+
+  h1, h2, h3, h4, h5 {
+    text-align: center;
+  }
+
   p {
+    margin-top: 20px;
     color: $dark-primary-text;
     text-align: center;
   }

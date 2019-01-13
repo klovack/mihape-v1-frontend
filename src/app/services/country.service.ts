@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class CountryService {
   private _countryList = [];
   private _provinceList = [];
   private _europeanList = [];
-  private _countriesUrl = 'http://localhost:3000/api/v1/countries';
+  private _countriesUrl = environment.production ? '/api/v1/countries' : 'http://localhost:3000/api/v1/countries';
 
   constructor(private http: HttpClient) { }
 

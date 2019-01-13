@@ -53,6 +53,12 @@ export class SidebarComponent implements DoCheck {
     this.isExpanded = !this.isExpanded;
   }
 
+  closeExpandedSidebar() {
+    setTimeout((() => {
+      this.isExpanded = false;
+    }).bind(this), 200);
+  }
+
   onSearch(searchInput?: HTMLInputElement, searchLink?: HTMLAnchorElement) {
     if (this.isExpanded) {
       if (searchLink) {

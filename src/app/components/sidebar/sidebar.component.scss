@@ -196,3 +196,9 @@ fa-icon {
     transform: translateX(0);
   }
 }
+
+@media screen and (max-width: 400px) {
+  .sidebar.expanded {
+    width: 250px;
+  }
+}

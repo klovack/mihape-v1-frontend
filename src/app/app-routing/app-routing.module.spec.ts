@@ -4,7 +4,7 @@ describe('AppRoutingModule', () => {
   let appRoutingModule: AppRoutingModule;
 
   beforeEach(() => {
-    appRoutingModule = new AppRoutingModule();
+    appRoutingModule = new AppRoutingModule(null, null);
   });
 
   it('should create an instance', () => {

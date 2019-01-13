@@ -48,6 +48,7 @@ button {
 }
 
 #show-desc-toggle {
+  width: fit-content;
   cursor: pointer;
   margin-bottom: 20px;
   margin-top: 20px;
@@ -57,7 +58,7 @@ button {
   display: none;
   position: absolute;
   max-width: 500px;
-  left: 30%;
+  left: 20%;
   line-height: 23px;
   text-align: justify;
   padding: 20px;

@@ -2,16 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions, Router, Scroll } from '@angular/router';
 
 import { HomeComponent } from '../components/home/home.component';
-import { ConfirmationComponent } from '../components/email/confirmation/confirmation.component';
-import { ReceivedComponent } from '../components/email/received/received.component';
-import { OverviewComponent } from '../components/overview/overview.component';
-import { InternalErrorComponent } from '../components/error/internal/internal-error.component';
 import { NotFoundComponent } from '../components/error/not-found/not-found.component';
 import { UserOnlyGuard } from '../services/auth-guard/user-area-only.service';
 import { NonUserOnlyGuard } from '../services/auth-guard/non-user-only.service';
 import { TransferInfoComponent } from '../components/info/transfer-info/transfer-info.component';
-import { ForgotPasswordComponent } from '../components/password/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from '../components/password/reset-password/reset-password.component';
 import { FaqComponent } from '../components/info/faq/faq.component';
 import { PrivacyPolicyComponent } from '../components/privacy-policy/privacy-policy.component';
 import { ViewportScroller } from '@angular/common';
@@ -27,8 +21,7 @@ const routes: Routes = [
   },
   { path: 'recipients', loadChildren: '../modules/recipients/recipients.module#RecipientsModule', canLoad: [UserOnlyGuard]},
   { path: 'email', loadChildren: '../modules/email/email.module#EmailModule', canLoad: [NonUserOnlyGuard] },
-  { path: 'bank-accounts', component: TransferInfoComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
-  { path: 'bank-accounts/:transactionId', component: TransferInfoComponent, canActivate: [UserOnlyGuard], canLoad: [UserOnlyGuard] },
+  { path: 'bank-accounts', loadChildren: '../modules/bank/bank.module#BankModule', canLoad: [UserOnlyGuard] },
   { path: 'password', loadChildren: '../modules/password/password.module#PasswordModule' },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   // { path: 'error', component: InternalErrorComponent },

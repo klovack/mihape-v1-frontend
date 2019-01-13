@@ -48,8 +48,9 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.ratesService.rates) {
       this.populateForm(this.ratesService.rates);
+    } else {
+      this.onConvert();
     }
-    this.onConvert();
   }
 
   ngOnDestroy() {

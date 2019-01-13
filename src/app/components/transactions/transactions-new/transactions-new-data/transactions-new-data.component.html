@@ -1,12 +1,14 @@
 <div class="container">
   <h2 class="title">Masukkan Informasi Transaksi</h2>
-  <p id="show-desc-toggle">Kenapa harus diisi?
-    <fa-icon (mouseenter)="showDesc()" (mouseleave)="showDesc()" [icon]="faInfo"></fa-icon>
+  <p (mouseenter)="showDesc()" (mouseleave)="showDesc()" id="show-desc-toggle">Kenapa harus diisi?
+    <fa-icon [icon]="faInfo"></fa-icon>
   </p>
   <div class="description" [class.expand]="doShowDescription">
-    <p>Untuk membedakan setiap transaksi berdasarkan pada kategori.</p> 
-    <p>Tujuan transaksi harus diisi, namun berita transaksi opsional.</p>
-    <p>Berita transaksi akan dituliskan pada berita pengiriman ke penerima.</p>
+    <p>Tujuan transaksi harus diisi agar kamu dapat membedakan setiap transaksi berdasarkan pada kategori.</p> 
+    <p>
+      Berita transaksi opsional, namun apabila diisi,
+      berita transaksi akan dituliskan pada berita pengiriman ke penerima.
+    </p>
   </div>
 
   <!-- Transaction Data Form -->
