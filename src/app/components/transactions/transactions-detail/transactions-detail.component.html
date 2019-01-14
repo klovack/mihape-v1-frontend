@@ -21,7 +21,7 @@
     <table class="trx-desc-detail" *ngIf="showDetail" [class.full-width]="!showAmount">
       <tr *ngIf="transaction.id">
         <th>ID Transaksi</th>
-        <td>{{transaction.id | stringSpacer:4:'&nbsp;&nbsp;'}}</td>
+        <td>{{transaction.transferId}}</td>
       </tr>
       <tr *ngIf="transaction.id">
         <th>Tujuan Transaksi</th>

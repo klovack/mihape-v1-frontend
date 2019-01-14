@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   dialogService: DialogService;
 
   constructor(private authService: AuthService, dialogService: DialogService, router: Router) {
-    if (environment.production) {
+    // if (environment.production) {
       const navEndEvents = router.events.pipe(
         filter(event => event instanceof NavigationEnd),
       );
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
           'page_path': event.urlAfterRedirects
         });
       });
-    }
+    // }
     this.dialogService = dialogService;
   }
 

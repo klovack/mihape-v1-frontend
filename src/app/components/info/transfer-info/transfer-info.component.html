@@ -13,15 +13,18 @@
 
   <p class="description">
     Untuk setiap transaksi, akan dibuat satu ID secara otomatis.
-    <span *ngIf="transaction">
+    <!-- <span *ngIf="transaction">
       ID Transaksi kamu adalah <h3 class="highlight" id="trx-id">{{transaction.id | stringSpacer:4:'&nbsp;&nbsp;'}}</h3>
+    </span> -->
+    <span *ngIf="transaction">
+      ID Transaksi kamu adalah <h3 class="highlight" id="trx-id">{{transaction.transferId}}</h3>
     </span>
     Saat kamu melakukan transfer uang ke Bank kami, <strong class="warning">jangan lupa cantumkan ID Transaksi</strong> yang kamu terima.
     Jika tidak, transaksi tidak akan dilanjutkan.
   </p>
 
   <p class="description">
-    Di bawah ini merupakan daftar bank yang kami gunakan:
+    Silahkan transfer ke:
   </p>
 
   <div class="mihape-bank">
@@ -35,7 +38,7 @@
     </div>
   </div>
 
-  <div class="mihape-bank">
+  <!-- <div class="mihape-bank">
     <div class="bank-details">
       <h4>Bank Mandiri</h4>
       <p>Agus Fikri Hadi</p>
@@ -44,7 +47,7 @@
     <div class="logo-bank">
       <img src="assets/img/bank-mandiri.png" alt="Logo of Bank Mandiri">
     </div>
-  </div>
+  </div> -->
 
   <p class="description">
     Pastikan uang yang kamu kirim sesuai dengan jumlah yang tercantum dalam setap transaksi. 

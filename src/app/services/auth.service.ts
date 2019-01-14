@@ -193,7 +193,7 @@ export class AuthService {
 
   private _storeUserData(data) {
     localStorage.setItem('token', 'JWT-transfer ' + data.token);
-    localStorage.setItem('user', JSON.stringify({ email: data.email, id: data.userId, name: data.name }));
+    localStorage.setItem('user', JSON.stringify({ email: data.email, id: data.userId, name: data.name, lastName: data.lastName }));
   }
 }
 

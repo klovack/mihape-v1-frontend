@@ -18,6 +18,7 @@ export default class Transaction {
     private _rates: Rates,
     private _userId: string,
     private _recipient: Recipient,
+    private _transferId?: string,
   ) {
     moment.locale('id');
   }
@@ -48,7 +49,7 @@ export default class Transaction {
    * @returns true if the transaction is canceled or the money is transfered
    */
   public get isMoneyTransfered() {
-    if (this.isDone) {
+    if (!!this._canceledAt || !!this._completedAt) {
       return true;
     }
 
@@ -69,6 +70,7 @@ export default class Transaction {
   public get rates() { return this._rates; }
   public get userId() { return this._userId; }
   public get recipient() { return this._recipient; }
+  public get transferId() { return this._transferId ? this._transferId : this._id; }
 }
 
 export const TransactionPurposes = [

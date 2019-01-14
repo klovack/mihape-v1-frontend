@@ -189,7 +189,8 @@ export class TransactionsService {
         new Currency(currentData.toBeTransfered.base, currentData.toBeTransfered.amount),
       ),
       currentData.user,
-      recipient
+      recipient,
+      currentData.transferId
     );
 
     return newTransaction;
@@ -230,6 +231,7 @@ class TransactionRespond {
       combineWithFee: boolean,
       user: string,
       description: string,
+      transferId: string,
     }
   ];
   user: string;

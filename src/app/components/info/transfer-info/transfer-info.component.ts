@@ -4,6 +4,7 @@ import Transaction from 'src/app/model/transaction.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { DialogService } from 'src/app/services/dialog.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-transfer-info',
@@ -18,7 +19,7 @@ export class TransferInfoComponent implements OnInit {
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _transactionsService: TransactionsService,
-    private _router: Router
+    private _router: Router,
   ) { }
 
   ngOnInit() {
