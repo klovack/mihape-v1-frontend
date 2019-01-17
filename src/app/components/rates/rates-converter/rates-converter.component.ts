@@ -8,6 +8,7 @@ import Currency, { CurrencyType } from '../../../model/currency.model';
 import { DialogService } from '../../../services/dialog.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-rates-converter',
@@ -32,8 +33,13 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
   isLoading = false;
   errorMessage = '';
   combineTooltip = false;
+  faInfo = faInfoCircle;
+  showEstimationDesc = false;
 
   ratesService: RatesService;
+
+  private requestTry = 0;
+  private maxRequestTry = 3;
 
   constructor(
     _ratesService: RatesService,
@@ -46,6 +52,7 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.requestTry = 0;
     if (this.ratesService.rates) {
       this.populateForm(this.ratesService.rates);
     } else {
@@ -87,9 +94,28 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
       this.isLoading = false;
     },
     err => {
-      this.isLoading = false;
-      this.showNoConnectionError();
+      this.requestTry += 1;
+
+      if (this.requestTry < this.maxRequestTry) {
+        console.log('retry');
+        setTimeout((() => {
+          this.onConvert();
+        }).bind(this), 500 * this.requestTry);
+      } else {
+        this.isLoading = false;
+        this.showNoConnectionError();
+      }
     });
+  }
+
+  onShowEstimationDesc() {
+    console.log('show');
+    this.showEstimationDesc = true;
+  }
+
+  onHideEstimationDesc() {
+    console.log('hide');
+    this.showEstimationDesc = false;
   }
 
   private checkForValidInput() {

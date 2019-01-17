@@ -67,7 +67,7 @@ export class RatesService {
       new Currency(toBeConverted.data.toCurrency.base, toBeConverted.data.toCurrency.combineAmount),
       new Currency(toBeConverted.data.fromCurrency.base, toBeConverted.data.fee),
       toBeConverted.data.combineWithFee,
-      new Currency(toBeConverted.data.fromCurrency.base, toBeConverted.data.total)
+      new Currency(toBeConverted.data.fromCurrency.base, toBeConverted.data.total),
     );
   }
 }

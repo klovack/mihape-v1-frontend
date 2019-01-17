@@ -2,7 +2,54 @@
   <h2 class="title">Tentang Kami</h2>
 
   <p class="description">
-    Mihape Global Nusantara merupakan startup yang bergerak dalam bidang pelayanan pengiriman uang dari Indonesia ke luar negeri.
-    Kami memiliki basis di Indonesia yang beralamat di Komplek Taman Bumi Prima R. 16, Cibabat, Cimahi. Layanan pengiriman uang yang kami sediakan bisa dilakukan dengan mengakses website www.mihape.com, sehingga customer menjadi lebih mudah untuk melakukan transaksi dimanapun dan kapanpun.
+    Mihape Global Nusantara merupakan startup yang bergerak dalam bidang pelayanan pengiriman uang 
+    dari Indonesia ke luar negeri dan berbasis di Bandung, Indonesia. Layanan pengiriman 
+    uang yang kami sediakan bisa dilakukan dengan mengakses website <a href="https://www.mihape.com">www.mihape.com</a>, 
+    sehingga customer menjadi lebih mudah untuk melakukan transaksi dimanapun dan kapanpun.
+  </p>
+
+  <h3 class="subtitle">Sejarah</h3>
+  <p class="description">
+    Mihape merupakan platform pengiriman uang dari Indonesia ke luar negeri. 
+    Tujuan utama kami saat ini adalah Jerman dan negara-negara yang menggunakan Euro sebagai mata uangnya. 
+    Platform ini diciptakan karena kami merasa adanya kesulitan untuk mengirim uang dari Indonesia ke Jerman 
+    yang disebabkan oleh biaya transfer bank yang sangat mahal (30$ ditambah Rp. 50.000,00). Untuk mensiasati biaya transfer 
+    melalui bank yang sangat mahal, biasanya kami meminta supaya uang dikirimkan dalam bentuk rupiah ke dalam rekening Indonesia yang 
+    kemudian diambil menggunakan ATM di Bank Jerman, tapi cara ini bisa dikatakan tidak praktis apabila uang yang dikirimkan dalam jumlah besar, 
+    karena ada batas maksimum pengambilan setiap harinya sehingga kami harus melakukan penarikan selama beberapa hari. 
+    Hal ini dianggap merugikan karena nilai tukar Rupiah terhadap 
+    Euro bisa berubah sewaktu-waktu sehingga uang yang kami terima berkurang jumlahnya secara signifikan.
+  </p>
+
+  <p class="description">
+    Selain itu ATM beberapa bank Indonesia sempat tidak bisa digunakan untuk melakukan transaksi di beberapa negara termasuk Jerman. 
+    Ada kalanya mahasiswa yang tidak memiliki ATM bank Indonesia seringkali meminta pertolongan teman untuk menerima uang transferan dari orang tua dalam bentuk Rupiah, 
+    akan tetapi sering kali banyak mahasiswa yang tidak bersedia menukar Euro dengan Rupiah dikarenakan fluktuasi nilai tukar Rupiah terhadap Euro yang tidak stabil.
+  </p>
+
+  <h3 class="subtitle">Tim Kami</h3>
+  <div class="description team">
+    <app-thumbnails 
+    [imageSrc]="'assets/img/rizki.png'" 
+    [imageDesc]="'Rizki Fikriansyah CEO of Mihape'"
+    [imagePosition]="'top'"
+    [title]="'Muhammad Rizki Fikriansyah as Co-Founder and CEO'"
+    [body]="'Rizki Fikriansyah merupakan mahasiswa di Hochschule Trier. Dalam proses pengembangan Mihape, Rizki bertanggung jawab sebagai Developer website dan aplikasi.'"
+    [width]="'80%'"
+    [imageWidth]="'50%'"
+    ></app-thumbnails>
+    <app-thumbnails 
+    [imageSrc]="'assets/img/vitri.png'" 
+    [imageDesc]="'Vitri Indriyani founder of Mihape'"
+    [imagePosition]="'top'"
+    [title]="'Vitri Indriyani as Founder'"
+    [body]="'Vitri Indriyani merupakan mahasiswi di Universitas Trier dengan program studi Master Erziehungswissenschaften. Vitri bertanggung jawab atas design dan social media content.'"
+    [width]="'80%'"
+    [imageWidth]="'50%'"
+    ></app-thumbnails>
+  </div>
+
+  <p class="link-center">
+    <a class="link" [routerLink]="backRoute">Kembali ke Halaman Utama</a>
   </p>
 </div>

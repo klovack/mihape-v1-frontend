@@ -175,6 +175,8 @@ export class TransactionsService {
 
   private async _createTransactionObject(currentData): Promise<Transaction> {
     const recipient = await this.recipientsService.getRecipient(currentData.recipient);
+    const toFinalCurrency = currentData.toFinalCurrency ?
+      new Currency(currentData.toFinalCurrency.base, currentData.toFinalCurrency.amount) : null;
     const newTransaction = new Transaction(
       currentData._id,
       currentData.name, currentData.description, currentData.createdAt, currentData.deadlineAt,
@@ -187,6 +189,7 @@ export class TransactionsService {
         new Currency(currentData.fee.base, currentData.fee.amount),
         currentData.combineWithFee,
         new Currency(currentData.toBeTransfered.base, currentData.toBeTransfered.amount),
+        toFinalCurrency
       ),
       currentData.user,
       recipient,
@@ -215,6 +218,10 @@ class TransactionRespond {
         amount: number
       },
       fee: {
+        base: string,
+        amount: number
+      },
+      toFinalCurrency: {
         base: string,
         amount: number
       },

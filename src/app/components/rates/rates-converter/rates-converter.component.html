@@ -29,7 +29,13 @@
     <app-loading-bounce [isBouncing]="isLoading"></app-loading-bounce>
   
     <div class="input">
-      <label for="from-amount">Perkiraan</label>
+      <label for="from-amount">
+        Perkiraan
+        <fa-icon (mouseenter)="onShowEstimationDesc()" (mouseleave)="onHideEstimationDesc()" [icon]="faInfo"></fa-icon>
+      </label>
+      <div class="description" *ngIf="showEstimationDesc" id="estimation-desc" [class.show]="showEstimationDesc">
+        <p>Saat ini Mihape baru menyediakan layanan flexibel transfer dimana jumlah uang yang diterima akan mengalami perubahan berdasarkan pada kurs aktual.</p> 
+      </div>
       <mat-form-field class="converter-amount-input">
         <input
           matInput

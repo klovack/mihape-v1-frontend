@@ -1,8 +1,9 @@
 <div class="container">
   <div class="email-confirm">
-    <h1>Konfirmasi Email Kamu</h1>
-    <p>Untuk bisa menggunakan layanan kami, kamu harus melakukan konfirmasi email supaya kami tahu bahwa itu benar-benar kamu.</p>
-    <p>Jika kamu telah menerima email konfirmasi dari kami, kamu hanya perlu klik tombol tautan yang ada.</p>
+    <h1 *ngIf="emailSent">Periksa Kotak Emailmu</h1>
+    <h1 *ngIf="!emailSent">Konfirmasi Email Kamu</h1>
+    <p *ngIf="!emailSent">Untuk bisa menggunakan layanan kami, kamu harus melakukan konfirmasi email supaya kami tahu bahwa itu benar-benar kamu.</p>
+    <p *ngIf="!emailSent">Jika kamu telah menerima email konfirmasi dari kami, kamu hanya perlu klik tombol tautan yang ada.</p>
     
     <form *ngIf="!emailSent" (ngSubmit)="onSendConfirmation()" #emailForm="ngForm" class="email-form">
       <mat-form-field>

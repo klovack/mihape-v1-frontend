@@ -4,7 +4,7 @@
       <td>Kamu Mengirim</td>
       <td>{{rates.fromCurrency.amount | currency:rates.fromCurrency.baseString:'symbol-narrow':'1.0-0'}}</td>
     </tr>
-    <tr id="estimation">
+    <tr id="estimation" *ngIf="!rates.toFinalCurrency">
       <td>Perkiraan</td>
       <td>{{rates.toCurrency.amount | currency:rates.toCurrency.baseString:'symbol-narrow':'1.2-2'}}</td>
     </tr>

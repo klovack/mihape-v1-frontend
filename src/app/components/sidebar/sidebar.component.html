@@ -29,10 +29,12 @@
       </div>
     </div>
     <div class="navbar-item" id="about">
-      <div class="container">
-        <fa-icon [icon]="faUsers"></fa-icon>
-        <p *ngIf="isExpanded">Tentang Kami</p>
-      </div>
+      <a routerLink="/about-us" rel="Tentang Kami">
+        <div class="container">
+          <fa-icon [icon]="faUsers"></fa-icon>
+          <p *ngIf="isExpanded">Tentang Kami</p>
+        </div>
+      </a>
     </div>
     <!-- <div class="navbar-item" id="service">
       <div class="container">

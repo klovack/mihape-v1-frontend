@@ -28,6 +28,8 @@ import { TimeoutComponent } from './components/util/timeout/timeout.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { RatesModule } from './modules/rates/rates.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { TermsConditionComponent } from './components/info/terms-condition/terms-condition.component';
+import { ContactComponent } from './components/info/contact/contact.component';
 
 registerLocaleData(localeId);
 
@@ -50,6 +52,8 @@ registerLocaleData(localeId);
     PrivacyPolicyComponent,
     FooterComponent,
     TimeoutComponent,
+    TermsConditionComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

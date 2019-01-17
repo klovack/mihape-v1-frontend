@@ -7,12 +7,14 @@ import { RatesDescriptionComponent } from 'src/app/components/rates/rates-descri
 import { RatesDetailComponent } from 'src/app/components/rates/rates-detail/rates-detail.component';
 import { MaterialModule } from 'src/app/material.module';
 import { SharedModule } from '../shared/shared.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
+    FontAwesomeModule,
     SharedModule,
   ],
   declarations: [

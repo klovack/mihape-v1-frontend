@@ -19,6 +19,10 @@
   text-align: center;
   margin-bottom: 20px;
   line-height: 1.2em;
+
+  &.left {
+    text-align: left;
+  }
 }
 
 .description {
@@ -26,27 +30,16 @@
   text-align: justify;
 }
 
-.team {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 65%;
-  margin: 20px auto;
+.ordered-list {
+  margin-left: 40px;
+  list-style-type: decimal;
 }
 
+
 @media screen and (max-width: 1000px) {
-  .team {
-    width: 100%;
-  }
+  
 }
 
 @media screen and (max-width: 700px) {
-  .team {
-    flex-wrap: wrap;
-
-    > * {
-      margin: 20px;
-    }
-  }
+  
 }
