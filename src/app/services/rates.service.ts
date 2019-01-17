@@ -18,7 +18,7 @@ export class RatesService {
     // { name: 'USD', type: CurrencyType.USD },
   ];
   private _rates: Rates;
-  private _maxTransaction = 45000000; // In Rupiah
+  private _maxTransaction = 9000000; // In Rupiah
   private _minTransaction = 100000; // In Rupiah
 
   constructor(private http: HttpClient) {}
