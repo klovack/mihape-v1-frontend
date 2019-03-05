@@ -97,7 +97,7 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
       this.requestTry += 1;
 
       if (this.requestTry < this.maxRequestTry) {
-        console.log('retry');
+        // console.log('retry');
         setTimeout((() => {
           this.onConvert();
         }).bind(this), 500 * this.requestTry);
@@ -109,12 +109,12 @@ export class RatesConverterComponent implements OnInit, OnDestroy {
   }
 
   onShowEstimationDesc() {
-    console.log('show');
+    // console.log('show');
     this.showEstimationDesc = true;
   }
 
   onHideEstimationDesc() {
-    console.log('hide');
+    // console.log('hide');
     this.showEstimationDesc = false;
   }
 

@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, DoCheck } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import {
   faSearch,
   faPlusSquare,
@@ -65,7 +65,7 @@ export class SidebarComponent implements DoCheck {
         searchLink.href = `https://blog.mihape.com/?s=${searchInput.value}`;
         searchLink.click();
       } else {
-        document.location.href =  `https://blog.mihape.com/?s=${searchInput.value}`;
+        document.location.href = `https://blog.mihape.com/?s=${searchInput.value}`;
       }
     } else {
       this.isExpanded = true;

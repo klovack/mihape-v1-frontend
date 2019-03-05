@@ -76,7 +76,6 @@ export class TransactionsService {
   }
 
   postNewlyCreatedTransaction() {
-    console.log(this._newlyCreatedTransaction);
     return this.http.post(this._transactionsUrl, {
       transaction: {
         name: this._newlyCreatedTransaction.name,

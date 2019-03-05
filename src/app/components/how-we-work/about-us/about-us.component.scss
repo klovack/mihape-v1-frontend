@@ -1,3 +1,5 @@
+@import '../../../../vars';
+
 .container {
   width: 70%;
   max-width: 1000px;
@@ -24,15 +26,20 @@
 .description {
   margin-bottom: 20px;
   text-align: justify;
+
+  &.team {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  > mat-card {
+    margin: 10px;
+  }
 }
 
-.team {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 65%;
-  margin: 20px auto;
+.mail {
+  text-align: right;
+  font-size: $font-larger;
 }
 
 @media screen and (max-width: 1000px) {
