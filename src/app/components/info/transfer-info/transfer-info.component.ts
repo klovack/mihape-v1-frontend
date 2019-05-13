@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-transfer-info',
@@ -20,9 +21,14 @@ export class TransferInfoComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _transactionsService: TransactionsService,
     private _router: Router,
+    private _title: Title,
+    private _meta: Meta,
   ) { }
 
   ngOnInit() {
+    this._title.setTitle("Kemana Saya Harus Transfer | Mihape - Simplify International Transfer, With our faster solution");
+    this._meta.updateTag({name: "description", content: "Informasi pengiriman uang dari Bank di Indonesia."})
+
     const params = this._activatedRoute.snapshot.params;
     if (params.transactionId) {
       this._transactionsService.getTransactionById(params.transactionId)
