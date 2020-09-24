@@ -23,7 +23,7 @@ export class AlphaTestComponent implements OnInit {
   onAccept() {
     this.isShowing = false;
     const alphaPermission = {
-      accept: true,
+      accept: false,
       expiresIn: new Date().setTime(Date.now() + (1000 * 60 * 60 * 24 * 7)), // One week
     };
     localStorage.setItem('acceptAlpha', JSON.stringify(alphaPermission));
